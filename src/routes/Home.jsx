@@ -19,7 +19,6 @@ export default function Home() {
   const { data: itemDesc } = useQuery("itemDescription", getKorItemDescription);
 
   return(
-    <>
-    </>
+    <></>
   )
 }
