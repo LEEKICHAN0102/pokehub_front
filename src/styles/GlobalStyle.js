@@ -153,6 +153,19 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+div {
+  user-select: none;
+  -webkit-user-select: none;
+  /* (safari, chrome) browsers */
+  -moz-user-select: none;
+  /* mozilla browsers */
+  -khtml-user-select: none;
+  /* konqueror browsers */
+
+  -ms-user-select: none; /* IE10+ */
+}
+
 `;
 
 export default GlobalStyle;
