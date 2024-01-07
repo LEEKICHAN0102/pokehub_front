@@ -32,6 +32,27 @@ export const getItemId = async() => {
   }
 }
 
+export const getKoreanName = async() =>{
+const itemId = await getItemId();
+  try {
+    const ItemName = await Promise.all(
+      itemId.map(async(id)=>{
+        const response = await axios.get(`${pokemon_URL}/item/${id}`);
+        const korName = response.data;
+
+        // 한국어 이름을 찾아옴, 없을 경우 영어를 반환
+        const koreanNameObj = korName.names.find((nameObj) => nameObj.language.name === 'ko');
+        const EnglishNameObj = korName.names.find((nameObj) => nameObj.language.name === 'en');
+        const koreanName = koreanNameObj ? koreanNameObj.name : EnglishNameObj.name;
+
+        return koreanName;
+      }))
+    return ItemName;
+  } catch (error) {
+    console.error("아이템 이름 response Error:" , error);
+  }
+}
+
 export const getKorItemDescription = async() => {
   const itemId = await getItemId();
   try {
