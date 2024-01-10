@@ -10,6 +10,7 @@ import {
   getPokemonAbility,
   getAbilityDescription,
   getDetailNameArray,
+  getPokemonClass,
 } from "../../api/pokemon/getPokemon";
 
 export default function useDetailPokemon(id) {
@@ -17,13 +18,14 @@ export default function useDetailPokemon(id) {
     { queryKey: "description", queryFn:()=> getPokemonDescription(id) },
     { queryKey: "official", queryFn:()=> getOfficialArtwork(id) },
     { queryKey: "official_shiny", queryFn:()=> getShinyOfficialArtwork(id) },
-    { queryKey: "Height", queryFn:()=> getPokemonHeight(id) },
-    { queryKey: "Genus", queryFn:()=> getPokemonGenus(id) },
-    { queryKey: "Gender", queryFn:()=> getPokemonGender(id) },
-    { queryKey: "Weight", queryFn:()=> getPokemonWeight(id) },
-    { queryKey: "Ability", queryFn:()=> getPokemonAbility(id) },
-    { queryKey: "AbilityDescription", queryFn:()=> getAbilityDescription(id) },
+    { queryKey: "height", queryFn:()=> getPokemonHeight(id) },
+    { queryKey: "genus", queryFn:()=> getPokemonGenus(id) },
+    { queryKey: "gender", queryFn:()=> getPokemonGender(id) },
+    { queryKey: "weight", queryFn:()=> getPokemonWeight(id) },
+    { queryKey: "ability", queryFn:()=> getPokemonAbility(id) },
+    { queryKey: "abilityDescription", queryFn:()=> getAbilityDescription(id) },
     { queryKey: "nameArray", queryFn:()=> getDetailNameArray(id) },
+    { queryKey: "class", queryFn:()=> getPokemonClass(id) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);
@@ -39,6 +41,7 @@ export default function useDetailPokemon(id) {
     ability: queries[7].data,
     abilityDescription: queries[8].data,
     nameArray: queries[9].data,
+    class: queries[10].data,
   };
 
   return { data, isLoading };

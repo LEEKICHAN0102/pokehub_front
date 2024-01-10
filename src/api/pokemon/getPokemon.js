@@ -45,12 +45,10 @@ export const getPokemonImage = async () => {
         const noneAnimatedImage = response.data.sprites.front_default;
         // noneGeneration_V가 있는 경우
         if (noneGeneration_V !== null) {
-          console.log(noneGeneration_V);
           return noneGeneration_V;
         }
         // noneAnimatedImage가 있는 경우
         else if (imageList === null) {
-          console.log("hi");
           return noneAnimatedImage;
         }
         // 그 외의 경우
@@ -250,26 +248,54 @@ export const getAbilityDescription = async (id) => {
   }
 };
 
-// export const getDetailNameArray = async (id) => {
-//   try {
-//     // 포켓몬 이름을 가져오는 함수
-//     const getPokemonName = async (pokemonId) => {
-//       const modifiedId = (pokemonId === 1) ? 1010 : pokemonId || ((pokemonId === 1010) ? 1 : pokemonId);
-//       const speciesResponse = await axios.get(`${pokemon_URL}/pokemon-species/${modifiedId}`);
-//       const nameList = speciesResponse.data.names.find((obj) => obj.language.name === "ko")?.name;
-//       return nameList;
-//     };
+export const getDetailNameArray = async (id) => {
+  try {
+    // 포켓몬 이름을 가져오는 함수
+    const getPokemonName = async (pokemonId) => {
+      let adjustedId;
 
-//     // Promise.all을 사용하여 병렬로 여러 요청 보내기
-//     const [prevResponse, currentResponse, nextResponse] = await Promise.all([
-//       getPokemonName(id - 1),
-//       getPokemonName(id),
-//       getPokemonName(id + 1),
-//     ]);
+      // Adjust the ID based on special cases
+      if (pokemonId === 1011) {
+        adjustedId = 1;
+      } else if (pokemonId === 0) {
+        adjustedId = 1010;
+      } else {
+        adjustedId = pokemonId;
+      }
 
-//     // 결과 배열 반환
-//     return [prevResponse, currentResponse, nextResponse];
-//   } catch (error) {
-//     console.error("포켓몬 상세 배열 response Error:", error);
-//   }
-// };
+      const speciesResponse = await axios.get(`${pokemon_URL}/pokemon-species/${adjustedId}`);
+      const nameList = speciesResponse.data.names.find((obj) => obj.language.name === "ko")?.name;
+      return nameList;
+    };
+
+    // Promise.all을 사용하여 병렬로 여러 요청 보내기
+    const [prevResponse, currentResponse, nextResponse] = await Promise.all([
+      getPokemonName(Number(id) - 1),
+      getPokemonName(id),
+      getPokemonName(Number(id) + 1),
+    ]);
+
+    // 결과 배열 반환
+    return [prevResponse, currentResponse, nextResponse];
+  } catch (error) {
+    console.error("포켓몬 상세 배열 response Error:", error);
+  }
+};
+
+export const getPokemonClass = async(id) => {
+  try{
+    const response = await axios.get(`${pokemon_URL}/pokemon-species/${id}`);
+    const data = response.data;
+    const isLegendary = data.is_legendary;
+    const isMythical = data.is_mythical;
+    if(isLegendary){
+      return "전설의 포켓몬"
+    } else if(isMythical) {
+      return "환상의 포켓몬"
+    } else {
+      return "일반 포켓몬"
+    }
+  }catch(error){
+    console.error("포켓몬 등급 response Error:", error);
+  }
+}

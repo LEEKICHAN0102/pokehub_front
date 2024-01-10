@@ -1,15 +1,15 @@
 import { Container,Title, CardContainer, Info, MainImage, Type, TypeBox, TypeImg } from "./style";
 import typeIcons from "../../styles/typeIcon";
 import colors from "../../styles/typeColor";
-import { Spinner } from "@chakra-ui/spinner";
 import usePokemonData from "../../hooks/Pokemon/usePokemonData";
 import { Link } from "react-router-dom";
+import Loader from "../Loader";
 
 export default function PokemonCard() {
   const { data, isLoading } = usePokemonData();
 
   if (isLoading) {
-    return <Spinner />;
+    return <Loader />;
   }
 
   return (
@@ -17,8 +17,8 @@ export default function PokemonCard() {
       <Title>전국 도감</Title>
         <Container>
           {data.pokemon.map((_, item) => (
-            <Link to={`/detail/${data.id[item]}`}>
-              <CardContainer key={item}>
+            <Link key={item} to={`/detail/${data.id[item]}`}>
+              <CardContainer>
                 <Info>
                   <span>no.{data.id[item]}</span>
                   <span>{data.name[item]}</span>
