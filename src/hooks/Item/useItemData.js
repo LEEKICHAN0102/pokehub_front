@@ -5,7 +5,7 @@ import {
   getKoreanName,
   getItemImage,
   getKorItemDescription,
-} from "../../api/pokemon/getItem";
+} from "../../api/item/getItem";
 
 export default function useItemData() {
   const queries = useQueries([

@@ -15,6 +15,7 @@ import poison from "../assets/icons/poison.svg";
 import psychic from "../assets/icons/psychic.svg";
 import rock from "../assets/icons/rock.svg";
 import steel from "../assets/icons/steel.svg";
+import unknown from "../assets/icons/unknown.svg";
 import water from "../assets/icons/water.svg";
 
 const typeIcons = {
@@ -35,6 +36,7 @@ const typeIcons = {
   psychic,
   rock,
   steel,
+  unknown,
   water,
 }
 

@@ -28,12 +28,12 @@ export default function DropDown(){
               포켓몬 (전국)
             </SubDropDown>
           </Link>
-          <Link to="/items">
+          <Link to="item">
             <SubDropDown>
               도구 / 아이템
             </SubDropDown>
           </Link>
-          <Link to="/gym-leader">
+          <Link to="gym-leader">
             <SubDropDown>
               관장 정보
             </SubDropDown>

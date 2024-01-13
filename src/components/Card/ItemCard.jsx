@@ -19,7 +19,7 @@ export default function ItemCard() {
                 <span>no.{data.id[index]}</span>
                 <span>{data.name[index]}</span>
               </Info>
-              <MainImage src={`${data.image[index]}`} alt />
+              <MainImage src={`${data.image[index]}`} />
             </CardContainer>
           ))}
         </Container>
