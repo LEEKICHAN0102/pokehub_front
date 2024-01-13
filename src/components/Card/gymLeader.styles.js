@@ -27,9 +27,7 @@ export const CardContainer = styled.div`
   border: 1px solid #e5e5e5;
   transition: box-shadow 0.3s ease;
   background: ${(props) =>
-    props.color.length > 1
-      ? `linear-gradient(to bottom, ${props.color}, rgba(255, 255, 255, 0));`
-      : `linear-gradient(to bottom, ${props.color}, rgba(255, 255, 255, 0))`};
+      `linear-gradient(to bottom, ${props.color}, rgba(255, 255, 255, 0))`};
 
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -61,9 +59,14 @@ export const InfoBox = styled.div`
   color: black;
 `;
 
-export const MainImage = styled.img`
-  width: 80px;
-  height: 80px;
+export const BadgeBox = styled.img`
+  width: 30px;
+  height: 30px;
+`;
+
+export const InGameImage = styled.img`
+  width: 130px;
+  height: 110px;
   margin: auto;
 `;
 

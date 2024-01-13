@@ -7,4 +7,7 @@ export default defineConfig({
   css: {
     modules: true,
   },
+  server: {
+    port: 3000, // 또는 다른 포트 번호
+  },
 })
