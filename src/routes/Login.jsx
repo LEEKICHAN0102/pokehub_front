@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import AuthHeader from "../components/authHeader";
+import socialIcons from "../styles/socialIcons";
 
 export default function Login() {
   const {
@@ -28,6 +29,15 @@ export default function Login() {
           <CreateAccount>아직 계정이 없으신가요?</CreateAccount>
         </Link>
       </Form>
+      <SocialLoginBox>
+        {Object.entries(socialIcons).map(([key, icon]) => (
+          <Link to="/login/naver">
+            <SocialImg key={key}>
+              <img src={icon} alt={`${key} 아이콘`} />
+            </SocialImg>
+          </Link>
+        ))}
+      </SocialLoginBox>
     </Container>
   );
 }
@@ -84,4 +94,22 @@ const CreateAccount = styled.div`
   }
   font-size: 16px;
   text-align: center;
+`;
+
+const SocialLoginBox = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 100px;
+`;
+
+const SocialImg = styled.div`
+  cursor: pointer;
+  img{
+    width: 90px;
+    height: 90px;
+    border-radius: 20px;
+    border: 1px solid gray;
+  }
 `;

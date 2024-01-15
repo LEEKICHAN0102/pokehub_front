@@ -21,6 +21,7 @@ export const DropdownItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 18px;
 `;
 
 export const SubDropDown = styled.div`
@@ -30,6 +31,20 @@ export const SubDropDown = styled.div`
   }
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: gray;
+  font-weight: bold;
+`;
+
+export const SubDropDownChild = styled.div`
+  padding: 10px;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 12px;
   color: gray;
 `;

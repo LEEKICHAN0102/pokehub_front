@@ -7,6 +7,8 @@ import DetailPokemon from "../../components/Detail";
 import ItemCard from "../../components/Card/ItemCard";
 import GymLeaderCard from "../../components/Card/GymLeaderCard";
 import GymLeaderDetail from "../../components/Detail/GymLeaderDetail";
+import ChampionCard from "../../components/Card/ChampionCard";
+import ChampionDetail from "../../components/Detail/ChampionDetail";
 
 export const publicRoutes = [
   {
@@ -40,7 +42,15 @@ export const publicRoutes = [
       {
         path: "gym-leader/detail/:name",
         element: <GymLeaderDetail />
-      }
+      },
+      {
+        path: "champion",
+        element: <ChampionCard />,
+      },
+      {
+        path: "champion/detail/:name",
+        element: <ChampionDetail />,
+      },
     ],
   },
 ];
