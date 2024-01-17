@@ -1,14 +1,19 @@
-import {DropdownMenu, DropdownItem, SubDropDown } from "./style";
+import {DropdownMenu, DropdownItem, SubDropDown, SubDropDownChild } from "./style";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 export default function DropDown(){
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isGymDropdownOpen, setGymDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
+
+  const toggleGymDropdown = () => {
+    setGymDropdownOpen(!isGymDropdownOpen);
+  }
 
   return (
     <DropdownMenu>
@@ -33,11 +38,33 @@ export default function DropDown(){
               도구 / 아이템
             </SubDropDown>
           </Link>
-          <Link to="gym-leader">
-            <SubDropDown>
-              관장 정보
+            <SubDropDown onClick={toggleGymDropdown} >
+              인물
+              {isGymDropdownOpen ? (
+                <IoIosArrowUp size={16} />
+              ) : (
+                <IoIosArrowDown size={16} />
+              )}
             </SubDropDown>
-          </Link>
+            {isGymDropdownOpen && (
+              <>
+                <Link to="/gym-leader">
+                  <SubDropDownChild>
+                    체육관 관장
+                  </SubDropDownChild>
+                </Link>
+                <Link to="/elite-four">
+                  <SubDropDownChild>
+                    사천왕
+                  </SubDropDownChild>
+                </Link>
+                <Link to="/champion">
+                  <SubDropDownChild>
+                    챔피언
+                  </SubDropDownChild>
+                </Link>
+              </>
+            )}
         </>
       )}
 

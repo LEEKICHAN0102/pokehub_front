@@ -1,5 +1,5 @@
 import axios from "axios";
-import { pokemon_URL,offset,limit } from "../../constant";
+import { pokemon_URL,offset, limit } from "../../constant";
 
 export const getAllPokemon = async() => {
   try {
@@ -44,16 +44,16 @@ export const getPokemonImage = async () => {
         const noneGeneration_V = response.data.sprites.other["showdown"]["front_default"];
         const noneAnimatedImage = response.data.sprites.front_default;
         // noneGeneration_V가 있는 경우
-        if (noneGeneration_V !== null) {
-          return noneGeneration_V;
+        if (imageList !== null) {
+          return imageList;
         }
         // noneAnimatedImage가 있는 경우
         else if (imageList === null) {
-          return noneAnimatedImage;
+          return noneGeneration_V;
         }
         // 그 외의 경우
         else {
-          return imageList;
+          return noneAnimatedImage;
         }
       }))
       return image;
@@ -297,5 +297,28 @@ export const getPokemonClass = async(id) => {
     }
   }catch(error){
     console.error("포켓몬 등급 response Error:", error);
+  }
+}
+
+export const getPokemonImageByName = async (ace) => {
+  try{
+      const response = await axios.get(`${pokemon_URL}/pokemon/${ace}`);
+      const imageList = response.data.sprites.versions["generation-v"]["black-white"]["animated"]["front_default"];
+      const noneGeneration_V = response.data.sprites.other["showdown"]["front_default"];
+      const noneAnimatedImage = response.data.sprites.front_default;
+        // noneGeneration_V가 있는 경우
+        if (imageList !== null) {
+          return imageList;
+        }
+        // noneAnimatedImage가 있는 경우
+        else if (imageList === null) {
+          return noneGeneration_V;
+        }
+        // 그 외의 경우
+        else {
+          return noneAnimatedImage;
+        }
+  }catch(error){
+    console.error("포켓몬 애니메이션 이미지 by ace response Error:" , error);
   }
 }
