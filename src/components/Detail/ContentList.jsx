@@ -1,6 +1,8 @@
 import { IoMale,IoFemale } from "react-icons/io5";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { Content, GenderBox } from "./style";
+import ModalComponent from "../Modal";
+import { useEffect, useState } from "react";
 
 export default function ContentList({data}){
   const gender = data.gender;

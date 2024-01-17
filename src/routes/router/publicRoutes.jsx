@@ -9,6 +9,8 @@ import GymLeaderCard from "../../components/Card/GymLeaderCard";
 import GymLeaderDetail from "../../components/Detail/GymLeaderDetail";
 import ChampionCard from "../../components/Card/ChampionCard";
 import ChampionDetail from "../../components/Detail/ChampionDetail";
+import EliteFourCard from "../../components/Card/EliteFourCard";
+import EliteFourDetail from "../../components/Detail/EliteFourDetail";
 
 export const publicRoutes = [
   {
@@ -42,6 +44,14 @@ export const publicRoutes = [
       {
         path: "gym-leader/detail/:name",
         element: <GymLeaderDetail />
+      },
+      {
+        path: "elite-four",
+        element: <EliteFourCard />,
+      },
+      {
+        path: "elite-four/detail/:name",
+        element: <EliteFourDetail />
       },
       {
         path: "champion",

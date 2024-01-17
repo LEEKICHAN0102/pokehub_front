@@ -12,11 +12,13 @@ export default function PokemonCard() {
     return <Loader />;
   }
 
+  console.log(data);
+
   return (
     <>
       <Title>전국 도감</Title>
         <Container>
-          {data.pokemon.map((_, item) => (
+          {data.id.map((_, item) => (
             <Link key={item} to={`/detail/${data.id[item]}`}>
               <CardContainer color={data.type[item].map(typeItem => colors[typeItem])}>
                 <Info>

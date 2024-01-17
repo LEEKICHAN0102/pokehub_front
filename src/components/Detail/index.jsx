@@ -21,6 +21,8 @@ export default function DetailPokemon() {
   const id = useParams().id;
   const { data, isLoading } = useDetailPokemon(id);
 
+  console.log(data);
+
   const prevId = Number(id)-1 === 0 ? 1010 : Number(id) - 1;
   const nextId = Number(id)+ 1 === 1011 ? 1 : Number(id) + 1;
 

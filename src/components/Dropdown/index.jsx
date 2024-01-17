@@ -63,16 +63,6 @@ export default function DropDown(){
                     챔피언
                   </SubDropDownChild>
                 </Link>
-                <Link to="/">
-                  <SubDropDownChild>
-                    섬의 주인
-                  </SubDropDownChild>
-                </Link>
-                <Link to="/">
-                  <SubDropDownChild>
-                    섬의 왕/여왕
-                  </SubDropDownChild>
-                </Link>
               </>
             )}
         </>
