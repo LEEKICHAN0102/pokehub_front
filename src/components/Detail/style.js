@@ -126,6 +126,13 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  li{
+    display: flex;
+    align-items: center;
+      svg {
+      margin-left: 5px;
+    }
+  }
 `;
 
 export const GenderBox = styled.div`

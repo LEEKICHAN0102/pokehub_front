@@ -26,7 +26,7 @@ export const publicRoutes = [
     element: <Layout />,
     children: [
       {
-        path: "",
+        path: "page/:page",
         element: <Home />,
       },
       {

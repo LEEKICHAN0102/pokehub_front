@@ -23,8 +23,8 @@ export default function DetailPokemon() {
 
   console.log(data);
 
-  const prevId = Number(id)-1 === 0 ? 1010 : Number(id) - 1;
-  const nextId = Number(id)+ 1 === 1011 ? 1 : Number(id) + 1;
+  const prevId = Number(id)-1 === 0 ? 1025 : Number(id) - 1;
+  const nextId = Number(id)+ 1 === 1026 ? 1 : Number(id) + 1;
 
   if (isLoading) {
     return <Loader />;

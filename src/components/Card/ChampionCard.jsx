@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 
 export default function ChampionCard() {
   const { data, isLoading } = useChampionData();
+  
   console.log(data);
 
   if (isLoading || !data.champion) {
