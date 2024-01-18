@@ -37,7 +37,7 @@ export default function Header() {
             <DropDown />
           )}
         </Group>
-        <Link to="/">
+        <Link to="/page/1">
           <Logo />
         </Link>
         <Group>

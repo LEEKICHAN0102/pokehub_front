@@ -1,9 +1,10 @@
 import axios from "axios";
-import { pokemon_URL,offset, limit } from "../../constant";
+import { pokemon_URL, limit } from "../../constant";
 
-export const getAllPokemon = async() => {
+export const getAllPokemon = async(pages) => {
   try {
-    const response = await axios.get(`${pokemon_URL}/pokemon?offset=${offset}&limit=${limit}`);
+    const pageOffset = (pages - 1) * limit;
+    const response = await axios.get(`${pokemon_URL}/pokemon?offset=${pageOffset}&limit=${limit}`);
     // 포켓몬 객체 데이터 return
     const pokemonList = response.data.results;
     
@@ -16,44 +17,51 @@ export const getAllPokemon = async() => {
   }
 }
 
-export const getPokemonID = async()=> {
+export const getPokemonID = async (pages) => {
   try {
-    // getAllPokemon result
-    const urls = await getAllPokemon();
-    
+    const urls = await getAllPokemon(pages);
+
     // 각 URL에서 포켓몬의 ID를 추출
-    const idList = urls.map((url) => {
-      // URL에서 마지막 부분을 가져와서 숫자로 변환
-      const idFromUrl = parseInt(url.split('/').slice(-2, -1)[0], 10);
-      return idFromUrl;
-    });
+    const idList = urls
+      .map((url) => {
+        // URL에서 마지막 부분을 가져와서 숫자로 변환
+        const idFromUrl = parseInt(url.split('/').slice(-2, -1)[0], 10);
+        return idFromUrl;
+      })
+      // 조건을 추가하여 1025를 넘는 경우를 걸러냄
+      .filter((id) => id <= 1025);
 
     return idList;
-  } catch(error) {
-    console.error("포켓몬 ID response Error:" , error);
+  } catch (error) {
+    console.error("포켓몬 ID response Error:", error);
   }
-}
+};
 
-export const getPokemonImage = async () => {
-  const pokemonId = await getPokemonID();
+
+export const getPokemonImage = async (pages) => {
+  const pokemonId = await getPokemonID(pages);
   try{
     const image = await Promise.all(
       pokemonId.map(async(id) => {
         const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
-        const imageList = response.data.sprites.versions["generation-v"]["black-white"]["animated"]["front_default"];
+        const animatedImageList = response.data.sprites.versions["generation-v"]["black-white"]["animated"]["front_default"];
         const noneGeneration_V = response.data.sprites.other["showdown"]["front_default"];
         const noneAnimatedImage = response.data.sprites.front_default;
+        const none_Sprite = response.data.sprites.other["home"]["front_default"];
         // noneGeneration_V가 있는 경우
-        if (imageList !== null) {
-          return imageList;
+        if (animatedImageList !== null) {
+          return animatedImageList;
         }
         // noneAnimatedImage가 있는 경우
-        else if (imageList === null) {
+        else if (noneGeneration_V !== null) {
           return noneGeneration_V;
-        }
+        } 
         // 그 외의 경우
-        else {
+        else if (noneAnimatedImage !== null) {
           return noneAnimatedImage;
+        }
+        else if (none_Sprite !== null) {
+          return none_Sprite;
         }
       }))
       return image;
@@ -62,33 +70,47 @@ export const getPokemonImage = async () => {
   }
 }
 
-export const getPokemonName = async () => {
-  const pokemonId = await getPokemonID();
-  try{
+export const getPokemonName = async (pages) => {
+  const pokemonId = await getPokemonID(pages);
+
+  try {
     const name = await Promise.all(
-      pokemonId.map(async(id) => {
+      pokemonId.map(async (id) => {
         const response = await axios.get(`${pokemon_URL}/pokemon-species/${id}`);
-        const nameList = response.data.names.find((Object) => Object.language.name === "ko").name;
-        return nameList;
-      }))
-      return name;
-  }catch(error){
-    console.error("포켓몬 한국어 이름 response Error:" , error);
+        const nameList = response.data.names.find((Object) => Object.language.name === "ko");
+
+        if (!nameList || nameList.name === undefined) {
+          const jaNameList = response.data.names.find((Object) => Object.language.name === "ja");
+          console.log("일본 : ", jaNameList ? jaNameList.name : "일본어 이름 없음");
+          return jaNameList ? jaNameList.name : "일본어 이름 없음";
+        } else {
+          return nameList.name;
+        }
+      })
+    );
+    return name;
+  } catch (error) {
+    console.error("포켓몬 한국어 이름 response Error:", error);
   }
-}
+};
 
 export const getPokemonDescription = async (id) => {
   try{
-    const response = await axios.get(`${pokemon_URL}/pokemon-species/${id}`);
-    const DescriptionList = response.data.flavor_text_entries.find((Object) => Object.language.name === "ko").flavor_text;
-    return DescriptionList;
+    try{
+      const response = await axios.get(`${pokemon_URL}/pokemon-species/${id}`);
+      const DescriptionList = response.data.flavor_text_entries.find((Object) => Object.language.name === "ko").flavor_text;
+      return DescriptionList;
+    } catch(error) {
+      console.log("포켓몬 설명이 존재하지 않음 :", error);
+      return "포켓몬 설명이 존재하지 않음";
+    }
   }catch(error){
     console.error("포켓몬 한국어 설명 response Error:" , error);
   }
 }
 
-export const  getPokemonType = async() => {
-  const pokemonId = await getPokemonID();
+export const  getPokemonType = async(pages) => {
+  const pokemonId = await getPokemonID(pages);
   try {
     const type = await Promise.all(
       pokemonId.map(async(id) => {
@@ -108,8 +130,8 @@ export const  getPokemonType = async() => {
   }
 }
 
-export const getKorPokemonType = async () => {
-  const pokemonId = await getPokemonID();
+export const getKorPokemonType = async (pages) => {
+  const pokemonId = await getPokemonID(pages);
   try {
     const korType = await Promise.all(
       pokemonId.map(async(id)=>{
@@ -136,18 +158,59 @@ export const getKorPokemonType = async () => {
   }
 }
 
-export const getOfficialArtwork = async(id) => {
-  try{
-    const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
-    const data=response.data;
+export const getKorPokemonRegion = async (pages) => {
+  try {
+    const pokemonId = await getPokemonID(pages);
 
-    const officialArtwork=data.sprites.other["official-artwork"].front_default;
+    const korRegion = await Promise.all(
+      pokemonId.map(async (id) => {
+        try {
+          const response = await axios.get(`${pokemon_URL}/pokemon-species/${id}`);
+          const data = response.data;
+
+          const dexNum = data.pokedex_numbers[1];
+          const dexArr = await axios.get(dexNum.pokedex.url);
+
+          const regionUrl = await axios.get(dexArr.data.region.url);
+
+          const korData = regionUrl.data.names;
+          const korReg = korData.find((nameInfo) => nameInfo.language.name === "ko");
+          const korRegName = korReg.name;
+
+          return korRegName;
+        } catch(error) {
+          console.log(`포켓몬 ID ${id}의 한국어 지역 정보를 가져오는 중 에러 발생 :` , error);
+          return "불명확";
+        }
+      })
+    );
+
+    return korRegion;
+  } catch (error) {
+    console.error("포켓몬 ID를 가져오는 중 에러 발생:", error);
+    return [];
+  }
+};
+
+
+export const getOfficialArtwork = async (id) => {
+  try {
+    const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
+    const data = response.data;
+
+    const officialArtwork = data.sprites.other["official-artwork"].front_default;
+
+    if (!officialArtwork) {
+      const none_officialArtwork = data.sprites.other.home.front_default;
+      console.log("No officialArtwork found, using none_officialArtwork");
+      return none_officialArtwork;
+    }
 
     return officialArtwork;
-  }catch (error){
+  } catch (error) {
     console.error('Error fetching data:', error);
   }
-}
+};
 
 export const getShinyOfficialArtwork = async(id) => {
   try{
@@ -183,17 +246,23 @@ export const getPokemonWeight = async(id) => {
   }
 }
 
-export const getPokemonGenus = async(id) => {
-  try{
+export const getPokemonGenus = async (id) => {
+  try {
     const response = await axios.get(`${pokemon_URL}/pokemon-species/${id}`);
     const data = response.data;
-    const genus = data.genera.find((Object) => Object.language.name === "ko").genus;
-    
-    return genus;
-  }catch(error){
-    console.error("포켓몬 신장 response Error:", error);
+
+    // genus를 찾아서 가져오기, 없으면 "분류 없음" 반환
+    const genusObject = data.genera.find((Object) => Object.language.name === "ko");
+
+    if (genusObject && genusObject.genus !== undefined) {
+      return genusObject.genus;
+    } else {
+      return "분류 없음";
+    }
+  } catch (error) {
+    console.error("포켓몬 분류 response Error:", error);
   }
-}
+};
 
 export const getPokemonGender = async (id) => {
   try {
@@ -218,11 +287,19 @@ export const getPokemonAbility = async (id) => {
   try {
     const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
     const data = response.data;
-    
+
     const abilities = await Promise.all(data.abilities.map(async (ability) => {
       const abilityResponse = await axios.get(ability.ability.url);
       const abilityData = abilityResponse.data;
-      return abilityData.names.find(name => name.language.name === 'ko').name;
+
+      // 특성 이름을 찾아 가져오기, 없으면 "특성 없음" 반환
+      const abilityNameObject = abilityData.names.find(name => name.language.name === 'ko');
+
+      if (abilityNameObject && abilityNameObject.name !== undefined) {
+        return abilityNameObject.name;
+      } else {
+        return "특성 없음";
+      }
     }));
 
     return abilities;
@@ -235,52 +312,61 @@ export const getAbilityDescription = async (id) => {
   try {
     const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
     const data = response.data;
-    
+
     const abilitiesDescription = await Promise.all(data.abilities.map(async (ability) => {
       const abilityResponse = await axios.get(ability.ability.url);
       const abilityData = abilityResponse.data;
-      return abilityData.flavor_text_entries.find((Object) => Object.language.name === 'ko').flavor_text;
+
+      const abilityDescriptionObject = abilityData.flavor_text_entries.find((Object) => Object.language.name === 'ko');
+
+      if (abilityDescriptionObject && abilityDescriptionObject.flavor_text !== undefined) {
+        return abilityDescriptionObject.flavor_text;
+      } else {
+        return "능력 없음";
+      }
     }));
 
     return abilitiesDescription;
   } catch (error) {
-    console.error("포켓몬 신장 response Error:", error);
+    console.error("포켓몬 능력 response Error:", error);
   }
 };
 
 export const getDetailNameArray = async (id) => {
   try {
-    // 포켓몬 이름을 가져오는 함수
-    const getPokemonName = async (pokemonId) => {
+    const getPokemonName = async (pokemonId, language) => {
       let adjustedId;
 
-      // Adjust the ID based on special cases
-      if (pokemonId === 1011) {
+      if (pokemonId === 1026) {
         adjustedId = 1;
       } else if (pokemonId === 0) {
-        adjustedId = 1010;
+        adjustedId = 1025;
       } else {
         adjustedId = pokemonId;
       }
 
       const speciesResponse = await axios.get(`${pokemon_URL}/pokemon-species/${adjustedId}`);
-      const nameList = speciesResponse.data.names.find((obj) => obj.language.name === "ko")?.name;
+      const nameList = speciesResponse.data.names.find((obj) => obj.language.name === language)?.name;
       return nameList;
     };
 
-    // Promise.all을 사용하여 병렬로 여러 요청 보내기
     const [prevResponse, currentResponse, nextResponse] = await Promise.all([
-      getPokemonName(Number(id) - 1),
-      getPokemonName(id),
-      getPokemonName(Number(id) + 1),
+      getPokemonName(Number(id) - 1, "ko"),
+      getPokemonName(id, "ko"),
+      getPokemonName(Number(id) + 1, "ko"),
     ]);
 
-    // 결과 배열 반환
-    return [prevResponse, currentResponse, nextResponse];
+    // 예외 처리: 만약 ko language로 가져온 nameList가 null이면 ja language로 가져오도록 설정
+    const prevNameList = prevResponse ?? await getPokemonName(Number(id) - 1, "ja");
+    const currentNameList = currentResponse ?? await getPokemonName(id, "ja");
+    const nextNameList = nextResponse ?? await getPokemonName(Number(id) + 1, "ja");
+
+    return [prevNameList, currentNameList, nextNameList];
   } catch (error) {
     console.error("포켓몬 상세 배열 response Error:", error);
   }
 };
+
 
 export const getPokemonClass = async(id) => {
   try{
@@ -303,19 +389,19 @@ export const getPokemonClass = async(id) => {
 export const getPokemonImageByName = async (ace) => {
   try{
       const response = await axios.get(`${pokemon_URL}/pokemon/${ace}`);
-      const imageList = response.data.sprites.versions["generation-v"]["black-white"]["animated"]["front_default"];
+      const animatedImageList = response.data.sprites.versions["generation-v"]["black-white"]["animated"]["front_default"];
       const noneGeneration_V = response.data.sprites.other["showdown"]["front_default"];
       const noneAnimatedImage = response.data.sprites.front_default;
         // noneGeneration_V가 있는 경우
-        if (imageList !== null) {
-          return imageList;
+        if (animatedImageList !== null) {
+          return animatedImageList;
         }
         // noneAnimatedImage가 있는 경우
-        else if (imageList === null) {
+        else if (noneGeneration_V !== null) {
           return noneGeneration_V;
         }
         // 그 외의 경우
-        else {
+        else if (noneAnimatedImage !== null) {
           return noneAnimatedImage;
         }
   }catch(error){

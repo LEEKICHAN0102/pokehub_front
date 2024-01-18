@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function Loader(){
   return(
     <CenteredContainer>
-      <Spinner />
+      <SpinnerComponent />
     </CenteredContainer>
   )
 }
@@ -14,4 +14,9 @@ const CenteredContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
+`;
+
+const SpinnerComponent = styled(Spinner)`
+  width: 150px;
+  height: 150px;
 `;

@@ -5,12 +5,13 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 1320px;
-  min-height: 100vh;
+  min-height: 110vh;
   margin: 0 auto;
 `;
 
 export default function Layout() {
   const location = useLocation();
+  console.log(location);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
