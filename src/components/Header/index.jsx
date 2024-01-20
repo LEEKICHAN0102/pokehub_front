@@ -10,7 +10,11 @@ import DropDown from "../Dropdown";
 export default function Header() {
   const dropdownRef = useRef(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  const loginOrLogoutText = isLoggedIn ? "로그아웃" : "로그인";
+  const loginOrLogoutLink = isLoggedIn ? "/logout" : "/login";
+  
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
@@ -42,7 +46,7 @@ export default function Header() {
         </Link>
         <Group>
           <Item>
-            <Link to="/login">로그인</Link>
+            <Link to={`${loginOrLogoutLink}`}>{loginOrLogoutText}</Link>
           </Item>
         </Group>
       </Content>

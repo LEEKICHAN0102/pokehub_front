@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
 import useDetailPokemon from "../../hooks/Pokemon/useDetail";
 import Loader from "../Loader";
+import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaChevronCircleLeft,FaChevronCircleRight } from "react-icons/fa";
 import ContentList from "./ContentList";
+import { useNavigate } from "react-router-dom";
 
 import { 
   Navigation,
@@ -15,10 +17,12 @@ import {
   Info,
   Description,
   MoreInfo,
+  OfficialBox,
 } from "./style";
 
 export default function DetailPokemon() {
   const id = useParams().id;
+  const navigate = useNavigate();
   const { data, isLoading } = useDetailPokemon(id);
 
   console.log(data);
@@ -28,6 +32,10 @@ export default function DetailPokemon() {
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  const handleBack = () => {
+    navigate(-1)
   }
 
   return(
@@ -46,7 +54,10 @@ export default function DetailPokemon() {
         </NextNav>
       </Navigation>
       <Container>
-        <Official src={`${data.official}`} alt={`${data.nameArray[1]}`} />
+        <OfficialBox>
+          <FaArrowLeftLong size={24} onClick={handleBack} />
+          <Official src={`${data.official}`} alt={`${data.nameArray[1]}`} />
+        </OfficialBox>
         <Info>
           <span>No. {id}</span>
           <Name>{data.nameArray && data.nameArray[1]}</Name>

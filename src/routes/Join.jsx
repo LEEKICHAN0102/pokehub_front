@@ -1,8 +1,11 @@
 import { useForm  } from "react-hook-form";
 import styled from "styled-components";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import AuthHeader from "../components/authHeader";
 
 export default function Join(){
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -12,10 +15,23 @@ export default function Join(){
 
   const password = watch("password");
 
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(`http://localhost:8080/join`, data);
+      console.log("서버 응답:", response.data);
+      console.log("상태 코드:", response.status);
+      if (response.status === 200) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
+  };
+
   return(
     <Container>
       <AuthHeader title="회원 가입" />
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <InputField
           iserror={errors.username}
           placeholder="닉네임"

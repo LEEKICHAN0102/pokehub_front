@@ -21,7 +21,7 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  width: 370px;
+  width: auto;
   height: 400px;
   border-radius: 10px;
   border: 1px solid #e5e5e5;
@@ -30,6 +30,23 @@ export const CardContainer = styled.div`
     props.color.length > 1
       ? `linear-gradient(to bottom, ${props.color}, rgba(255, 255, 255, 0));`
       : `linear-gradient(to bottom, ${props.color}, rgba(255, 255, 255, 0))`};
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+`;
+
+export const ItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: auto;
+  height: 400px;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+  transition: box-shadow 0.3s ease;
+  background-color: #AECD8C;
+  padding: 10px;
 
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -54,11 +71,29 @@ export const InfoBox = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  width: 100px;
+  width: auto;
+  padding: 20px;
   height: 30px;
   background-color: #e5e5e5;
   border-radius: 20px;
   color: black;
+`;
+
+export const DetailInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  width: 150px;
+  margin: auto;
+  padding: 10px;
+  height: 30px;
+  background-color: #e5e5e5;
+  border-radius: 20px;
+  color: black;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 export const MainImage = styled.img`

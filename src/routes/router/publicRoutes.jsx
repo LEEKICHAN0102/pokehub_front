@@ -30,7 +30,7 @@ export const publicRoutes = [
         element: <Home />,
       },
       {
-        path: "item",
+        path: "item/:page",
         element: <ItemCard />,
       },
       {

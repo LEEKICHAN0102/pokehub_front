@@ -2,18 +2,34 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import AuthHeader from "../components/authHeader";
-import socialIcons from "../styles/socialIcons";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// import socialIcons from "../styles/socialIcons";
 
 export default function Login() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
   } = useForm({ mode: "onSubmit" });
 
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(`http://localhost:8080/login`, data);
+      console.log("서버 응답:", response.data);
+      console.log("상태 코드:", response.status);
+      if (response.status === 200) {
+        navigate("/page/1");
+      }
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
+  };
+
   return (
     <Container>
       <AuthHeader title="로그인" />
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <InputField
           placeholder="email"
           type="email"
@@ -29,15 +45,6 @@ export default function Login() {
           <CreateAccount>아직 계정이 없으신가요?</CreateAccount>
         </Link>
       </Form>
-      <SocialLoginBox>
-        {Object.entries(socialIcons).map(([key, icon]) => (
-          <Link to="/login/naver">
-            <SocialImg key={key}>
-              <img src={icon} alt={`${key} 아이콘`} />
-            </SocialImg>
-          </Link>
-        ))}
-      </SocialLoginBox>
     </Container>
   );
 }
@@ -96,20 +103,20 @@ const CreateAccount = styled.div`
   text-align: center;
 `;
 
-const SocialLoginBox = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 100px;
-`;
+// const SocialLoginBox = styled.div`
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   margin-top: 100px;
+// `;
 
-const SocialImg = styled.div`
-  cursor: pointer;
-  img{
-    width: 90px;
-    height: 90px;
-    border-radius: 20px;
-    border: 1px solid gray;
-  }
-`;
+// const SocialImg = styled.div`
+//   cursor: pointer;
+//   img{
+//     width: 90px;
+//     height: 90px;
+//     border-radius: 20px;
+//     border: 1px solid gray;
+//   }
+// `;

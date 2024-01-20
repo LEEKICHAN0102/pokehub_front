@@ -7,13 +7,13 @@ import {
   getKorItemDescription,
 } from "../../api/item/getItem";
 
-export default function useItemData() {
+export default function useItemData(page) {
   const queries = useQueries([
-    { queryKey: "item", queryFn: getAllItem },
-    { queryKey: "itemId", queryFn: getItemId },
-    { queryKey: "itemName", queryFn: getKoreanName },
-    { queryKey: "itemImage", queryFn: getItemImage },
-    { queryKey: "itemDescription", queryFn: getKorItemDescription },
+    { queryKey: "item", queryFn: () => getAllItem(page) },
+    { queryKey: "itemId", queryFn: () => getItemId(page) },
+    { queryKey: "itemName", queryFn: () => getKoreanName(page) },
+    { queryKey: "itemImage", queryFn: () => getItemImage(page) },
+    { queryKey: "itemDescription", queryFn: () => getKorItemDescription(page) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);
