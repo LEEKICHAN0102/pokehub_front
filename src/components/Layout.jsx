@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
+import Footer from "./Footer";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -19,6 +20,7 @@ export default function Layout() {
     <Container>
       <Header />
       <Outlet />
+      <Footer />
     </Container>
   );
 }

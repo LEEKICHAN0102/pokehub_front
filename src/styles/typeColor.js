@@ -18,7 +18,6 @@ const colors = {
   dark: "#595761",
   fairy: "#EE90E6",
   unknown: "#d5ec6d",
-  shadow: "#4b4f71",
 };
 
 export default colors;

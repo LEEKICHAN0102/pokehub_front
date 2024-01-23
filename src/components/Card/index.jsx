@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { Container, Title, CardContainer, Info, InfoBox, MainImage, Type, TypeBox, TypeImg } from "./style";
+import { useEffect } from "react";
+import { Container, CardContainer, Info, InfoBox, MainImage, Type, TypeBox, TypeImg } from "./style";
+import Title from "../Title";
 import typeIcons from "../../styles/typeIcon";
 import colors from "../../styles/typeColor";
 import usePokemonData from "../../hooks/Pokemon/usePokemonData";
@@ -19,20 +20,18 @@ export default function PokemonCard() {
 
   useEffect(() => {
     // 페이지 변경 시에만 navigate 호출
-    if (page !== data.page) {
       navigate(`/page/${page}`);
-    }
-  }, [page, data.page, navigate]);
+  }, [page]);
 
   if (isLoading) {
     return <Loader />;
   }
 
-  console.log(data);
-
+  console.log(data); 
+  
   return (
     <>
-      <Title>전국 도감</Title>
+      <Title name="포켓몬 도감" />
       <Container>
         {data.id.map((_, item) => (
           <Link key={item} to={`/detail/${data.id[item]}`}>

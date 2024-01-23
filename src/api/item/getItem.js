@@ -1,9 +1,10 @@
 import axios from "axios";
-import { pokemon_URL,offset,limit } from "../../constant";
+import { pokemon_URL,limit } from "../../constant";
 
-export const getAllItem = async() => {
+export const getAllItem = async(page) => {
   try {
-    const response = await axios.get(`${pokemon_URL}/item?offset=${offset}&limit=${limit}`);
+    const pageOffset = (page - 1) * limit;
+    const response = await axios.get(`${pokemon_URL}/item?offset=${pageOffset}&limit=${limit}`);
     const itemList = response.data.results;
     
     const itemUrl = itemList.map((item) => item.url);
@@ -14,10 +15,10 @@ export const getAllItem = async() => {
   }
 }
 
-export const getItemId = async() => {
+export const getItemId = async(page) => {
   try {
     // getAllPokemon result
-    const urls = await getAllItem();
+    const urls = await getAllItem(page);
     
     // 각 URL에서 아이템의 ID를 추출
     const idList = urls.map((url) => {
@@ -32,8 +33,8 @@ export const getItemId = async() => {
   }
 }
 
-export const getKoreanName = async() =>{
-const itemId = await getItemId();
+export const getKoreanName = async(page) =>{
+const itemId = await getItemId(page);
   try {
     const ItemName = await Promise.all(
       itemId.map(async(id)=>{
@@ -53,8 +54,8 @@ const itemId = await getItemId();
   }
 }
 
-export const getKorItemDescription = async() => {
-  const itemId = await getItemId();
+export const getKorItemDescription = async(page) => {
+  const itemId = await getItemId(page);
   try {
     const ItemDescription = await Promise.all(
       itemId.map(async(id)=>{
@@ -87,8 +88,8 @@ export const getKorItemDescription = async() => {
   }
 }
 
-export const getItemImage = async() => {
-  const itemId = await getItemId();
+export const getItemImage = async(page) => {
+  const itemId = await getItemId(page);
   try{
     const itemImage = await Promise.all(
       itemId.map(async(id)=>{

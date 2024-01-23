@@ -11,6 +11,7 @@ import ChampionCard from "../../components/Card/ChampionCard";
 import ChampionDetail from "../../components/Detail/ChampionDetail";
 import EliteFourCard from "../../components/Card/EliteFourCard";
 import EliteFourDetail from "../../components/Detail/EliteFourDetail";
+import EventCard from "../../components/Card/EventCard";
 
 export const publicRoutes = [
   {
@@ -30,7 +31,7 @@ export const publicRoutes = [
         element: <Home />,
       },
       {
-        path: "item",
+        path: "item/:page",
         element: <ItemCard />,
       },
       {
@@ -60,6 +61,10 @@ export const publicRoutes = [
       {
         path: "champion/detail/:name",
         element: <ChampionDetail />,
+      },
+      {
+        path: "event",
+        element: <EventCard />,
       },
     ],
   },

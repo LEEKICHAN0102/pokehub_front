@@ -1,6 +1,6 @@
 import { IoMale,IoFemale } from "react-icons/io5";
 import { AiFillQuestionCircle } from "react-icons/ai";
-import { Content, GenderBox } from "./style";
+import { Content, GenderBox, ToolTipBox, TooltipWrapper } from "./style";
 
 export default function ContentList({data}){
   const gender = data.gender;
@@ -50,14 +50,13 @@ export default function ContentList({data}){
           <>
             {data.ability.map((ability, index) => (
               <li key={index}>
-                <>
-                  {ability}
-                  <AiFillQuestionCircle
-                    size={16}
-                    color="gray"
-                    cursor={"pointer"}
-                  />
-                </>
+                {ability}
+                <TooltipWrapper>
+                  <AiFillQuestionCircle size={16} color="gray" cursor={"pointer"} />
+                  <ToolTipBox>
+                    {data.abilityDescription[index]}
+                  </ToolTipBox>
+                </TooltipWrapper>
               </li>
             ))}
           </>

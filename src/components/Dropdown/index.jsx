@@ -28,12 +28,12 @@ export default function DropDown(){
 
       {isDropdownOpen && (
         <>
-          <Link to="/">
+          <Link to="/page/1">
             <SubDropDown>
               포켓몬 (전국)
             </SubDropDown>
           </Link>
-          <Link to="item">
+          <Link to="item/1">
             <SubDropDown>
               도구 / 아이템
             </SubDropDown>

@@ -1,27 +1,19 @@
 import styled from "styled-components";
 
-export const Title = styled.h1`
-  font-size:36px;
-  font-weight: 600px;
-  margin: auto;
-  width: 90%;
-  margin-top: 50px;
-`;
-
 export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 3fr); /* 3 columns */
   gap: 20px;
   width: 90%;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 50px;
 `;
 
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  width: 370px;
+  width: auto;
   height: 400px;
   border-radius: 10px;
   border: 1px solid #e5e5e5;
@@ -36,6 +28,22 @@ export const CardContainer = styled.div`
   }
 `;
 
+export const ItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: auto;
+  height: 400px;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+  transition: box-shadow 0.3s ease;
+  background-color: #AECD8C;
+  padding: 10px;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+`;
 
 export const Info = styled.div`
   display: flex;
@@ -54,11 +62,29 @@ export const InfoBox = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  width: 100px;
+  width: auto;
+  padding: 20px;
   height: 30px;
   background-color: #e5e5e5;
   border-radius: 20px;
   color: black;
+`;
+
+export const DetailInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  width: 150px;
+  margin: auto;
+  padding: 10px;
+  height: 30px;
+  background-color: #e5e5e5;
+  border-radius: 20px;
+  color: black;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 export const MainImage = styled.img`

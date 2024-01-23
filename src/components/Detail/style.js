@@ -73,6 +73,20 @@ export const Container = styled.div`
   background-color: white;
 `;
 
+export const OfficialBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  svg {
+    margin-bottom: 50px;
+    cursor: pointer;
+    color: gray;
+    :hover{
+      color: black;
+      transition: 0.3s ease-in-out all;
+    }
+  }
+`;
+
 export const Official = styled.img`
   width: 300px;
   height: 300px;
@@ -139,4 +153,29 @@ export const GenderBox = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+`;
+
+export const TooltipWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+export const ToolTipBox = styled.div`
+  position: absolute;
+  visibility: hidden;
+  width: 250px;
+  background-color: #3d3b3b;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* ToolTip이 부모 요소에 대해 호버될 때 표시되도록 설정 */
+  ${TooltipWrapper}:hover & {
+    visibility: visible;
+  }
 `;
