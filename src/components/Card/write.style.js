@@ -42,7 +42,7 @@ export const WriteContentButton = styled.div`
   padding: 30px;
 `;
 
-export const WriteContent = styled.div`
+export const WriteContent = styled.textarea`
   font-size: 16px;
   font-weight: lighter;
   padding: 20px;
@@ -52,26 +52,11 @@ export const WriteContent = styled.div`
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   resize: none;
-  resize: both;
   overflow: auto;
   img{
     width: 200px;
     height: 200px;
   }
-`;
-
-export const WriteContentTool = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 30px;
-  color: gray;
-  gap: 20px;
-  :hover{
-    color: #000;
-    transition: ease-in-out 0.3s all;
-  }
-  cursor: pointer;
 `;
 
 export const WritePosting = styled.button`
@@ -85,6 +70,7 @@ export const WritePosting = styled.button`
   font-size: 20px;
   color: white;
   border:none;
+  margin: auto;
   &:hover{
     transition: ease-in-out 0.3s all;
     transform: scale(1.05);

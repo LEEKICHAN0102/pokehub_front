@@ -113,7 +113,7 @@ const Form = styled.form`
 const InputField = styled.input`
   margin-bottom: 10px;
   padding: 12px;
-  border: 1px solid ${props => (props.iserror ? "red" : "gray")};
+  border: 1px solid ${({ iserror }) => (iserror ? "red" : "gray")};
   border-radius: 10px;
   width: 430px;
   height: 50px;
@@ -141,4 +141,5 @@ const ErrorSpan = styled.span`
   color: red;
   font-size: 8px;
   margin-top: 0;
+  margin: auto;
 `;

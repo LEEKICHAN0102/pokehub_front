@@ -5,8 +5,12 @@ export const PostContainer = styled(EventContainer)``;
 
 export const PostCardContainer = styled(EventCardContainer)``;
 
-export const PostThumb = styled(EventImg)``;
+export const PostThumb = styled(EventImg)`
+  padding: 30px;
+`;
 
 export const PostTitle = styled(EventTitle)``;
 
-export const PostInfo = styled(EventInfo)``;
+export const PostInfo = styled(EventInfo)`
+  flex-direction: column;
+`;

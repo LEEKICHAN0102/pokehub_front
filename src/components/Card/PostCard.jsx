@@ -1,27 +1,39 @@
 import Title from "../Title";
 import { PostContainer, PostCardContainer, PostThumb, PostTitle, PostInfo  } from "./postcard.style";
-import Pagination from "react-js-pagination";
-import "../../styles/Paging.css";
+// import Pagination from "react-js-pagination";
+// import "../../styles/Paging.css";
+import ThumbLogo from "../../assets/Loading/pokehubLogo.png";
+import usePostData from "../../hooks/post/usePostData";
+import Loader from "../Loader";
+import { Link } from "react-router-dom";
 
 export default function PostCard() {
-  const e = [0,1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+  const { data, isLoading } = usePostData();
+
+  if(isLoading){
+    return <Loader />
+  };
+
+  console.log(data);
 
   return(
     <>
-      <Title name="게시글" />
+      <Title name="게시글" hasButton="글 작성" />
       <PostContainer>
-        {e.map((e,i) => (
-          <PostCardContainer>
-            <PostThumb  />
-            <PostTitle>제목 너무 길면 끊어서 출력</PostTitle>
-            <PostInfo>
-              <span>작성자 이름</span>
-              <span>게시 날짜</span>
-            </PostInfo>
-          </PostCardContainer>
+        {data.posting.map((posting) => (
+          <Link to={`/board/${posting._id}`} key={posting._id} >
+            <PostCardContainer>
+              <PostThumb src={`${ThumbLogo}`} />
+              <PostTitle>{posting.title}</PostTitle>
+              <PostInfo>
+                <span>작성자: {posting.username}</span>
+                <span>게시: {posting.postingTime}</span>
+              </PostInfo>
+            </PostCardContainer>
+          </Link>
         ))}
       </PostContainer>
-      <Pagination
+      {/* <Pagination
         activePage
         itemsCountPerPage={20}
         totalItemsCount
@@ -29,7 +41,7 @@ export default function PostCard() {
         prevPageText={"‹"}
         nextPageText={"›"}
         onChange
-      />
+      /> */}
     </>
   )
 }

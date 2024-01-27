@@ -14,6 +14,7 @@ const EliteFourCard = lazy(() => import("../../components/Card/EliteFourCard"));
 const EliteFourDetail = lazy(() => import("../../components/Detail/EliteFourDetail"));
 const EventCard = lazy(() => import("../../components/Card/EventCard"));
 const PostCard = lazy(() => import("../../components/Card/PostCard"));
+const PostDetail = lazy(() => import("../../components/Detail/PostDetail"));
 const WriteCard = lazy(() => import("../../components/Card/WriteCard"));
 const Profile = lazy(() => import("../../components/Profile/index"));
 
@@ -69,6 +70,10 @@ export const publicRoutes = [
       {
         path: "board",
         element: <PostCard />,
+      },
+      {
+        path: "board/:postId",
+        element: <PostDetail />,
       },
       {
         path: "board/write",

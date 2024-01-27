@@ -53,6 +53,7 @@ export const MyPost = styled.div`
   width: 50%;
   height: 100%;
   background-color: blue;
+  padding: 20px;
 `;
 
 export const LikePost = styled.div`
