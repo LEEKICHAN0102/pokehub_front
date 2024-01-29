@@ -1,11 +1,11 @@
 import { useQueries } from "react-query";
 import { 
-  getCommentById
+  getPostingById
 } from "../../api/post/getPost";
 
 export default function useDetailPostData(postId){
   const queries = useQueries([
-    { queryKey: "comment", queryFn:() => getCommentById(postId) },
+    { queryKey: "comment", queryFn:() => getPostingById(postId) },
   ]);
 
   const isCommentLoading = queries.some((query) => query.isLoading);

@@ -26,3 +26,12 @@ export const PostComment = async (postId) => {
     console.error("댓글 포스팅 중 에러 발생:", error);
   }
 }
+
+export const PostReply = async (commentId) => {
+  try {
+    const response = await axios.post(`http://localhost:8080/board/${commentId}`);
+    return response.data;
+  } catch (error) {
+    console.error("답글 포스팅 중 에러 발생:", error);
+  }
+}
