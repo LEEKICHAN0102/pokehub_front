@@ -1,4 +1,4 @@
-import { useParams , useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { 
   PostDetailContainer,
   PostDetailTitle,
@@ -34,7 +34,6 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa6";
 
 export default function PostDetail() {
-  const navigate = useNavigate();
   const postId = useParams().postId;
   const [replyStates, setReplyStates] = useState({});
 
@@ -46,6 +45,11 @@ export default function PostDetail() {
   const {
     register: replyRegister,
     handleSubmit: replyHandleSubmit,
+  } = useForm({ mode: "onSubmit" });
+
+  const {
+    register: LikeRegister,
+    handleSubmit: LikeHandleSubmit,
   } = useForm({ mode: "onSubmit" });
 
   const { data, isLoading } = useDetailPostData(postId);
@@ -76,6 +80,17 @@ export default function PostDetail() {
     }
   };
 
+  const onHandleLike = async (likeData) => {
+    try {
+      // 빈 객체를 전송하지 않고, 필요한 경우 데이터를 전송
+      const response = await axios.post(`http://localhost:8080/board/like/${postId}` , likeData ,{ withCredentials: true });
+      console.log("서버 응답:", response.data);
+      console.log("상태 코드:", response.status);
+    } catch (error) {
+      console.error("에러 발생:", error, error.message);
+    }
+  };
+
   const handleReply = (commentId) => {
     setReplyStates((prevStates) => ({
       ...prevStates,
@@ -93,8 +108,11 @@ export default function PostDetail() {
         <PostDetailContent>
           {data.detail.findByPostId.content}
         </PostDetailContent>
-        <LikeButtonWrapper>
-          <LikeButton>
+        <LikeButtonWrapper onClick={LikeHandleSubmit(onHandleLike)}>
+          <LikeButton
+            type="button"
+            {...LikeRegister("likedUserId")}
+          >
             <FaStar size={48} color="gray" />
             <span>추천</span>
           </LikeButton>

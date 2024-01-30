@@ -192,7 +192,7 @@ export const InputButton = styled.button`
   cursor: pointer;
 `;
 
-export const LikeButtonWrapper = styled.div`
+export const LikeButtonWrapper = styled.form`
   display: flex;
   gap: 20px;
   margin: 0 auto;
@@ -200,7 +200,7 @@ export const LikeButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-export const LikeButton = styled.div`
+export const LikeButton = styled.button`
   width: 100px;
   height: 100px;
   border-radius: 50px;
@@ -209,7 +209,8 @@ export const LikeButton = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  appearance: none;
+  border: none;
   background-color: #E1DDDE;
 
   span{
@@ -223,6 +224,7 @@ export const LikeButton = styled.div`
       &:active{
       transition: ease-in-out 0.05s all;
       transform: scale(1.05);
+      border: none;
     }
   }
 `;

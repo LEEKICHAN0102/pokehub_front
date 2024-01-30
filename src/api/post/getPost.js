@@ -35,3 +35,12 @@ export const PostReply = async (commentId) => {
     console.error("답글 포스팅 중 에러 발생:", error);
   }
 }
+
+export const PostLike = async (postId) => {
+  try {
+    const response = await axios.post(`http://localhost:8080/board/like/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.error("답글 포스팅 중 에러 발생:", error);
+  }
+}
