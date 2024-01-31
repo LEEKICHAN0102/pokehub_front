@@ -34,7 +34,7 @@ export const PostDetailTitle = styled.div`
 
 export const PostDetailContent = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   width: 95%;
   height: auto;
   margin: auto;
@@ -43,6 +43,12 @@ export const PostDetailContent = styled.div`
   span{
     font-size: 16px;
     font-weight: bold;
+  }
+
+  p{
+    color: gray;
+    font-size: 16px;
+    margin: 10px 0;
   }
 `;
 
@@ -211,12 +217,16 @@ export const LikeButton = styled.button`
   justify-content: center;
   appearance: none;
   border: none;
-  background-color: #E1DDDE;
+  /* background-color: ${(props) => props.isLiked ? "#2D57FA" :"#E1DDDE"};  */
 
   span{
-    color: gray;
+    /* color: ${(props) => props.isLiked ? "black" :"gray"};  */
     font-size: 20px;
     font-weight: bold;
+  }
+
+  svg{
+    /* color: ${(props) => props.isLiked ? "#FAEF64" :"gray"};  */
   }
 
   &:hover {

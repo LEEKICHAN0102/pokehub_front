@@ -20,7 +20,7 @@ export default function PostCard() {
     <>
       <Title name="게시글" hasButton="글 작성" />
       <PostContainer>
-        {data.posting.map((posting) => (
+        {[...data.posting].reverse().map((posting) => (
           <Link to={`/board/${posting._id}`} key={posting._id} >
             <PostCardContainer>
               <PostThumb src={`${ThumbLogo}`} />

@@ -33,8 +33,8 @@ export default function Header() {
       } catch (error) {
         console.log("로그인 되지 않았습니다.", error);
         setIsLoggedIn(false);
-      }
-    };
+    }
+  };
   
     document.addEventListener("click", handleClickOutside);
     checkLoginStatus(); // 이 부분을 옮겨서 마운트 시에 호출하도록 변경

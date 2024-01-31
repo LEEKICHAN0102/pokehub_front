@@ -26,7 +26,7 @@ import {
   LikeButton,
   LikeCount,
 } from "./postDetail.style"
-import { useForm } from "react-hook-form"
+import { set, useForm } from "react-hook-form"
 import useDetailPostData from "../../hooks/post/usePostDetailData";
 import axios from "axios";
 import Loader from "../Loader";
@@ -35,6 +35,9 @@ import { FaStar } from "react-icons/fa6";
 
 export default function PostDetail() {
   const postId = useParams().postId;
+  const [newComments, setNewComments] = useState([]);
+  const [newReplies, setNewReplies] = useState([]);
+  const [ isNewLike , setNewLike] = useState();
   const [replyStates, setReplyStates] = useState({});
 
   const {
@@ -58,11 +61,13 @@ export default function PostDetail() {
     return <Loader />
   }
 
-  console.log(data);
-
-  const onSubmit = async (postData) => {
+  const onCommentSubmit = async (postData) => {
     try {
       const response = await axios.post(`http://localhost:8080/board/${postId}`, postData, { withCredentials: true });
+      setNewComments((prevComments) => [
+        ...prevComments,
+        { type: "comment", data: response.data.newComment },
+      ]);
       console.log("서버 응답:", response.data);
       console.log("상태 코드:", response.status);
     } catch (error) {
@@ -73,6 +78,10 @@ export default function PostDetail() {
   const onReplySubmit = async (replyData, commentId) => {
     try {
       const response = await axios.post(`http://localhost:8080/board/${postId}/${commentId}`, replyData, { withCredentials: true });
+      setNewReplies((prevReplies) => [
+        ...prevReplies,
+        { type: "reply", data: response.data.newReply },
+      ]);
       console.log("서버 응답:", response.data);
       console.log("상태 코드:", response.status);
     } catch (error) {
@@ -86,7 +95,7 @@ export default function PostDetail() {
       const response = await axios.post(`http://localhost:8080/board/like/${postId}` , likeData ,{ withCredentials: true });
       console.log("서버 응답:", response.data);
       console.log("상태 코드:", response.status);
-    } catch (error) {
+      } catch (error) {
       console.error("에러 발생:", error, error.message);
     }
   };
@@ -106,6 +115,7 @@ export default function PostDetail() {
           <span>{data.detail.findByPostId.postingTime}</span>
         </PostDetailTitle>
         <PostDetailContent>
+          <p>작성자 : {data.detail.findByPostId.username}</p>
           {data.detail.findByPostId.content}
         </PostDetailContent>
         <LikeButtonWrapper onClick={LikeHandleSubmit(onHandleLike)}>
@@ -113,10 +123,10 @@ export default function PostDetail() {
             type="button"
             {...LikeRegister("likedUserId")}
           >
-            <FaStar size={48} color="gray" />
+            <FaStar size={48} />
             <span>추천</span>
           </LikeButton>
-          <LikeCount>0</LikeCount>
+          <LikeCount>{data.detail.findByPostId.likeCount}</LikeCount>
         </LikeButtonWrapper>
       </PostDetailContainer>
       <PostDetailDivider />
@@ -141,7 +151,6 @@ export default function PostDetail() {
                   </PostDetailReply>
                 );
               }
-              return null;
             })}
           </CommentWrapper>
           {replyStates[comment._id] ? (
@@ -156,7 +165,32 @@ export default function PostDetail() {
           ) : null}
         </PostDetailComment>
       ))}
-      <PostDetailForm onSubmit={postHandleSubmit(onSubmit)}>
+      {newComments.map((newComment) => (
+        <PostDetailComment key={newComment.data._id}>
+          <CommentWrapper>
+            <CommentAuthor>{newComment.data.username}</CommentAuthor>
+            <CommentContent>{newComment.data.content}</CommentContent>
+            <CommentTime>
+              {newComment.data.postingTime}
+              <CommentReply onClick={() => handleReply(newComment.data._id)}>답글 달기</CommentReply>
+            </CommentTime>
+            {newReplies.map((newReply) => {
+              if (newReply.data.commentId === newComment.data._id) {
+                return (
+                  <PostDetailReply key={newReply.data._id}>
+                    <ReplyWrapper>
+                      <ReplyAuthor>{newReply.data.username}</ReplyAuthor>
+                      <ReplyContent>{newReply.data.replyContent}</ReplyContent>
+                      <ReplyTime>{newReply.data.postingTime}</ReplyTime>
+                    </ReplyWrapper>
+                  </PostDetailReply>
+                );
+              }
+            })}
+          </CommentWrapper>
+        </PostDetailComment>
+      ))}
+      <PostDetailForm onSubmit={postHandleSubmit(onCommentSubmit)}>
         <InputWrapper>
           <InputContent
             placeholder="댓글을 작성해보세요!"
