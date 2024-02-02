@@ -1,36 +1,63 @@
-import { ProfileContainer, ProfileImage, ProfileInfo, UserPost, MyPost, LikePost } from "./profile.style"
-import { useEffect } from "react";
+import { ProfileContainer, ProfileInfo, UserPost, MyPost, LikePost, PostBox } from "./profile.style"
 import axios from "axios";
 import Title from "../Title"
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Profile() {
-  const userId = useParams();
+  const userId = useParams().userId;
+  const [userData, setUserData] = useState({});
+  const [userPostingData, setUserPostingData] = useState([]);
+  const [userLikedData, setUserLikedData] = useState([]);
+
+  console.log(userPostingData);
 
   useEffect(() => {
-    const LoggedInUserStatus = async () => {
+    const checkProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/profile/:userId", { withCredentials: true });
-        console.log("서버 응답:", response.data);
-        } catch (error) {
-        console.log("로그인 되지 않았습니다.", error);
+        const response = await axios.get(`http://localhost:8080/profile/${userId}`, { withCredentials: true });
+        const userProfileData = response.data;
+        console.log("프로필 응답:", userProfileData);
+        setUserData(userProfileData.user);
+        setUserPostingData(userProfileData.userPosting);
+        setUserLikedData(userProfileData.userLiked);
+      } catch (error) {
+        console.log("프로필 정보 불러오는 중 에러 발생.", error);
       }
     };
-    LoggedInUserStatus();
-  }, []);
+  
+    checkProfile();
+  }, [userId]);
 
   return(
     <>
-      <Title name={`${"냉동전갈"} 님의 프로필`} />
+      <Title name={`${userData.username} 님의 프로필`} />
       <ProfileContainer>
-        <ProfileImage />
         <ProfileInfo>
-          <span>냉동전갈</span>
-          <span>rlcks01537@gmail.com</span>
+          <span>{userData.username}</span>
+          <span>{userData.email}</span>
         </ProfileInfo>
         <UserPost>
-          <MyPost></MyPost>
-          <LikePost></LikePost>
+          <MyPost>
+            <span>내가 작성한 게시글</span>
+            {userPostingData.map((myPost) => (
+              <PostBox key={myPost._id}>
+                <span>{myPost.username}</span>
+                <span>{myPost.title}</span>
+                <span>{myPost.postingTime}</span>
+              </PostBox>
+            ))}
+          </MyPost>
+          <LikePost>
+            <span>내가 좋아하는 게시글</span>
+            {userLikedData.map((likePost) => (
+              <PostBox key={likePost._id}>
+                <span>{likePost.username}</span>
+                <span>{likePost.title}</span>
+                <span>{likePost.postingTime}</span>
+              </PostBox>
+            ))}
+          </LikePost>
         </UserPost>
       </ProfileContainer>
     </>

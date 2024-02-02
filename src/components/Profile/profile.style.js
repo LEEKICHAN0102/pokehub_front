@@ -43,23 +43,40 @@ export const UserPost = styled.div`
   justify-content: space-between;
   width: 70%;
   height: 50%;
-  background-color: black;
   margin-top: 30px;
 `;
 
 export const MyPost = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 50%;
   height: 100%;
-  background-color: blue;
   padding: 20px;
 `;
 
 export const LikePost = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 50%;
   height: 100%;
-  background-color: green;
+  padding: 20px;
+`;
+
+export const PostBox = styled.div`
+  width: 400px;
+  height: 100px;
+  border: 1px solid #e5e5e5;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: white;
 `;

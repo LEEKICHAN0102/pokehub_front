@@ -16,6 +16,7 @@ import PostCard from "../../components/Card/PostCard";
 import PostDetail from "../../components/Detail/PostDetail";
 import WriteCard from "../../components/Card/WriteCard";
 import Profile from "../../components/Profile/index";
+import FourOFour from "../../components/404";
 
 export const publicRoutes = [
   {
@@ -87,5 +88,9 @@ export const publicRoutes = [
         element: <Profile />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <FourOFour />
   },
 ];

@@ -6,11 +6,13 @@ import { Container, Content, Group, Item , LogoutButton } from "./style";
 import DropDown from "../Dropdown";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import Profile from "../Profile";
 
 export default function Header() {
   const dropdownRef = useRef(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData ] = useState("");
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
   const {
@@ -41,6 +43,7 @@ export default function Header() {
       try {
         const response = await axios.get("http://localhost:8080/page/1", { withCredentials: true });
         console.log("서버 응답:", response.data);
+        setUserData(response.data);
         setUsername(response.data.user.username);
         setUserId(response.data.user._id);
         setIsLoggedIn(true);
@@ -71,7 +74,9 @@ export default function Header() {
           {isLoggedIn ? (
             <Item>
               <Link to={`/profile/${userId}`}>
-                <span>{`환영합니다 ${username}님`}</span>
+                <span>
+                  {`환영합니다 ${username}님`}
+                </span>
               </Link>
             </Item>
           ) : (
