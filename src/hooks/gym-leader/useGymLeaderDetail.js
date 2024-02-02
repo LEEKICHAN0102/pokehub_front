@@ -5,7 +5,7 @@ import {
 
 export default function useGymLeaderDetailData(name){
   const queries = useQueries([
-    { queryKey: "gymLeader", queryFn: ()=> getByName(name) },
+    { queryKey: ["gymLeader", name], queryFn: ()=> getByName(name) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);

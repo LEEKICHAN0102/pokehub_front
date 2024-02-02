@@ -32,9 +32,21 @@ export const Item = styled.li`
   float: left;
   cursor: pointer;
   letter-spacing: -0.16px;
-  transition: all 0.1s;
   :hover{
-    color: red;
-    transition: all 0.5s;
+    color: #FF658F;
+    transition: all 0.3s;
   }
+`;
+
+export const LogoutButton = styled.input`
+  border: none;
+  width: 70px;
+  height: 40px;
+  color: white;
+  background-color: gray;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 `;

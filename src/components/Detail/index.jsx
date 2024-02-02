@@ -5,6 +5,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaChevronCircleLeft,FaChevronCircleRight } from "react-icons/fa";
 import ContentList from "./ContentList";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import { 
   Navigation,
@@ -24,6 +25,7 @@ export default function DetailPokemon() {
   const id = useParams().id;
   const navigate = useNavigate();
   const { data, isLoading } = useDetailPokemon(id);
+  const [isShiny, setShiny] = useState(false);
 
   console.log(data);
 
@@ -32,6 +34,10 @@ export default function DetailPokemon() {
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  const handleShiny = () => {
+    setShiny((prev) => !prev);
   }
 
   const handleBack = () => {
@@ -56,7 +62,13 @@ export default function DetailPokemon() {
       <Container>
         <OfficialBox>
           <FaArrowLeftLong size={24} onClick={handleBack} />
-          <Official src={`${data.official}`} alt={`${data.nameArray[1]}`} />
+          <Official
+            src={isShiny ? data.official_shiny : data.official}
+            alt={`${data.nameArray[1]}`}
+            onMouseEnter={() => setShiny(true)}
+            onMouseLeave={() => setShiny(false)}
+            isShiny={isShiny}
+          />
         </OfficialBox>
         <Info>
           <span>No. {id}</span>

@@ -9,11 +9,11 @@ import {
 
 export default function useItemData(page) {
   const queries = useQueries([
-    { queryKey: "item", queryFn: () => getAllItem(page) },
-    { queryKey: "itemId", queryFn: () => getItemId(page) },
-    { queryKey: "itemName", queryFn: () => getKoreanName(page) },
-    { queryKey: "itemImage", queryFn: () => getItemImage(page) },
-    { queryKey: "itemDescription", queryFn: () => getKorItemDescription(page) },
+    { queryKey: ["item", page], queryFn: () => getAllItem(page) },
+    { queryKey: ["id", page], queryFn: () => getItemId(page) },
+    { queryKey: ["name", page], queryFn: () => getKoreanName(page) },
+    { queryKey: ["image", page], queryFn: () => getItemImage(page) },
+    { queryKey: ["description", page], queryFn: () => getKorItemDescription(page) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);

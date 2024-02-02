@@ -15,17 +15,17 @@ import {
 
 export default function useDetailPokemon(id) {
   const queries = useQueries([
-    { queryKey: "description", queryFn:()=> getPokemonDescription(id) },
-    { queryKey: "official", queryFn:()=> getOfficialArtwork(id) },
-    { queryKey: "official_shiny", queryFn:()=> getShinyOfficialArtwork(id) },
-    { queryKey: "height", queryFn:()=> getPokemonHeight(id) },
-    { queryKey: "genus", queryFn:()=> getPokemonGenus(id) },
-    { queryKey: "gender", queryFn:()=> getPokemonGender(id) },
-    { queryKey: "weight", queryFn:()=> getPokemonWeight(id) },
-    { queryKey: "ability", queryFn:()=> getPokemonAbility(id) },
-    { queryKey: "abilityDescription", queryFn:()=> getAbilityDescription(id) },
-    { queryKey: "nameArray", queryFn:()=> getDetailNameArray(id) },
-    { queryKey: "class", queryFn:()=> getPokemonClass(id) },
+    { queryKey: ["description", id], queryFn:()=> getPokemonDescription(id) },
+    { queryKey: ["official", id], queryFn:()=> getOfficialArtwork(id) },
+    { queryKey: ["official_shiny", id], queryFn:()=> getShinyOfficialArtwork(id) },
+    { queryKey: ["height", id], queryFn:()=> getPokemonHeight(id) },
+    { queryKey: ["genus", id], queryFn:()=> getPokemonGenus(id) },
+    { queryKey: ["gender", id], queryFn:()=> getPokemonGender(id) },
+    { queryKey: ["weight", id], queryFn:()=> getPokemonWeight(id) },
+    { queryKey: ["ability", id], queryFn:()=> getPokemonAbility(id) },
+    { queryKey: ["abilityDescription", id], queryFn:()=> getAbilityDescription(id) },
+    { queryKey: ["nameArray", id], queryFn:()=> getDetailNameArray(id) },
+    { queryKey: ["class", id], queryFn:()=> getPokemonClass(id) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);
@@ -33,7 +33,7 @@ export default function useDetailPokemon(id) {
   const data = {
     description: queries[0].data,
     official: queries[1].data,
-    shiny_official: queries[2].data,
+    official_shiny: queries[2].data,
     height: queries[3].data,
     genus: queries[4].data,
     gender: queries[5].data,

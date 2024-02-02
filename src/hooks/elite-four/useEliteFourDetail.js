@@ -5,7 +5,7 @@ import {
 
 export default function useEliteFourDetailData(name){
   const queries = useQueries([
-    { queryKey: "eliteFour", queryFn: ()=> getByName(name) },
+    { queryKey: ["eliteFour", name], queryFn: ()=> getByName(name) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);

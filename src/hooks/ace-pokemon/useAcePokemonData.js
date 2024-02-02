@@ -5,7 +5,7 @@ import {
 
 export default function useAcePokemonData(acePokemon){
   const queries = useQueries([
-    { queryKey: "acePokemon", queryFn:() => getPokemonImageByName(acePokemon) },
+    { queryKey: ["acePokemon", acePokemon], queryFn:() => getPokemonImageByName(acePokemon) },
   ]);
 
   const isPokemonLoading = queries.some((query) => query.isLoading);

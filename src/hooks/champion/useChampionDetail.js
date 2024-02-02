@@ -5,7 +5,7 @@ import {
 
 export default function useChampionDetailData(name){
   const queries = useQueries([
-    { queryKey: "champion", queryFn: ()=> getByName(name) },
+    { queryKey: ["champion", name], queryFn: ()=> getByName(name) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);

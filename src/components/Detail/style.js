@@ -88,8 +88,9 @@ export const OfficialBox = styled.div`
 `;
 
 export const Official = styled.img`
-  width: 300px;
-  height: 300px;
+  max-width: 300px;
+  max-height: 300px;
+  cursor: pointer;
 `;
 
 export const ToggleDiv = styled.div`

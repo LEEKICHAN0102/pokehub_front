@@ -1,22 +1,21 @@
-import { lazy } from "react";
 import Layout from "../../components/Layout";
 
-const Home = lazy(() => import("../Home"));
-const Login = lazy(() => import("../Login"));
-const Join = lazy(() => import("../Join"));
-const DetailPokemon = lazy(() => import("../../components/Detail"));
-const ItemCard = lazy(() => import("../../components/Card/ItemCard"));
-const GymLeaderCard = lazy(() => import("../../components/Card/GymLeaderCard"));
-const GymLeaderDetail = lazy(() => import("../../components/Detail/GymLeaderDetail"));
-const ChampionCard = lazy(() => import("../../components/Card/ChampionCard"));
-const ChampionDetail = lazy(() => import("../../components/Detail/ChampionDetail"));
-const EliteFourCard = lazy(() => import("../../components/Card/EliteFourCard"));
-const EliteFourDetail = lazy(() => import("../../components/Detail/EliteFourDetail"));
-const EventCard = lazy(() => import("../../components/Card/EventCard"));
-const PostCard = lazy(() => import("../../components/Card/PostCard"));
-const PostDetail = lazy(() => import("../../components/Detail/PostDetail"));
-const WriteCard = lazy(() => import("../../components/Card/WriteCard"));
-const Profile = lazy(() => import("../../components/Profile/index"));
+import Home from "../Home";
+import Login from "../Login";
+import Join from "../Join";
+import DetailPokemon from "../../components/Detail";
+import ItemCard from "../../components/Card/ItemCard";
+import GymLeaderCard from "../../components/Card/GymLeaderCard";
+import GymLeaderDetail from "../../components/Detail/GymLeaderDetail";
+import ChampionCard from "../../components/Card/ChampionCard";
+import ChampionDetail from "../../components/Detail/ChampionDetail";
+import EliteFourCard from "../../components/Card/EliteFourCard";
+import EliteFourDetail from "../../components/Detail/EliteFourDetail";
+import EventCard from "../../components/Card/EventCard";
+import PostCard from "../../components/Card/PostCard";
+import PostDetail from "../../components/Detail/PostDetail";
+import WriteCard from "../../components/Card/WriteCard";
+import Profile from "../../components/Profile/index";
 
 export const publicRoutes = [
   {
@@ -84,7 +83,7 @@ export const publicRoutes = [
         element: <EventCard />,
       },
       {
-        path: "profile",
+        path: "profile/:userId",
         element: <Profile />,
       },
     ],

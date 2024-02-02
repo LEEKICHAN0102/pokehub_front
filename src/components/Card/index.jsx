@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Container, CardContainer, Info, InfoBox, MainImage, Type, TypeBox, TypeImg } from "./style";
 import Title from "../Title";
 import typeIcons from "../../styles/typeIcon";
@@ -17,11 +16,6 @@ export default function PokemonCard() {
   const handlePageChange = (newPage) => {
     navigate(`/page/${newPage}`);
   };
-
-  useEffect(() => {
-    // 페이지 변경 시에만 navigate 호출
-      navigate(`/page/${page}`);
-  }, [page]);
 
   if (isLoading) {
     return <Loader />;

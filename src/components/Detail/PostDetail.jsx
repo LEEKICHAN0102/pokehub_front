@@ -26,28 +26,29 @@ import {
   LikeButton,
   LikeCount,
 } from "./postDetail.style"
-import { set, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import useDetailPostData from "../../hooks/post/usePostDetailData";
 import axios from "axios";
 import Loader from "../Loader";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa6";
+import { useQueryClient } from "react-query";
 
 export default function PostDetail() {
   const postId = useParams().postId;
-  const [newComments, setNewComments] = useState([]);
-  const [newReplies, setNewReplies] = useState([]);
-  const [ isNewLike , setNewLike] = useState();
   const [replyStates, setReplyStates] = useState({});
+  const queryClient = useQueryClient();
 
   const {
     register: postRegister,
     handleSubmit: postHandleSubmit,
+    setValue: postSetValue,
   } = useForm({ mode: "onSubmit" });
 
   const {
     register: replyRegister,
     handleSubmit: replyHandleSubmit,
+    setValue: replySetValue,
   } = useForm({ mode: "onSubmit" });
 
   const {
@@ -63,13 +64,9 @@ export default function PostDetail() {
 
   const onCommentSubmit = async (postData) => {
     try {
-      const response = await axios.post(`http://localhost:8080/board/${postId}`, postData, { withCredentials: true });
-      setNewComments((prevComments) => [
-        ...prevComments,
-        { type: "comment", data: response.data.newComment },
-      ]);
-      console.log("서버 응답:", response.data);
-      console.log("상태 코드:", response.status);
+      await axios.post(`http://localhost:8080/board/${postId}`, postData, { withCredentials: true });
+      queryClient.invalidateQueries(["detail", postId]);
+      postSetValue("content", "");
     } catch (error) {
       console.error("에러 발생:", error);
     }
@@ -77,13 +74,9 @@ export default function PostDetail() {
 
   const onReplySubmit = async (replyData, commentId) => {
     try {
-      const response = await axios.post(`http://localhost:8080/board/${postId}/${commentId}`, replyData, { withCredentials: true });
-      setNewReplies((prevReplies) => [
-        ...prevReplies,
-        { type: "reply", data: response.data.newReply },
-      ]);
-      console.log("서버 응답:", response.data);
-      console.log("상태 코드:", response.status);
+      await axios.post(`http://localhost:8080/board/${postId}/${commentId}`, replyData, { withCredentials: true });
+      queryClient.invalidateQueries(["detail", postId]);
+      replySetValue("replyContent", "");
     } catch (error) {
       console.error("에러 발생:", error);
     }
@@ -92,10 +85,9 @@ export default function PostDetail() {
   const onHandleLike = async (likeData) => {
     try {
       // 빈 객체를 전송하지 않고, 필요한 경우 데이터를 전송
-      const response = await axios.post(`http://localhost:8080/board/like/${postId}` , likeData ,{ withCredentials: true });
-      console.log("서버 응답:", response.data);
-      console.log("상태 코드:", response.status);
-      } catch (error) {
+      await axios.post(`http://localhost:8080/board/like/${postId}`, likeData, { withCredentials: true });
+      queryClient.invalidateQueries(["detail", postId]);
+    } catch (error) {
       console.error("에러 발생:", error, error.message);
     }
   };
@@ -163,31 +155,6 @@ export default function PostDetail() {
               <ReplyInputSubmit>답글</ReplyInputSubmit>
             </ReplyInputContainer> 
           ) : null}
-        </PostDetailComment>
-      ))}
-      {newComments.map((newComment) => (
-        <PostDetailComment key={newComment.data._id}>
-          <CommentWrapper>
-            <CommentAuthor>{newComment.data.username}</CommentAuthor>
-            <CommentContent>{newComment.data.content}</CommentContent>
-            <CommentTime>
-              {newComment.data.postingTime}
-              <CommentReply onClick={() => handleReply(newComment.data._id)}>답글 달기</CommentReply>
-            </CommentTime>
-            {newReplies.map((newReply) => {
-              if (newReply.data.commentId === newComment.data._id) {
-                return (
-                  <PostDetailReply key={newReply.data._id}>
-                    <ReplyWrapper>
-                      <ReplyAuthor>{newReply.data.username}</ReplyAuthor>
-                      <ReplyContent>{newReply.data.replyContent}</ReplyContent>
-                      <ReplyTime>{newReply.data.postingTime}</ReplyTime>
-                    </ReplyWrapper>
-                  </PostDetailReply>
-                );
-              }
-            })}
-          </CommentWrapper>
         </PostDetailComment>
       ))}
       <PostDetailForm onSubmit={postHandleSubmit(onCommentSubmit)}>

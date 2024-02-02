@@ -217,16 +217,16 @@ export const LikeButton = styled.button`
   justify-content: center;
   appearance: none;
   border: none;
-  /* background-color: ${(props) => props.isLiked ? "#2D57FA" :"#E1DDDE"};  */
+  background-color: #2D57FA;
 
   span{
-    /* color: ${(props) => props.isLiked ? "black" :"gray"};  */
+    color: black;
     font-size: 20px;
     font-weight: bold;
   }
 
   svg{
-    /* color: ${(props) => props.isLiked ? "#FAEF64" :"gray"};  */
+    color: #FAEF64;
   }
 
   &:hover {
