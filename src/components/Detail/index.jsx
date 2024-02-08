@@ -36,10 +36,6 @@ export default function DetailPokemon() {
     return <Loader />;
   }
 
-  const handleShiny = () => {
-    setShiny((prev) => !prev);
-  }
-
   const handleBack = () => {
     navigate(-1)
   }

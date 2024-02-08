@@ -32,7 +32,7 @@ export const publicRoutes = [
     element: <Layout />,
     children: [
       {
-        path: "page/:page",
+        path: "pokemon/:page",
         element: <Home />,
       },
       {
@@ -48,7 +48,7 @@ export const publicRoutes = [
         element: <GymLeaderCard />,
       },
       {
-        path: "gym-leader/detail/:name",
+        path: "gym-leader/detail/:order",
         element: <GymLeaderDetail />
       },
       {
@@ -56,7 +56,7 @@ export const publicRoutes = [
         element: <EliteFourCard />,
       },
       {
-        path: "elite-four/detail/:name",
+        path: "elite-four/detail/:order",
         element: <EliteFourDetail />
       },
       {
@@ -64,7 +64,7 @@ export const publicRoutes = [
         element: <ChampionCard />,
       },
       {
-        path: "champion/detail/:name",
+        path: "champion/detail/:order",
         element: <ChampionDetail />,
       },
       {

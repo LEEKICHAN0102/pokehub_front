@@ -20,16 +20,16 @@ export const MainImage = styled.img`
   width: 80px;
   height: 80px;
   margin: auto;
+  cursor: pointer;
 `;
 
 export const PrevNav = styled.a`
   width: 50%;
   height: 100%;
   display: flex;
-  padding: 20px;
-  flex-direction: column;
+  align-items: center;
+  padding: 40px;
   font-size: 24px;
-  gap: 5px;
   color: white;
   border-radius: 10px;
   &:hover{
@@ -47,11 +47,11 @@ export const NavDiv = styled.div`
 export const NextNav = styled.a`
   width: 50%;
   height: 100%;
-  gap: 5px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding: 20px;
+  justify-content: center;
+  padding: 40px;
   color: white;
   font-size: 24px;
   border-radius: 10px;
@@ -84,31 +84,39 @@ export const ImageQuote = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  width: auto;
+  gap: 30px;
+  width: 450px;
   span {
     color: gray;
-    font-size: 16px;
   }
 `;
 
 export const Official = styled.img`
-  width: 350px;
-  height: 600px;
+  width: auto;
+  height: auto;
 `;
 
-export const Quote = styled.h4`
+export const Quote = styled.span`
   font-weight: bold;
-  color: ${props => props.color};
+  width: auto;
+  margin-top: 20px;
+  border: 3px solid gray;
+  border-radius: 5px;
+  padding: 20px;
 `;
 
 export const Info = styled.div`
-  width: 90%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 5px;
+`;
+
+export const Introduction = styled.h4`
+  font-size: 20px;
+  color: ${(props) => props.color};
 `;
 
 export const Name = styled.h1`
@@ -131,6 +139,7 @@ export const MoreInfo = styled.div`
   border: 1px solid #d0d4d2ed;
   border-radius: 10px;
   padding: 30px;
+  gap: 10px;
   span{
     font-size: 12px;
   }
@@ -142,9 +151,17 @@ export const Content = styled.div`
   align-items: center;
   gap: 10px;
   img{
-    width: 30px;
-    height: 30px;
+    width: 80px;
+    height: 80px;
   }
+`;
+
+export const BgmContent = styled(Content)`
+  flex-direction: column;
+  border: 1px solid gray;
+  padding: 20px;
+  border-radius: 5px;
+  align-items: flex-start;
 `;
 
 export const GenderBox = styled.div`

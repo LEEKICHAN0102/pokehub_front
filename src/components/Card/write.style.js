@@ -38,7 +38,7 @@ export const WriteContentContainer = styled.div`
 export const WriteContentButton = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  margin: auto;
   padding: 30px;
 `;
 
@@ -60,9 +60,6 @@ export const WriteContent = styled.textarea`
 `;
 
 export const WritePosting = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: 10px;
   background-color: #8CB1ED;
   width: 70px;

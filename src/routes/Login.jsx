@@ -21,13 +21,13 @@ export default function Login() {
       
       if (response.status === 200) {
         // 로그인 성공 시, 세션 정보를 확인하는 요청을 보냄
-        const checkLoginStatusResponse = await axios.get("http://localhost:8080/page/1", {
+        const checkLoginStatusResponse = await axios.get("http://localhost:8080/pokemon/1", {
           withCredentials: true,
         });
   
         console.log("로그인 상태 확인:", checkLoginStatusResponse.data);
   
-        navigate("/page/1", { state: { user: checkLoginStatusResponse.data.user } });
+        navigate("/pokemon/1", { state: { user: checkLoginStatusResponse.data.user } });
       }
     } catch (error) {
       console.error("에러 발생:", error);

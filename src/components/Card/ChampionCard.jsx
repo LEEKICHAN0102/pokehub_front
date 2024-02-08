@@ -30,7 +30,7 @@ export default function ChampionCard() {
       <Container>
         {data.champion ? (
           data.champion.map((champion) => (
-            <Link key={champion._id} to={`detail/${champion.name}`}>
+            <Link key={champion._id} to={`detail/${champion.order}`}>
               <CardContainer color={colors[champion.type]}>
                 <Info>
                   <InfoBox>{champion.name}</InfoBox>

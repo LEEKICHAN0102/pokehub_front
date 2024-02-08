@@ -55,14 +55,20 @@ export const NextNav = styled.a`
   }
 `;
 
+export const Introduction = styled.h4`
+  font-size: 20px;
+  color: ${(props) => props.color};
+`;
+
 export const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 80%;
   margin: auto;
+  height: auto 0;
   margin-top: 150px;
-  height: 100vh;
   border-radius: 20px;
   border: 3px solid #2c2b2b;
   padding: 50px;
@@ -78,28 +84,32 @@ export const ImageQuote = styled.div`
   align-items: center;
   justify-content: center;
   gap: 30px;
-  max-width: 350px;
+  max-width: 450px;
+  span{
+    color: black;
+  }
 `;
 
 export const Official = styled.img`
-  width: 350px;
-  height: 600px;
+  width: auto;
+  height: auto;
 `;
 
 export const Quote = styled.span`
   font-weight: bold;
+  border: 3px solid gray;
+  border-radius: 5px;
+  padding: 20px;
 `;
 
 export const Info = styled.div`
-  width: 60%;
-  height: 80%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 5px;
   span{
-    color: gray;
     font-size: 16px;
   }
 `;
@@ -111,18 +121,21 @@ export const Name = styled.h1`
 export const Information = styled.h4`
   margin-top: 40px;
   font-weight: bold;
-  color: ${props => props.color};
+  color: black;
 `;
 
 export const MoreInfo = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 3fr);
   margin: auto;
   margin-top: 50px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   border: 1px solid #d0d4d2ed;
   border-radius: 10px;
   padding: 30px;
+  gap: 10px;
   span{
     font-size: 12px;
   }

@@ -6,7 +6,6 @@ import { Container, Content, Group, Item , LogoutButton } from "./style";
 import DropDown from "../Dropdown";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import Profile from "../Profile";
 
 export default function Header() {
   const dropdownRef = useRef(null);
@@ -41,7 +40,7 @@ export default function Header() {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/page/1", { withCredentials: true });
+        const response = await axios.get("http://localhost:8080/pokemon/1", { withCredentials: true });
         console.log("서버 응답:", response.data);
         setUserData(response.data);
         setUsername(response.data.user.username);
@@ -67,7 +66,7 @@ export default function Header() {
           </Item>
           {isDropdownOpen && <DropDown />}
         </Group>
-        <Link to="/page/1">
+        <Link to="/pokemon/1">
           <Logo />
         </Link>
         <Group>

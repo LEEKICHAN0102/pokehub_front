@@ -59,7 +59,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 85%;
   margin: auto;
   margin-top: 150px;
   height: 70vh;

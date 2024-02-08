@@ -2,10 +2,8 @@ import { useRef,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useEliteFourDetailData from "../../hooks/elite-four/useEliteFourDetail";
 import typeColor from "../../styles/typeColor";
-import typeIcon from "../../styles/typeIcon";
 import Loader from "../Loader";
 import { FaChevronCircleLeft,FaChevronCircleRight } from "react-icons/fa";
-import CustomAudioPlayer from "./CustomAudioPlayer";
 
 import { 
   Navigation,
@@ -16,17 +14,21 @@ import {
   Container,
   Official,
   Info,
+  Introduction,
   ImageQuote,
   Information,
   MoreInfo,
   Quote,
   Content,
-} from "./gymLeaderDetail.style";
+} from "./championDetail.style";
 
 
 export default function EliteFourDetail() {
-  const name = useParams().name;
-  const {data, isLoading} = useEliteFourDetailData(name);
+  const order = useParams().order;
+  const {data, isLoading} = useEliteFourDetailData(order);
+
+  const prevOrder = Number(order)-1 === 0 ? 32 : Number(order) - 1;
+  const nextOrder = Number(order)+ 1 === 33 ? 1 : Number(order) + 1;
 
   const audioRef = useRef(null);
 
@@ -37,49 +39,44 @@ export default function EliteFourDetail() {
     }
   }, []);
 
+  if(isLoading){
+    return <Loader />
+  }
+
   return (
     <>
       <Navigation>
-        <PrevNav>
-          <Name></Name>
-          <FaChevronCircleLeft size={36} />
+        <PrevNav href={`/elite-four/detail/${prevOrder}`}>
+          <FaChevronCircleLeft size={60} />
         </PrevNav>
         <NavDiv />
-        <NextNav>
-          <Name></Name>
-          <FaChevronCircleRight size={36} />
+        <NextNav href={`/elite-four/detail/${nextOrder}`}>
+            <FaChevronCircleRight size={60} />
         </NextNav>
       </Navigation>
       <Container>
         <ImageQuote>
-          {data.eliteFour && data.eliteFour.image ? (
+          {data.eliteFour && (
             <>
+              <Name>{data.eliteFour.name}</Name>
+              <Introduction color={typeColor[data.eliteFour.type]}>{data.eliteFour.introduction}</Introduction>
               <Official src={`${data.eliteFour.image.full}`} alt={`${data.eliteFour.name}`} />
               <Quote color={typeColor[data.eliteFour.type]}>{data.eliteFour.quote}</Quote>
             </>
-          ) : (
-            <Loader />
           )}
         </ImageQuote>
         <Info>
-          {data.eliteFour ? (
+          {data.eliteFour && (
             <>
-              <Name>{data.eliteFour.name}</Name>
-              <span>{data.eliteFour.region} 지방의 체육관 관장</span>
               <Information color={typeColor[data.eliteFour.type]}>
                 {data.eliteFour.information}
               </Information>
               <MoreInfo>
-                {data.eliteFour.bgm["battle"] && (
-                  <CustomAudioPlayer src={data.eliteFour.bgm["battle"]} />
-                )}
-                {data.eliteFour.bgm["theme"] && (
-                  <CustomAudioPlayer src={data.eliteFour.bgm["theme"]} />
-                )}
+                <Content>
+                  
+                </Content>
               </MoreInfo>
             </>
-          ) : (
-            <Loader />
           )}
         </Info>
       </Container>

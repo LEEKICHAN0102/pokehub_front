@@ -1,11 +1,11 @@
 import { useQueries } from "react-query";
 import {
-  getByName
+  getByOrder
 } from "../../api/elite-four/eliteFour";
 
-export default function useEliteFourDetailData(name){
+export default function useEliteFourDetailData(order){
   const queries = useQueries([
-    { queryKey: ["eliteFour", name], queryFn: ()=> getByName(name) },
+    { queryKey: ["eliteFour", order], queryFn: ()=> getByOrder(order) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);

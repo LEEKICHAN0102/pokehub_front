@@ -15,26 +15,27 @@ import colors from "../../styles/typeColor";
 import Loader from "../Loader";
 import useGymLeaderData from "../../hooks/gym-leader/useGymLeaderData";
 import { Link } from "react-router-dom";
+import "../../styles/Paging.css";
 
 export default function GymLeaderCard() {
   const { data, isLoading } = useGymLeaderData();
 
-  if (isLoading || !data.gymLeader) {
+  if (isLoading) {
     return <Loader />;
   }
 
+  console.log(data); 
+
   return (
-    <div>
+    <>
       <Title>포켓몬 관장 정보</Title>
       <Container>
-        {data.gymLeader.map((gymLeader) => (
-          <Link key={gymLeader._id} to={`detail/${gymLeader.name}`}>
+        {data.gymLeader && data.gymLeader.map((gymLeader) => (
+          <Link key={gymLeader._id} to={`detail/${gymLeader.order}`}>
             <CardContainer color={colors[gymLeader.type]}>
               <Info>
                 <InfoBox>{gymLeader.name}</InfoBox>
-                {Object.keys(gymLeader.badge).map((badgeKey) => (
-                  <BadgeBox key={badgeKey} src={gymLeader.badge[badgeKey]} alt={badgeKey} />
-                ))}
+                <BadgeBox src={`${gymLeader.image.badge}`} />
               </Info>
               <InGameImage src={gymLeader.image.inGame} />
               <Type>
@@ -46,6 +47,6 @@ export default function GymLeaderCard() {
           </Link>
         ))}
       </Container>
-    </div>
+    </>
   );
 };

@@ -14,7 +14,7 @@ export default function PokemonCard() {
   const { data, isLoading } = usePokemonData(page);
 
   const handlePageChange = (newPage) => {
-    navigate(`/page/${newPage}`);
+    navigate(`/pokemon/${newPage}`);
   };
 
   if (isLoading) {

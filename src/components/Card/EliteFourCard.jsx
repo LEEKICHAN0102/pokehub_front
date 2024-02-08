@@ -24,11 +24,11 @@ export default function EliteFourCard() {
   }
 
   return (
-    <div>
-      <Title>포켓몬 관장 정보</Title>
+    <>
+      <Title>포켓몬 사천왕 정보</Title>
       <Container>
-        {data.eliteFour.map((eliteFour) => (
-          <Link key={eliteFour._id} to={`detail/${eliteFour.name}`}>
+        {data.eliteFour && data.eliteFour.map((eliteFour) => (
+          <Link key={eliteFour._id} to={`detail/${eliteFour.order}`}>
             <CardContainer color={colors[eliteFour.type]}>
               <Info>
                 <InfoBox>{eliteFour.name}</InfoBox>
@@ -43,6 +43,6 @@ export default function EliteFourCard() {
           </Link>
         ))}
       </Container>
-    </div>
+    </>
   );
 };
