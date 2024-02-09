@@ -25,13 +25,13 @@ import {
   BgmContent,
   Content,
   MainImage,
-} from "./championDetail.style";
+} from "./characterDetail.style";
 
 
 export default function ChampionDetail() {
   const order = useParams().order;
   const {data, isLoading} = useChampionDetailData(order);
-  const { aceData, isPokemonLoading } = useAcePokemonData(data?.champion?.ace_pokemon[0]);
+  const { aceData, isPokemonLoading } = useAcePokemonData(data?.champion?.ace_pokemon);
 
   const prevOrder = Number(order)-1 === 0 ? 12 : Number(order) - 1;
   const nextOrder = Number(order)+ 1 === 13 ? 1 : Number(order) + 1;
@@ -130,7 +130,7 @@ export default function ChampionDetail() {
                   {aceData.acePokemon && (
                     <>
                       <span>에이스 포켓몬 :</span>
-                      <Link to={`/detail`}>
+                      <Link to={`/detail/${data.champion.ace_pokemon}`}>
                         <MainImage src={`${aceData.acePokemon}`} />
                       </Link>
                     </>

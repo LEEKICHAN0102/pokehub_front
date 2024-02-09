@@ -391,7 +391,7 @@ export const getPokemonClass = async(id) => {
   }
 }
 
-export const getPokemonImageByName = async (ace) => {
+export const getPokemonImageByNumber = async (ace) => {
   try{
       const response = await axios.get(`${pokemon_URL}/pokemon/${ace}`);
       const animatedImageList = response.data.sprites.versions["generation-v"]["black-white"]["animated"]["front_default"];

@@ -5,11 +5,12 @@ import {
   Info,
   InfoBox,
   InGameImage,
-  Title,
   Type,
   TypeBox,
   TypeImg,
 } from "./gymLeader.styles";
+
+import Title from "../Title";
 import typeIcons from "../../styles/typeIcon";
 import colors from "../../styles/typeColor";
 import Loader from "../Loader";
@@ -28,7 +29,7 @@ export default function GymLeaderCard() {
 
   return (
     <>
-      <Title>포켓몬 관장 정보</Title>
+      <Title name="포켓몬 관장 정보" />
       <Container>
         {data.gymLeader && data.gymLeader.map((gymLeader) => (
           <Link key={gymLeader._id} to={`detail/${gymLeader.order}`}>

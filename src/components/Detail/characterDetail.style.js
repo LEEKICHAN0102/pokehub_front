@@ -154,6 +154,16 @@ export const Content = styled.div`
     width: 80px;
     height: 80px;
   }
+
+  .badge{
+    width: 30px;
+    height: 30px;
+  }
+
+  .typeBox{
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 export const BgmContent = styled(Content)`

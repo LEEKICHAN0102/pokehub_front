@@ -4,11 +4,12 @@ import {
   Info,
   InfoBox,
   InGameImage,
-  Title,
   Type,
   TypeBox,
   TypeImg,
 } from "./gymLeader.styles";
+
+import Title from "../Title";
 import typeIcons from "../../styles/typeIcon";
 import colors from "../../styles/typeColor";
 import Loader from "../Loader";
@@ -25,7 +26,7 @@ export default function EliteFourCard() {
 
   return (
     <>
-      <Title>포켓몬 사천왕 정보</Title>
+      <Title name="포켓몬 사천왕 정보" />
       <Container>
         {data.eliteFour && data.eliteFour.map((eliteFour) => (
           <Link key={eliteFour._id} to={`detail/${eliteFour.order}`}>

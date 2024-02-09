@@ -25,7 +25,7 @@ export default function DetailPokemon() {
   const id = useParams().id;
   const navigate = useNavigate();
   const { data, isLoading } = useDetailPokemon(id);
-  const [isShiny, setShiny] = useState(false);
+  const [shiny, setShiny] = useState(false);
 
   console.log(data);
 
@@ -59,11 +59,11 @@ export default function DetailPokemon() {
         <OfficialBox>
           <FaArrowLeftLong size={24} onClick={handleBack} />
           <Official
-            src={isShiny ? data.official_shiny : data.official}
+            src={shiny ? data.official_shiny : data.official}
             alt={`${data.nameArray[1]}`}
             onMouseEnter={() => setShiny(true)}
             onMouseLeave={() => setShiny(false)}
-            isShiny={isShiny}
+            shiny={shiny}
           />
         </OfficialBox>
         <Info>

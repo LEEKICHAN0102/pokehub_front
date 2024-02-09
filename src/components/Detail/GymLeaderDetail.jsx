@@ -1,6 +1,8 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useGymLeaderDetailData from "../../hooks/gym-leader/useGymLeaderDetail";
-import typeColor from "../../styles/typeColor";
+import useAcePokemonData from "../../hooks/ace-pokemon/useAcePokemonData";
+import colors from "../../styles/typeColor";
+import typeIcons from "../../styles/typeIcon";
 import { FaChevronCircleLeft,FaChevronCircleRight } from "react-icons/fa";
 
 import { 
@@ -14,16 +16,24 @@ import {
   Info,
   ImageQuote,
   Information,
+  MainImage,
   MoreInfo,
   Quote,
   Content,
   Introduction,
-} from "./championDetail.style";
+} from "./characterDetail.style";
+
+import {
+  Type,
+  TypeBox,
+  TypeImg,
+} from "../Card/gymLeader.styles";
 
 
 export default function GymLeaderDetail() {
   const order = useParams().order;
   const {data, isLoading} = useGymLeaderDetailData(order);
+  const { aceData, isPokemonLoading } = useAcePokemonData(data?.gymLeader?.ace_pokemon);
 
   const prevOrder = Number(order)-1 === 0 ? 77 : Number(order) - 1;
   const nextOrder = Number(order)+ 1 === 78 ? 1 : Number(order) + 1;
@@ -46,7 +56,7 @@ export default function GymLeaderDetail() {
           {data.gymLeader && (
             <>
               <Name>{data.gymLeader.name}</Name>
-              <Introduction color={typeColor[data.gymLeader.type]}>{data.gymLeader.introduction}</Introduction>
+              <Introduction color={colors[data.gymLeader.type]}>{data.gymLeader.introduction}</Introduction>
               <Official src={`${data.gymLeader.image.full}`} alt={`${data.gymLeader.name}`} />
               <Quote>{data.gymLeader.quote}</Quote>
             </>
@@ -64,10 +74,23 @@ export default function GymLeaderDetail() {
                 </Content>
                 <Content>
                   <span>획득 가능 배지 : ({Object.keys(data.gymLeader.badge)}) </span>
-                  <img src={`${data.gymLeader.image.badge}`} />
+                  <img src={`${data.gymLeader.image.badge}`} className="badge" />
                 </Content>
                 <Content>
                   <span>성별 : {data.gymLeader.gender}</span>
+                </Content>
+                <Content>
+                  <span>사용타입 : {data.gymLeader.type}</span>
+                </Content>
+                <Content>
+                  {aceData.acePokemon && (
+                    <>
+                      <span>에이스 포켓몬 :</span>
+                      <Link to={`/detail/${data.gymLeader.ace_pokemon}`}>
+                        <MainImage src={`${aceData.acePokemon}`} />
+                      </Link>
+                    </>
+                  )}
                 </Content>
               </MoreInfo>
             </>
