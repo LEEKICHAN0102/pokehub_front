@@ -12,6 +12,11 @@ import ChampionDetail from "../../components/Detail/ChampionDetail";
 import EliteFourCard from "../../components/Card/EliteFourCard";
 import EliteFourDetail from "../../components/Detail/EliteFourDetail";
 import EventCard from "../../components/Card/EventCard";
+import PostCard from "../../components/Card/PostCard";
+import PostDetail from "../../components/Detail/PostDetail";
+import WriteCard from "../../components/Card/WriteCard";
+import Profile from "../../components/Profile/index";
+import FourOFour from "../../components/404";
 
 export const publicRoutes = [
   {
@@ -27,7 +32,7 @@ export const publicRoutes = [
     element: <Layout />,
     children: [
       {
-        path: "page/:page",
+        path: "pokemon/:page",
         element: <Home />,
       },
       {
@@ -43,7 +48,7 @@ export const publicRoutes = [
         element: <GymLeaderCard />,
       },
       {
-        path: "gym-leader/detail/:name",
+        path: "gym-leader/detail/:order",
         element: <GymLeaderDetail />
       },
       {
@@ -51,7 +56,7 @@ export const publicRoutes = [
         element: <EliteFourCard />,
       },
       {
-        path: "elite-four/detail/:name",
+        path: "elite-four/detail/:order",
         element: <EliteFourDetail />
       },
       {
@@ -59,13 +64,33 @@ export const publicRoutes = [
         element: <ChampionCard />,
       },
       {
-        path: "champion/detail/:name",
+        path: "champion/detail/:order",
         element: <ChampionDetail />,
+      },
+      {
+        path: "board",
+        element: <PostCard />,
+      },
+      {
+        path: "board/:postId",
+        element: <PostDetail />,
+      },
+      {
+        path: "board/write",
+        element: <WriteCard />,
       },
       {
         path: "event",
         element: <EventCard />,
       },
+      {
+        path: "profile/:userId",
+        element: <Profile />,
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <FourOFour />
   },
 ];

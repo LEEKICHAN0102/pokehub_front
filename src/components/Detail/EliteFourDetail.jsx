@@ -1,32 +1,25 @@
 import { useRef,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useEliteFourDetailData from "../../hooks/elite-four/useEliteFourDetail";
-import typeColor from "../../styles/typeColor";
-import typeIcon from "../../styles/typeIcon";
-import Loader from "../Loader";
+import useAcePokemonData from "../../hooks/ace-pokemon/useAcePokemonData";
 import { FaChevronCircleLeft,FaChevronCircleRight } from "react-icons/fa";
-import CustomAudioPlayer from "./CustomAudioPlayer";
-
+import Loader from "../Loader";
 import { 
   Navigation,
   PrevNav,
-  Name,
   NavDiv,
   NextNav,
-  Container,
-  Official,
-  Info,
-  ImageQuote,
-  Information,
-  MoreInfo,
-  Quote,
-  Content,
-} from "./gymLeaderDetail.style";
+} from "./characterDetail.style";
+import CharacterContentList from "./CharacterContentList";
 
 
 export default function EliteFourDetail() {
-  const name = useParams().name;
-  const {data, isLoading} = useEliteFourDetailData(name);
+  const order = useParams().order;
+  const {data, isLoading} = useEliteFourDetailData(order);
+  const { aceData, isPokemonLoading } = useAcePokemonData(data?.eliteFour?.ace_pokemon);
+
+  const prevOrder = Number(order)-1 === 0 ? 32 : Number(order) - 1;
+  const nextOrder = Number(order)+ 1 === 33 ? 1 : Number(order) + 1;
 
   const audioRef = useRef(null);
 
@@ -37,52 +30,22 @@ export default function EliteFourDetail() {
     }
   }, []);
 
+  if(isLoading || isPokemonLoading){
+    return <Loader />
+  }
+
   return (
     <>
       <Navigation>
-        <PrevNav>
-          <Name></Name>
-          <FaChevronCircleLeft size={36} />
+        <PrevNav href={`/elite-four/detail/${prevOrder}`}>
+          <FaChevronCircleLeft size={60} />
         </PrevNav>
         <NavDiv />
-        <NextNav>
-          <Name></Name>
-          <FaChevronCircleRight size={36} />
+        <NextNav href={`/elite-four/detail/${nextOrder}`}>
+            <FaChevronCircleRight size={60} />
         </NextNav>
       </Navigation>
-      <Container>
-        <ImageQuote>
-          {data.eliteFour && data.eliteFour.image ? (
-            <>
-              <Official src={`${data.eliteFour.image.full}`} alt={`${data.eliteFour.name}`} />
-              <Quote color={typeColor[data.eliteFour.type]}>{data.eliteFour.quote}</Quote>
-            </>
-          ) : (
-            <Loader />
-          )}
-        </ImageQuote>
-        <Info>
-          {data.eliteFour ? (
-            <>
-              <Name>{data.eliteFour.name}</Name>
-              <span>{data.eliteFour.region} 지방의 체육관 관장</span>
-              <Information color={typeColor[data.eliteFour.type]}>
-                {data.eliteFour.information}
-              </Information>
-              <MoreInfo>
-                {data.eliteFour.bgm["battle"] && (
-                  <CustomAudioPlayer src={data.eliteFour.bgm["battle"]} />
-                )}
-                {data.eliteFour.bgm["theme"] && (
-                  <CustomAudioPlayer src={data.eliteFour.bgm["theme"]} />
-                )}
-              </MoreInfo>
-            </>
-          ) : (
-            <Loader />
-          )}
-        </Info>
-      </Container>
+      <CharacterContentList data={data} aceData={aceData} />
     </>
   )
 };

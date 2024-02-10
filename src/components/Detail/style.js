@@ -59,7 +59,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 85%;
   margin: auto;
   margin-top: 150px;
   height: 70vh;
@@ -88,8 +88,9 @@ export const OfficialBox = styled.div`
 `;
 
 export const Official = styled.img`
-  width: 300px;
-  height: 300px;
+  max-width: 300px;
+  max-height: 300px;
+  cursor: pointer;
 `;
 
 export const ToggleDiv = styled.div`

@@ -1,78 +1,42 @@
 import { useParams } from "react-router-dom";
 import useGymLeaderDetailData from "../../hooks/gym-leader/useGymLeaderDetail";
-import typeColor from "../../styles/typeColor";
-import typeIcon from "../../styles/typeIcon";
-import Loader from "../Loader";
+import useAcePokemonData from "../../hooks/ace-pokemon/useAcePokemonData";
 import { FaChevronCircleLeft,FaChevronCircleRight } from "react-icons/fa";
-
+import Loader from "../Loader";
 import { 
   Navigation,
   PrevNav,
-  Name,
   NavDiv,
   NextNav,
-  Container,
-  Official,
-  Info,
-  ImageQuote,
-  Information,
-  MoreInfo,
-  Quote,
-  Content,
-} from "./gymLeaderDetail.style";
+} from "./characterDetail.style";
+
+import CharacterContentList from "./CharacterContentList";
 
 
 export default function GymLeaderDetail() {
-  const name = useParams().name;
-  const {data, isLoading} = useGymLeaderDetailData(name);
+  const order = useParams().order;
+  const {data, isLoading} = useGymLeaderDetailData(order);
+  const { aceData, isPokemonLoading } = useAcePokemonData(data?.gymLeader?.ace_pokemon);
+
+  const prevOrder = Number(order)-1 === 0 ? 77 : Number(order) - 1;
+  const nextOrder = Number(order)+ 1 === 78 ? 1 : Number(order) + 1;
+
+  if(isLoading || isPokemonLoading){
+    return <Loader />
+  }
 
   return (
     <>
       <Navigation>
-        <PrevNav>
-          <Name></Name>
-          <FaChevronCircleLeft size={36} />
+        <PrevNav href={`/gym-leader/detail/${prevOrder}`}>
+          <FaChevronCircleLeft size={60} />
         </PrevNav>
         <NavDiv />
-        <NextNav>
-          <Name></Name>
-          <FaChevronCircleRight size={36} />
+        <NextNav href={`/gym-leader/detail/${nextOrder}`}>
+          <FaChevronCircleRight size={60} />
         </NextNav>
       </Navigation>
-      <Container>
-        <ImageQuote>
-          {data.gymLeader && data.gymLeader.image ? (
-            <>
-              <Official src={`${data.gymLeader.image.full}`} alt={`${data.gymLeader.name}`} />
-              <Quote color={typeColor[data.gymLeader.type]}>{data.gymLeader.quote}</Quote>
-            </>
-          ) : (
-            <Loader />
-          )}
-        </ImageQuote>
-        <Info>
-          {data.gymLeader ? (
-            <>
-              <Name>{data.gymLeader.name}</Name>
-              <span>{data.gymLeader.region} 지방의 체육관 관장</span>
-              <Information color={typeColor[data.gymLeader.type]}>
-                {data.gymLeader.information}
-              </Information>
-              <MoreInfo>
-                <Content>
-                  <span>획득 가능 배지 : ({Object.keys(data.gymLeader.badge)}) </span>
-                  <img src={`${data.gymLeader.badge[Object.keys(data.gymLeader.badge)]}`} />
-                </Content>
-                <Content>
-                  
-                </Content>
-              </MoreInfo>
-            </>
-          ) : (
-            <Loader />
-          )}
-        </Info>
-      </Container>
+      <CharacterContentList data={data} aceData={aceData} />
     </>
   )
 };

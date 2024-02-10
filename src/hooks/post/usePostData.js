@@ -1,17 +1,17 @@
 import { useQueries } from "react-query";
 import {
-  getAllGymLeaders
-} from "../../api/gym-leader/gymLeader";
+  getAllPosting
+} from "../../api/post/getPost";
 
-export default function useGymLeaderData(){
+export default function usePostData(){
   const queries = useQueries([
-    { queryKey: ["gymLeader"], queryFn: () => getAllGymLeaders() },
+    { queryKey: "posting", queryFn: getAllPosting },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);
 
   const data = {
-    gymLeader: queries[0].data,
+    posting: queries[0].data,
   }
 
   return { data, isLoading };

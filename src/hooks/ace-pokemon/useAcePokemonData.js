@@ -1,11 +1,11 @@
 import { useQueries } from "react-query";
 import {
-  getPokemonImageByName
+  getPokemonImageByNumber
 } from "../../api/pokemon/getPokemon";
 
 export default function useAcePokemonData(acePokemon){
   const queries = useQueries([
-    { queryKey: "acePokemon", queryFn:() => getPokemonImageByName(acePokemon) },
+    { queryKey: ["acePokemon", acePokemon], queryFn:() => getPokemonImageByNumber(acePokemon) },
   ]);
 
   const isPokemonLoading = queries.some((query) => query.isLoading);

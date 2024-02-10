@@ -28,7 +28,7 @@ export default function DropDown(){
 
       {isDropdownOpen && (
         <>
-          <Link to="/page/1">
+          <Link to="/pokemon/1">
             <SubDropDown>
               포켓몬 (전국)
             </SubDropDown>

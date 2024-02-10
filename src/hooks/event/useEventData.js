@@ -9,7 +9,7 @@ export default function useEventData() {
   const isLoading = queries.some((query) => query.isLoading);
 
   const data = {
-    event: queries[0]?.data || [], // data가 정의되지 않은 경우 빈 배열을 반환
+    event: queries[0].data,
   };
 
   return { data, isLoading };

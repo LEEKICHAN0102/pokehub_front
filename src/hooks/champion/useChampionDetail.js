@@ -1,11 +1,11 @@
 import { useQueries } from "react-query";
 import {
-  getByName
+  getByOrder
 } from "../../api/champion/champion";
 
-export default function useChampionDetailData(name){
+export default function useChampionDetailData(order){
   const queries = useQueries([
-    { queryKey: "champion", queryFn: ()=> getByName(name) },
+    { queryKey: ["champion", order], queryFn: ()=> getByOrder(order) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);

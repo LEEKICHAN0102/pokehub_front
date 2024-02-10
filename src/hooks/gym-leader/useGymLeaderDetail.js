@@ -1,11 +1,11 @@
 import { useQueries } from "react-query";
 import {
-  getByName
+  getByOrder
 } from "../../api/gym-leader/gymLeader";
 
-export default function useGymLeaderDetailData(name){
+export default function useGymLeaderDetailData(order){
   const queries = useQueries([
-    { queryKey: "gymLeader", queryFn: ()=> getByName(name) },
+    { queryKey: ["gymLeader", order], queryFn: ()=> getByOrder(order) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);

@@ -15,11 +15,19 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`http://localhost:8080/login`, data);
+      const response = await axios.post(`http://localhost:8080/login`, data, { withCredentials: true });
       console.log("서버 응답:", response.data);
       console.log("상태 코드:", response.status);
+      
       if (response.status === 200) {
-        navigate("/page/1");
+        // 로그인 성공 시, 세션 정보를 확인하는 요청을 보냄
+        const checkLoginStatusResponse = await axios.get("http://localhost:8080/pokemon/1", {
+          withCredentials: true,
+        });
+  
+        console.log("로그인 상태 확인:", checkLoginStatusResponse.data);
+  
+        navigate("/pokemon/1", { state: { user: checkLoginStatusResponse.data.user } });
       }
     } catch (error) {
       console.error("에러 발생:", error);

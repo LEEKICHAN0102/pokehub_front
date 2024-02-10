@@ -1,9 +1,9 @@
 import axios from "axios";
 import { pokemon_URL, limit } from "../../constant";
 
-export const getAllPokemon = async(pages) => {
+export const getAllPokemon = async(page) => {
   try {
-    const pageOffset = (pages - 1) * limit;
+    const pageOffset = (page - 1) * limit;
     const response = await axios.get(`${pokemon_URL}/pokemon?offset=${pageOffset}&limit=${limit}`);
     // 포켓몬 객체 데이터 return
     const pokemonList = response.data.results;
@@ -17,9 +17,9 @@ export const getAllPokemon = async(pages) => {
   }
 }
 
-export const getPokemonID = async (pages) => {
+export const getPokemonID = async (page) => {
   try {
-    const urls = await getAllPokemon(pages);
+    const urls = await getAllPokemon(page);
 
     // 각 URL에서 포켓몬의 ID를 추출
     const idList = urls
@@ -38,8 +38,8 @@ export const getPokemonID = async (pages) => {
 };
 
 
-export const getPokemonImage = async (pages) => {
-  const pokemonId = await getPokemonID(pages);
+export const getPokemonImage = async (page) => {
+  const pokemonId = await getPokemonID(page);
   try{
     const image = await Promise.all(
       pokemonId.map(async(id) => {
@@ -70,8 +70,8 @@ export const getPokemonImage = async (pages) => {
   }
 }
 
-export const getPokemonName = async (pages) => {
-  const pokemonId = await getPokemonID(pages);
+export const getPokemonName = async (page) => {
+  const pokemonId = await getPokemonID(page);
 
   try {
     const name = await Promise.all(
@@ -109,8 +109,8 @@ export const getPokemonDescription = async (id) => {
   }
 }
 
-export const  getPokemonType = async(pages) => {
-  const pokemonId = await getPokemonID(pages);
+export const  getPokemonType = async(page) => {
+  const pokemonId = await getPokemonID(page);
   try {
     const type = await Promise.all(
       pokemonId.map(async(id) => {
@@ -130,8 +130,8 @@ export const  getPokemonType = async(pages) => {
   }
 }
 
-export const getKorPokemonType = async (pages) => {
-  const pokemonId = await getPokemonID(pages);
+export const getKorPokemonType = async (page) => {
+  const pokemonId = await getPokemonID(page);
   try {
     const korType = await Promise.all(
       pokemonId.map(async(id)=>{
@@ -158,9 +158,9 @@ export const getKorPokemonType = async (pages) => {
   }
 }
 
-export const getKorPokemonRegion = async (pages) => {
+export const getKorPokemonRegion = async (page) => {
   try {
-    const pokemonId = await getPokemonID(pages);
+    const pokemonId = await getPokemonID(page);
 
     const korRegion = await Promise.all(
       pokemonId.map(async (id) => {
@@ -215,10 +215,15 @@ export const getOfficialArtwork = async (id) => {
 export const getShinyOfficialArtwork = async(id) => {
   try{
     const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
-    const data=response.data;
-    const shinyArtwork=data.sprites.other["official-artwork"].front_shiny;
-
-    return shinyArtwork;
+    const data = response.data;
+    const shinyArtwork = data.sprites.other["official-artwork"].front_shiny;
+    const shinyArtwork_Home = data.sprites.other["home"].front_shiny;
+      if (shinyArtwork !== null) {
+        return shinyArtwork
+      }
+      else if (shinyArtwork_Home !== null) {
+        return shinyArtwork_Home;
+      }
   }catch (error){
     console.error("포켓몬 이로치 response Error:", error);
   }
@@ -386,7 +391,7 @@ export const getPokemonClass = async(id) => {
   }
 }
 
-export const getPokemonImageByName = async (ace) => {
+export const getPokemonImageByNumber = async (ace) => {
   try{
       const response = await axios.get(`${pokemon_URL}/pokemon/${ace}`);
       const animatedImageList = response.data.sprites.versions["generation-v"]["black-white"]["animated"]["front_default"];
