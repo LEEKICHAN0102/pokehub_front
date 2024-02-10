@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import useDetailPokemon from "../../hooks/Pokemon/useDetail";
 import Loader from "../Loader";
-import { FaArrowLeftLong } from "react-icons/fa6";
+import { IoIosHome } from "react-icons/io";
 import { FaChevronCircleLeft,FaChevronCircleRight } from "react-icons/fa";
 import ContentList from "./ContentList";
 import { useNavigate } from "react-router-dom";
@@ -32,12 +32,13 @@ export default function DetailPokemon() {
   const prevId = Number(id)-1 === 0 ? 1025 : Number(id) - 1;
   const nextId = Number(id)+ 1 === 1026 ? 1 : Number(id) + 1;
 
+  const handleBack = () => {
+    const dividePage_PER_ID = Math.ceil(id / 21);
+    navigate(`/pokemon/${dividePage_PER_ID}`);
+  }
+  
   if (isLoading) {
     return <Loader />;
-  }
-
-  const handleBack = () => {
-    navigate(-1)
   }
 
   return(
@@ -57,7 +58,7 @@ export default function DetailPokemon() {
       </Navigation>
       <Container>
         <OfficialBox>
-          <FaArrowLeftLong size={24} onClick={handleBack} />
+          <IoIosHome size={24} onClick={handleBack} />
           <Official
             src={shiny ? data.official_shiny : data.official}
             alt={`${data.nameArray[1]}`}

@@ -161,6 +161,11 @@ export const Content = styled.div`
   }
 
   .typeBox{
+    width: 50px;
+    height: 50px;
+  }
+
+  .typeImg{
     width: 30px;
     height: 30px;
   }
@@ -172,10 +177,4 @@ export const BgmContent = styled(Content)`
   padding: 20px;
   border-radius: 5px;
   align-items: flex-start;
-`;
-
-export const GenderBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
 `;
