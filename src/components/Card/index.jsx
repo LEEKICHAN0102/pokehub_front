@@ -20,8 +20,6 @@ export default function PokemonCard() {
   if (isLoading) {
     return <Loader />;
   }
-
-  console.log(data); 
   
   return (
     <>

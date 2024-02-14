@@ -27,8 +27,6 @@ export default function DetailPokemon() {
   const { data, isLoading } = useDetailPokemon(id);
   const [shiny, setShiny] = useState(false);
 
-  console.log(data);
-
   const prevId = Number(id)-1 === 0 ? 1025 : Number(id) - 1;
   const nextId = Number(id)+ 1 === 1026 ? 1 : Number(id) + 1;
 
@@ -64,7 +62,6 @@ export default function DetailPokemon() {
             alt={`${data.nameArray[1]}`}
             onMouseEnter={() => setShiny(true)}
             onMouseLeave={() => setShiny(false)}
-            shiny={shiny}
           />
         </OfficialBox>
         <Info>

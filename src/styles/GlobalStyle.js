@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+body {
+  font-family: 'Galmuri11', sans-serif; /* 폰트 적용 */
+}
+
 * {
   box-sizing: border-box;
 }

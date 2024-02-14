@@ -1,20 +1,26 @@
 import Title from "../Title";
 import { PostContainer, PostCardContainer, PostThumb, PostTitle, PostInfo  } from "./postcard.style";
-// import Pagination from "react-js-pagination";
-// import "../../styles/Paging.css";
+import Pagination from "react-js-pagination";
+import "../../styles/Paging.css";
 import ThumbLogo from "../../assets/Loading/pokehubLogo.png";
 import usePostData from "../../hooks/post/usePostData";
 import Loader from "../Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function PostCard() {
-  const { data, isLoading } = usePostData();
+  const { page } = useParams();
+  const { data, isLoading } = usePostData(page);
+  const navigate = useNavigate();
+
+  console.log(page);
+
+  const handlePageChange = (newPage) => {
+    navigate(`/board/${newPage}`);
+  };
 
   if(isLoading){
     return <Loader />
   };
-
-  console.log(data);
 
   return(
     <>
@@ -33,15 +39,15 @@ export default function PostCard() {
           </Link>
         ))}
       </PostContainer>
-      {/* <Pagination
-        activePage
+      <Pagination
+        activePage={parseInt(page)}
         itemsCountPerPage={20}
-        totalItemsCount
+        totalItemsCount={40}
         pageRangeDisplayed={5}
         prevPageText={"‹"}
         nextPageText={"›"}
-        onChange
-      /> */}
+        onChange={handlePageChange}
+      />
     </>
   )
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const getAllPosting = async () => {
+export const getAllPosting = async (page) => {
   try {
-    const response = await axios.get("http://localhost:8080/board");
+    const response = await axios.get(`http://localhost:8080/board/${page}`);
     return response.data;
   } catch (error) {
     console.error("모든 포스팅 정보 가져오는 중 에러 발생:", error);

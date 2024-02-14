@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import styled from "styled-components";
+import useUserData from "../hooks/user/useUserData";
 
 const Container = styled.div`
   width: 1320px;
@@ -11,15 +12,16 @@ const Container = styled.div`
 `;
 
 export default function Layout() {
+  const { user } = useUserData();
+  const outletProps = { user };
   const location = useLocation();
-  console.log(location);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
   return (
     <Container>
-      <Header />
-      <Outlet />
+      <Header user={user} />
+      <Outlet context={outletProps} />
       <Footer />
     </Container>
   );

@@ -61,7 +61,6 @@ export const InfoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
   width: auto;
   padding: 20px;
   height: 30px;
@@ -74,7 +73,6 @@ export const DetailInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
   width: 150px;
   margin: auto;
   padding: 10px;

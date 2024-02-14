@@ -16,17 +16,10 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`http://localhost:8080/login`, data, { withCredentials: true });
-      console.log("서버 응답:", response.data);
-      console.log("상태 코드:", response.status);
-      
       if (response.status === 200) {
-        // 로그인 성공 시, 세션 정보를 확인하는 요청을 보냄
         const checkLoginStatusResponse = await axios.get("http://localhost:8080/pokemon/1", {
           withCredentials: true,
         });
-  
-        console.log("로그인 상태 확인:", checkLoginStatusResponse.data);
-  
         navigate("/pokemon/1", { state: { user: checkLoginStatusResponse.data.user } });
       }
     } catch (error) {
@@ -110,21 +103,3 @@ const CreateAccount = styled.div`
   font-size: 16px;
   text-align: center;
 `;
-
-// const SocialLoginBox = styled.div`
-//   width: 100%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   margin-top: 100px;
-// `;
-
-// const SocialImg = styled.div`
-//   cursor: pointer;
-//   img{
-//     width: 90px;
-//     height: 90px;
-//     border-radius: 20px;
-//     border: 1px solid gray;
-//   }
-// `;

@@ -97,7 +97,6 @@ export const Official = styled.img`
 `;
 
 export const Quote = styled.span`
-  font-weight: bold;
   width: auto;
   margin-top: 20px;
   border: 3px solid gray;
@@ -125,7 +124,6 @@ export const Name = styled.h1`
 
 export const Information = styled.h4`
   margin-top: 40px;
-  font-weight: bold;
 `;
 
 export const MoreInfo = styled.div`

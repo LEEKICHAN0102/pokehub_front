@@ -4,6 +4,7 @@ import GlobalStyle from "./styles/GlobalStyle"
 
 import router from "./routes/router/index.jsx";
 import { theme } from "./styles/theme";
+import "./styles/font.modules.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient()

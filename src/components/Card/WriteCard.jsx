@@ -1,9 +1,11 @@
 import { WriteForm, WriteTitle, WriteContentContainer, WriteContent, WriteContentButton, WritePosting } from "./write.style";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 export default function WriteCard() {
+  const outletContext = useOutletContext();
+  const { user } = outletContext;
   const {
     register,
     handleSubmit,
@@ -21,8 +23,11 @@ export default function WriteCard() {
     } catch (error) {
       console.error("에러 발생:", error);
     }
-    console.log(data);
   };
+
+  if (!user.userData) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <WriteForm onSubmit={handleSubmit(onSubmit)}>
@@ -42,5 +47,5 @@ export default function WriteCard() {
         </WriteContentButton>
       </WriteContentContainer>
     </WriteForm>
-  );
+  )
 }

@@ -18,8 +18,6 @@ export default function Join(){
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`http://localhost:8080/join`, data);
-      console.log("서버 응답:", response.data);
-      console.log("상태 코드:", response.status);
       if (response.status === 200) {
         navigate("/login");
       }
@@ -51,7 +49,7 @@ export default function Join(){
               required: "이메일을 입력해주세요",
               pattern: { 
                 value: /\S+@\S+\.\S+/, 
-                message: "올바른 이메일 형식이 아닙니다."  // 이메일 validate RegExp
+                message: "올바른 이메일 형식이 아닙니다."
               },
             }
           )}
@@ -67,7 +65,7 @@ export default function Join(){
               required: "비밀번호를 입력해주세요",
               minLength: { value: 8, message: "비밀번호는 최소 8자 이상이어야 합니다."},
               pattern: {
-                value: /^(?=.*[!@#$%^&*])/, // 최소 하나의 특수 문자가 포함된 경우
+                value: /^(?=.*[!@#$%^&*])/,
                 message: "하나 이상의 특수 문자가 포함되어야 합니다.",
               },
             }

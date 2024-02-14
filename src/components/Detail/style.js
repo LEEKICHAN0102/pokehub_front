@@ -22,7 +22,7 @@ export const PrevNav = styled.a`
   display: flex;
   padding: 20px;
   flex-direction: column;
-  font-size: 24px;
+  font-size: 20px;
   gap: 5px;
   color: white;
   border-radius: 10px;
@@ -47,7 +47,7 @@ export const NextNav = styled.a`
   align-items: flex-end;
   padding: 20px;
   color: white;
-  font-size: 24px;
+  font-size: 20px;
   border-radius: 10px;
   &:hover{
     background-color: #3d3b3b;
@@ -115,7 +115,7 @@ export const Info = styled.div`
 `;
 
 export const Name = styled.h1`
-  font-size: 24px;
+  font-size: 20px;
 `;
 
 export const Description = styled.h4`

@@ -5,14 +5,14 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 export default function DropDown(){
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [isGymDropdownOpen, setGymDropdownOpen] = useState(false);
+  const [isCharacterDropdownOpen, setCharacterDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
 
-  const toggleGymDropdown = () => {
-    setGymDropdownOpen(!isGymDropdownOpen);
+  const toggleCharacterDropdown = () => {
+    setCharacterDropdownOpen(!isCharacterDropdownOpen);
   }
 
   return (
@@ -38,15 +38,15 @@ export default function DropDown(){
               도구 / 아이템
             </SubDropDown>
           </Link>
-            <SubDropDown onClick={toggleGymDropdown} >
+            <SubDropDown onClick={toggleCharacterDropdown} >
               인물
-              {isGymDropdownOpen ? (
+              {isCharacterDropdownOpen ? (
                 <IoIosArrowUp size={16} />
               ) : (
                 <IoIosArrowDown size={16} />
               )}
             </SubDropDown>
-            {isGymDropdownOpen && (
+            {isCharacterDropdownOpen && (
               <>
                 <Link to="/gym-leader">
                   <SubDropDownChild>

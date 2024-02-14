@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams, useOutletContext } from "react-router-dom";
 import { 
   PostDetailContainer,
   PostDetailTitle,
@@ -38,6 +38,9 @@ export default function PostDetail() {
   const postId = useParams().postId;
   const [replyStates, setReplyStates] = useState({});
   const queryClient = useQueryClient();
+  const { data, isLoading } = useDetailPostData(postId);
+  const outletContext = useOutletContext();
+  const { user } = outletContext;
 
   const {
     register: postRegister,
@@ -56,10 +59,13 @@ export default function PostDetail() {
     handleSubmit: LikeHandleSubmit,
   } = useForm({ mode: "onSubmit" });
 
-  const { data, isLoading } = useDetailPostData(postId);
 
   if(isLoading ){
     return <Loader />
+  }
+
+  if(!user.userData) {
+    return <Navigate to="/login" replace />;
   }
 
   const onCommentSubmit = async (postData) => {
@@ -84,7 +90,6 @@ export default function PostDetail() {
 
   const onHandleLike = async (likeData) => {
     try {
-      // 빈 객체를 전송하지 않고, 필요한 경우 데이터를 전송
       await axios.post(`http://localhost:8080/board/like/${postId}`, likeData, { withCredentials: true });
       queryClient.invalidateQueries(["detail", postId]);
     } catch (error) {

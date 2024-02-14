@@ -23,7 +23,6 @@ export const PostDetailTitle = styled.div`
 
   p{
     font-size: 20px;
-    font-weight: bold;
   }
 
   span{
@@ -42,7 +41,6 @@ export const PostDetailContent = styled.div`
   
   span{
     font-size: 16px;
-    font-weight: bold;
   }
 
   p{
@@ -80,7 +78,6 @@ export const CommentWrapper = styled.div`
 `;
 
 export const CommentAuthor = styled.span`
-  font-weight: bold;
   font-size: 16px;
 `;
 
@@ -222,7 +219,6 @@ export const LikeButton = styled.button`
   span{
     color: black;
     font-size: 20px;
-    font-weight: bold;
   }
 
   svg{
@@ -241,6 +237,5 @@ export const LikeButton = styled.button`
 
 export const LikeCount = styled.div`
   font-size: 20px;
-  font-weight: bold;
   color: black;
 `;

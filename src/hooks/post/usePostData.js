@@ -3,9 +3,9 @@ import {
   getAllPosting
 } from "../../api/post/getPost";
 
-export default function usePostData(){
+export default function usePostData(page){
   const queries = useQueries([
-    { queryKey: "posting", queryFn: getAllPosting },
+    { queryKey: ["posting" ,  page], queryFn: () => getAllPosting(page) },
   ]);
 
   const isLoading = queries.some((query) => query.isLoading);

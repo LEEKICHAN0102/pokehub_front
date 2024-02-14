@@ -1,14 +1,12 @@
 import Title from "../Title";
 import { EventContainer, EventCardContainer, EventImg, EventTitle, EventInfo, MoreInfo, InfoText } from "./event.style";
+import { Link } from "react-router-dom";
 import useEventData from "../../hooks/event/useEventData";
 import Loader from "../Loader";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 export default function EventCard() {
   const { data, isLoading } = useEventData();
-
-  console.log(data);
-
 
   if(isLoading){
     return <Loader />
@@ -19,7 +17,7 @@ export default function EventCard() {
       <Title name="이벤트" />
       <EventContainer>
         {data.event.map((event, index) => (
-          <a key={index} href={event.link} target="_blank" rel="noopener noreferrer">
+          <Link key={index} to={event.link} target="_blank" rel="noopener noreferrer">
             <EventCardContainer>
               <EventImg src={`${event.imageUrl}`} alt={`${event.title}`} />
               <EventTitle>{event.title}</EventTitle>
@@ -28,7 +26,7 @@ export default function EventCard() {
                 <span>{event.date}</span>
               </EventInfo>
             </EventCardContainer>
-          </a>
+          </Link>
         ))}
       </EventContainer>
       <MoreInfo>

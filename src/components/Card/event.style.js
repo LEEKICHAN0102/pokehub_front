@@ -34,7 +34,6 @@ export const EventImg = styled.img`
 export const EventTitle = styled.span`
   margin-top: auto;
   font-size: 16px;
-  font-weight: bold;
   width: auto;
 `;
 
@@ -44,7 +43,6 @@ export const EventInfo = styled.div`
   gap: 10px;
   width: auto;
   span{
-    font-weight: bold;
     font-size: 12px;
     color: gray;
   }
@@ -57,7 +55,6 @@ export const MoreInfo = styled.div`
 export const InfoText = styled.a`
   span {
     font-size: 16px;
-    font-weight: bold;
   }
   width: 500px;
   height: 70px;

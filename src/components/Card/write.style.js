@@ -21,7 +21,6 @@ export const WriteTitle = styled.input`
   border-radius: 10px;
   margin-top: 20px;
   font-size: 20px;
-  font-weight: bold;
   padding-left: 20px;
 `;
 
