@@ -18,7 +18,7 @@ export default function WriteCard() {
       const response = await axios.post(`http://localhost:8080/board/write`, data, { withCredentials: true });
       
       if (response.status === 200) {
-        navigate("/board");
+        navigate("/board/1");
       }
     } catch (error) {
       console.error("에러 발생:", error);

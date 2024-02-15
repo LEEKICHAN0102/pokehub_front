@@ -10,9 +10,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 export default function PostCard() {
   const { page } = useParams();
   const { data, isLoading } = usePostData(page);
+  const totalPages = Math.ceil(data.totalCount / 20);
+  const pageRange = Math.min(totalPages, 5);
   const navigate = useNavigate();
-
-  console.log(page);
 
   const handlePageChange = (newPage) => {
     navigate(`/board/${newPage}`);
@@ -26,8 +26,8 @@ export default function PostCard() {
     <>
       <Title name="게시글" hasButton="글 작성" />
       <PostContainer>
-        {[...data.posting].reverse().map((posting) => (
-          <Link to={`/board/${posting._id}`} key={posting._id} >
+        {data.posting.map((posting) => (
+          <Link to={`/board/detail/${posting._id}`} key={posting._id} >
             <PostCardContainer>
               <PostThumb src={`${ThumbLogo}`} />
               <PostTitle>{posting.title}</PostTitle>
@@ -42,8 +42,8 @@ export default function PostCard() {
       <Pagination
         activePage={parseInt(page)}
         itemsCountPerPage={20}
-        totalItemsCount={40}
-        pageRangeDisplayed={5}
+        totalItemsCount={data.totalCount}
+        pageRangeDisplayed={pageRange}
         prevPageText={"‹"}
         nextPageText={"›"}
         onChange={handlePageChange}

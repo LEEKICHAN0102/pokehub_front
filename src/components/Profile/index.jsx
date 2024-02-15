@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 export default function Profile() {
   const userId = useParams().userId;
   const [userData, setUserData] = useState({});
-  const [userPostingData, setUserPostingData] = useState([]);
-  const [userLikedData, setUserLikedData] = useState([]);
+  const [postingData, setPostingData] = useState([]);
+  const [likedData, setLikedData] = useState([]);
   const outletContext = useOutletContext();
   const { user } = outletContext;
 
@@ -19,12 +19,8 @@ export default function Profile() {
         const userProfileData = response.data;
         console.log("프로필 응답:", userProfileData);
         setUserData(userProfileData.user);
-
-        // 내가 작성한 게시글 중에서 시간이 늦은 순으로 5개만 가져오기
-        setUserPostingData(userProfileData.userPosting.slice(0, 5).sort((a, b) => new Date(b.postingTime) - new Date(a.postingTime)));
-
-        // 내가 좋아요한 게시글 중에서 시간이 늦은 순으로 5개만 가져오기
-        setUserLikedData(userProfileData.userLiked.slice(0, 5).sort((a, b) => new Date(b.postingTime) - new Date(a.postingTime)));
+        setPostingData(userProfileData.userPosting); //slice.sort ? 할지 그냥 모두 보여줄지... 고민중..
+        setLikedData(userProfileData.userLiked);
       } catch (error) {
         console.log("프로필 정보 불러오는 중 에러 발생.", error);
       }
@@ -48,8 +44,8 @@ export default function Profile() {
         <UserPost>
           <MyPost>
             <span>내가 작성한 게시글</span>
-            {userPostingData.map((myPost) => (
-              <Link key={myPost._id} to={`/board/${myPost._id}`}>
+            {postingData.map((myPost) => (
+              <Link key={myPost._id} to={`/board/detail/${myPost._id}`}>
                 <PostBox>
                   <span>{myPost.title}</span>
                   <span>{myPost.postingTime}</span>
@@ -59,8 +55,8 @@ export default function Profile() {
           </MyPost>
           <LikePost>
             <span>내가 좋아하는 게시글</span>
-            {userLikedData.map((likePost) => (
-              <Link key={likePost._id} to={`/board/${likePost._id}`}>
+            {likedData.map((likePost) => (
+              <Link key={likePost._id} to={`/board/detail/${likePost._id}`}>
                 <PostBox>
                   <span>{likePost.title}</span>
                   <span>{likePost.postingTime}</span>

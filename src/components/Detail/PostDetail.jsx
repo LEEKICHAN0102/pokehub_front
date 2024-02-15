@@ -70,7 +70,7 @@ export default function PostDetail() {
 
   const onCommentSubmit = async (postData) => {
     try {
-      await axios.post(`http://localhost:8080/board/${postId}`, postData, { withCredentials: true });
+      await axios.post(`http://localhost:8080/board/detail/${postId}`, postData, { withCredentials: true });
       queryClient.invalidateQueries(["detail", postId]);
       postSetValue("content", "");
     } catch (error) {
@@ -80,7 +80,7 @@ export default function PostDetail() {
 
   const onReplySubmit = async (replyData, commentId) => {
     try {
-      await axios.post(`http://localhost:8080/board/${postId}/${commentId}`, replyData, { withCredentials: true });
+      await axios.post(`http://localhost:8080/board/detail/${postId}/${commentId}`, replyData, { withCredentials: true });
       queryClient.invalidateQueries(["detail", postId]);
       replySetValue("replyContent", "");
     } catch (error) {
@@ -90,7 +90,7 @@ export default function PostDetail() {
 
   const onHandleLike = async (likeData) => {
     try {
-      await axios.post(`http://localhost:8080/board/like/${postId}`, likeData, { withCredentials: true });
+      await axios.post(`http://localhost:8080/board/detail/like/${postId}`, likeData, { withCredentials: true });
       queryClient.invalidateQueries(["detail", postId]);
     } catch (error) {
       console.error("에러 발생:", error, error.message);

@@ -68,7 +68,7 @@ export default function DropDown(){
         </>
       )}
 
-      <Link to="/board">
+      <Link to="/board/1">
         <DropdownItem>
           게시판
         </DropdownItem>

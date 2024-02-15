@@ -7,7 +7,7 @@ export const ProfileContainer = styled.div`
   margin: auto;
   margin-top: 50px;
   width: 85vw;
-  height: 100vh;
+  height: auto;
   border-radius: 20px;
 `;
 
@@ -38,7 +38,7 @@ export const ProfileInfo = styled.div`
 
 export const UserPost = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   width: 70%;
   height: 50%;

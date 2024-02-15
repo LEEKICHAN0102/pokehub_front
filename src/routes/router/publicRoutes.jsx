@@ -40,7 +40,7 @@ export const publicRoutes = [
         element: <ItemCard />,
       },
       {
-        path: "detail/:id",
+        path: "pokemon/detail/:id",
         element: <DetailPokemon />,
       },
       {
@@ -68,11 +68,11 @@ export const publicRoutes = [
         element: <ChampionDetail />,
       },
       {
-        path: "board",
+        path: "board/:page",
         element: <PostCard />,
       },
       {
-        path: "board/:postId",
+        path: "board/detail/:postId",
         element: <PostDetail />,
       },
       {

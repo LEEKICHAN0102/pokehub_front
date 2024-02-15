@@ -82,7 +82,6 @@ export const getPokemonName = async (page) => {
 
         if (!nameList || nameList.name === undefined) {
           const jaNameList = response.data.names.find((Object) => Object.language.name === "ja");
-          console.log("일본 : ", jaNameList ? jaNameList.name : "일본어 이름 없음");
           return jaNameList ? jaNameList.name : "일본어 이름 없음";
         } else {
           return nameList.name;
@@ -411,6 +410,6 @@ export const getPokemonImageByNumber = async (ace) => {
           return noneAnimatedImage;
         }
   }catch(error){
-    console.error("포켓몬 애니메이션 이미지 by ace response Error:" , error);
+    console.log("포켓몬 애니메이션 이미지 by ace response Error:" , error);
   }
 }
