@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthHeader from "../components/authHeader";
+import { useState } from "react";
 
 export default function Join(){
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ export default function Join(){
     watch,
     formState: { errors },
   } = useForm({mode: "onChange"});
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessageUserName, setErrorMessageUsername] = useState("");
 
   const password = watch("password");
 
@@ -22,7 +25,13 @@ export default function Join(){
         navigate("/login");
       }
     } catch (error) {
-      console.error("에러 발생:", error);
+      if (error.response && error.response.status === 400) {
+        setErrorMessageUsername(error.response.data);
+      }else if (error.response && error.response.status === 401) {
+        setErrorMessage(error.response.data);
+      } else {
+        console.error("에러 발생:", error);
+      }
     }
   };
 
@@ -33,15 +42,24 @@ export default function Join(){
         <InputField
           iserror={errors.username}
           placeholder="닉네임"
+          autoComplete="new-username"
           {...register(
             "username",
-            {required: "사용할 유저명을 입력해주세요"}
+            {
+              required: "사용할 유저명을 입력해주세요",
+              pattern: {
+                value: /^[\wㄱ-ㅎㅏ-ㅣ가-힣]{1,8}$/,
+                message: "공백을 포함하지 않은 영,한문 8자리의 닉네임만이 사용 가능 합니다."
+              }
+            }
           )}
         />
         {errors.username && <ErrorSpan>{errors.username.message}</ErrorSpan>}
+        {errorMessageUserName && <ErrorSpan>{errorMessageUserName}</ErrorSpan>}
         <InputField
           type="email"
           placeholder="E-mail"
+          autoComplete="new-Email"
           iserror={errors.email}
           {...register(
             "email",
@@ -55,9 +73,11 @@ export default function Join(){
           )}
         />
         {errors.email && <ErrorSpan>{errors.email.message}</ErrorSpan>}
+        {errorMessage && <ErrorSpan>{errorMessage}</ErrorSpan>}
         <InputField
           type="password"
           placeholder="비밀 번호"
+          autoComplete="new-password"
           iserror={errors.password}
           {...register(
             "password",
@@ -75,6 +95,7 @@ export default function Join(){
         <InputField
           type="password"
           placeholder="비밀 번호 재확인"
+          autoComplete="new-password"
           iserror={errors.password_confirm}
           {...register(
             "password_confirm",

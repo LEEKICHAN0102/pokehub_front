@@ -17,6 +17,7 @@ import PostDetail from "../../components/Detail/PostDetail";
 import WriteCard from "../../components/Card/WriteCard";
 import Profile from "../../components/Profile/index";
 import FourOFour from "../../components/404";
+import PokemonCard from "../../components/Card";
 
 export const publicRoutes = [
   {
@@ -32,8 +33,12 @@ export const publicRoutes = [
     element: <Layout />,
     children: [
       {
-        path: "pokemon/:page",
+        path: "",
         element: <Home />,
+      },
+      {
+        path: "pokemon/:page",
+        element: <PokemonCard />,
       },
       {
         path: "item/:page",

@@ -17,9 +17,8 @@ export default function Profile() {
       try {
         const response = await axios.get(`http://localhost:8080/profile/${userId}`, { withCredentials: true });
         const userProfileData = response.data;
-        console.log("프로필 응답:", userProfileData);
         setUserData(userProfileData.user);
-        setPostingData(userProfileData.userPosting); //slice.sort ? 할지 그냥 모두 보여줄지... 고민중..
+        setPostingData(userProfileData.userPosting);
         setLikedData(userProfileData.userLiked);
       } catch (error) {
         console.log("프로필 정보 불러오는 중 에러 발생.", error);

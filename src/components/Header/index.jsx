@@ -50,7 +50,7 @@ export default function Header({ user }) {
           </Item>
           {isDropdownOpen && <DropDown />}
         </Group>
-        <Link to="/pokemon/1">
+        <Link to="/">
           <Logo />
         </Link>
         <Group>
