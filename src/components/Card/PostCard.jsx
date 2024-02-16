@@ -1,27 +1,33 @@
 import Title from "../Title";
 import { PostContainer, PostCardContainer, PostThumb, PostTitle, PostInfo  } from "./postcard.style";
-// import Pagination from "react-js-pagination";
-// import "../../styles/Paging.css";
+import Pagination from "react-js-pagination";
+import "../../styles/Paging.css";
 import ThumbLogo from "../../assets/Loading/pokehubLogo.png";
 import usePostData from "../../hooks/post/usePostData";
 import Loader from "../Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function PostCard() {
-  const { data, isLoading } = usePostData();
+  const { page } = useParams();
+  const { data, isLoading } = usePostData(page);
+  const totalPages = Math.ceil(data.totalCount / 20);
+  const pageRange = Math.min(totalPages, 5);
+  const navigate = useNavigate();
+
+  const handlePageChange = (newPage) => {
+    navigate(`/board/${newPage}`);
+  };
 
   if(isLoading){
     return <Loader />
   };
 
-  console.log(data);
-
   return(
     <>
       <Title name="게시글" hasButton="글 작성" />
       <PostContainer>
-        {[...data.posting].reverse().map((posting) => (
-          <Link to={`/board/${posting._id}`} key={posting._id} >
+        {data.posting.map((posting) => (
+          <Link to={`/board/detail/${posting._id}`} key={posting._id} >
             <PostCardContainer>
               <PostThumb src={`${ThumbLogo}`} />
               <PostTitle>{posting.title}</PostTitle>
@@ -33,15 +39,15 @@ export default function PostCard() {
           </Link>
         ))}
       </PostContainer>
-      {/* <Pagination
-        activePage
+      <Pagination
+        activePage={parseInt(page)}
         itemsCountPerPage={20}
-        totalItemsCount
-        pageRangeDisplayed={5}
+        totalItemsCount={data.totalCount}
+        pageRangeDisplayed={pageRange}
         prevPageText={"‹"}
         nextPageText={"›"}
-        onChange
-      /> */}
+        onChange={handlePageChange}
+      />
     </>
   )
 }

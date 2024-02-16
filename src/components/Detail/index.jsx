@@ -27,12 +27,10 @@ export default function DetailPokemon() {
   const { data, isLoading } = useDetailPokemon(id);
   const [shiny, setShiny] = useState(false);
 
-  console.log(data);
-
   const prevId = Number(id)-1 === 0 ? 1025 : Number(id) - 1;
   const nextId = Number(id)+ 1 === 1026 ? 1 : Number(id) + 1;
 
-  const handleBack = () => {
+  const handleMatchHome = () => {
     const dividePage_PER_ID = Math.ceil(id / 21);
     navigate(`/pokemon/${dividePage_PER_ID}`);
   }
@@ -44,13 +42,13 @@ export default function DetailPokemon() {
   return(
     <>
       <Navigation>
-        <PrevNav href={`/detail/${prevId}`}>
+        <PrevNav href={`/pokemon/detail/${prevId}`}>
           No. {prevId}
           <Name>{data.nameArray && data.nameArray[0]}</Name>
           <FaChevronCircleLeft size={36} />
         </PrevNav>
           <NavDiv />
-        <NextNav href={`/detail/${nextId}`}>
+        <NextNav href={`/pokemon/detail/${nextId}`}>
           No .{nextId}
           <Name>{data.nameArray && data.nameArray[2]}</Name>
           <FaChevronCircleRight size={36} />
@@ -58,13 +56,12 @@ export default function DetailPokemon() {
       </Navigation>
       <Container>
         <OfficialBox>
-          <IoIosHome size={24} onClick={handleBack} />
+          <IoIosHome size={24} onClick={handleMatchHome} />
           <Official
             src={shiny ? data.official_shiny : data.official}
             alt={`${data.nameArray[1]}`}
             onMouseEnter={() => setShiny(true)}
             onMouseLeave={() => setShiny(false)}
-            shiny={shiny}
           />
         </OfficialBox>
         <Info>

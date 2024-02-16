@@ -25,8 +25,6 @@ export default function ItemCard() {
     return <Loader />
   }
 
-  console.log(data);
-
 return (
     <>
       <Title name="도구 / 아이템" />

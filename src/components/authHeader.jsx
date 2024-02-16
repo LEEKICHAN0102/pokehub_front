@@ -11,7 +11,7 @@ export default function AuthHeader({ title }) {
           size={24} 
           onClick={()=>navigate(-1)}
         />
-        <Link to="/page/1">
+        <Link to="/pokemon/1">
           <IoIosHome size={24} />
         </Link>
       </Icons>

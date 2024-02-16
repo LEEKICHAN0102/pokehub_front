@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Logo from "../../assets/Logo";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Container, Content, Group, Item , LogoutButton } from "./style";
@@ -7,19 +7,17 @@ import DropDown from "../Dropdown";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
-export default function Header() {
+export default function Header({ user }) {
   const dropdownRef = useRef(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData ] = useState("");
-  const [username, setUsername] = useState("");
-  const [userId, setUserId] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     handleSubmit,
   } = useForm({ mode: "onSubmit"})
 
   const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
+    setDropdownOpen((prev) => !prev);
   };
 
   const handleClickOutside = (event) => {
@@ -28,34 +26,20 @@ export default function Header() {
     }
   };
 
-  const handleLogout = async (userData) => {
+  const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:8080/logout", userData, { withCredentials: true });
-      setIsLoggedIn(false);
+      await axios.post("http://localhost:8080/logout", {}, { withCredentials: true });
+      navigate("/login");
     } catch (error) {
       console.error("로그아웃 실패:", error);
     }
   };
 
   useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/pokemon/1", { withCredentials: true });
-        console.log("서버 응답:", response.data);
-        setUserData(response.data);
-        setUsername(response.data.user.username);
-        setUserId(response.data.user._id);
-        setIsLoggedIn(true);
-      } catch (error) {
-        console.log("로그인 되지 않았습니다.", error);
-        setIsLoggedIn(false);
-    }
-  };
-  
+    setDropdownOpen(false)
     document.addEventListener("click", handleClickOutside);
-    checkLoginStatus(); // 이 부분을 옮겨서 마운트 시에 호출하도록 변경
     return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+}, [location]);
 
   return (
     <Container ref={dropdownRef}>
@@ -66,15 +50,15 @@ export default function Header() {
           </Item>
           {isDropdownOpen && <DropDown />}
         </Group>
-        <Link to="/pokemon/1">
+        <Link to="/">
           <Logo />
         </Link>
         <Group>
-          {isLoggedIn ? (
+          {user.userData ? (
             <Item>
-              <Link to={`/profile/${userId}`}>
+              <Link to={`/profile/${user.userData.user._id}`}>
                 <span>
-                  {`환영합니다 ${username}님`}
+                  {`환영합니다 ${user.userData.user.username}님`}
                 </span>
               </Link>
             </Item>
@@ -82,14 +66,14 @@ export default function Header() {
             null
           )}
           <Item>
-            {isLoggedIn ? (
+            {user.userData ? (
               <LogoutButton 
                 onClick={handleSubmit(handleLogout)}
                 type="button"
                 value="로그아웃"
               />
             ) : (
-                <Link to="/login">로그인</Link>
+              <Link to="/login">로그인</Link>
             )}
           </Item>
         </Group>

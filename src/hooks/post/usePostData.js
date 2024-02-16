@@ -1,18 +1,11 @@
-import { useQueries } from "react-query";
-import {
-  getAllPosting
-} from "../../api/post/getPost";
+import { useQuery } from "react-query";
+import { getAllPosting } from "../../api/post/getPost";
 
-export default function usePostData(){
-  const queries = useQueries([
-    { queryKey: "posting", queryFn: getAllPosting },
-  ]);
+export default function usePostData(page) {
+  const query = useQuery(["posting", page], () => getAllPosting(page));
 
-  const isLoading = queries.some((query) => query.isLoading);
-
-  const data = {
-    posting: queries[0].data,
-  }
-
-  return { data, isLoading };
+  return {
+    data: query.data ? query.data : [],
+    isLoading: query.isLoading
+  };
 }

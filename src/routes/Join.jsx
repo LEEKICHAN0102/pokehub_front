@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthHeader from "../components/authHeader";
+import { useState } from "react";
 
 export default function Join(){
   const navigate = useNavigate();
@@ -12,19 +13,25 @@ export default function Join(){
     watch,
     formState: { errors },
   } = useForm({mode: "onChange"});
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessageUserName, setErrorMessageUsername] = useState("");
 
   const password = watch("password");
 
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`http://localhost:8080/join`, data);
-      console.log("서버 응답:", response.data);
-      console.log("상태 코드:", response.status);
       if (response.status === 200) {
         navigate("/login");
       }
     } catch (error) {
-      console.error("에러 발생:", error);
+      if (error.response && error.response.status === 400) {
+        setErrorMessageUsername(error.response.data);
+      }else if (error.response && error.response.status === 401) {
+        setErrorMessage(error.response.data);
+      } else {
+        console.error("에러 발생:", error);
+      }
     }
   };
 
@@ -35,15 +42,24 @@ export default function Join(){
         <InputField
           iserror={errors.username}
           placeholder="닉네임"
+          autoComplete="new-username"
           {...register(
             "username",
-            {required: "사용할 유저명을 입력해주세요"}
+            {
+              required: "사용할 유저명을 입력해주세요",
+              pattern: {
+                value: /^[\wㄱ-ㅎㅏ-ㅣ가-힣]{1,8}$/,
+                message: "공백을 포함하지 않은 영,한문 8자리의 닉네임만이 사용 가능 합니다."
+              }
+            }
           )}
         />
         {errors.username && <ErrorSpan>{errors.username.message}</ErrorSpan>}
+        {errorMessageUserName && <ErrorSpan>{errorMessageUserName}</ErrorSpan>}
         <InputField
           type="email"
           placeholder="E-mail"
+          autoComplete="new-Email"
           iserror={errors.email}
           {...register(
             "email",
@@ -51,15 +67,17 @@ export default function Join(){
               required: "이메일을 입력해주세요",
               pattern: { 
                 value: /\S+@\S+\.\S+/, 
-                message: "올바른 이메일 형식이 아닙니다."  // 이메일 validate RegExp
+                message: "올바른 이메일 형식이 아닙니다."
               },
             }
           )}
         />
         {errors.email && <ErrorSpan>{errors.email.message}</ErrorSpan>}
+        {errorMessage && <ErrorSpan>{errorMessage}</ErrorSpan>}
         <InputField
           type="password"
           placeholder="비밀 번호"
+          autoComplete="new-password"
           iserror={errors.password}
           {...register(
             "password",
@@ -67,7 +85,7 @@ export default function Join(){
               required: "비밀번호를 입력해주세요",
               minLength: { value: 8, message: "비밀번호는 최소 8자 이상이어야 합니다."},
               pattern: {
-                value: /^(?=.*[!@#$%^&*])/, // 최소 하나의 특수 문자가 포함된 경우
+                value: /^(?=.*[!@#$%^&*])/,
                 message: "하나 이상의 특수 문자가 포함되어야 합니다.",
               },
             }
@@ -77,6 +95,7 @@ export default function Join(){
         <InputField
           type="password"
           placeholder="비밀 번호 재확인"
+          autoComplete="new-password"
           iserror={errors.password_confirm}
           {...register(
             "password_confirm",

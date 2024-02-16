@@ -7,8 +7,8 @@ export const ProfileContainer = styled.div`
   margin: auto;
   margin-top: 50px;
   width: 85vw;
-  height: 100vh;
-  background-color: gray;
+  height: auto;
+  border-radius: 20px;
 `;
 
 export const ProfileImage = styled.img`
@@ -29,7 +29,6 @@ export const ProfileInfo = styled.div`
 
   span{
     font-size: 24px;
-    font-weight: bold;
     &:hover{
       color: #38EAE3;
       transition: ease-in-out 0.3s all;
@@ -39,7 +38,7 @@ export const ProfileInfo = styled.div`
 
 export const UserPost = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   width: 70%;
   height: 50%;
@@ -53,6 +52,7 @@ export const MyPost = styled.div`
   width: 50%;
   height: 100%;
   padding: 20px;
+  gap: 10px;
 `;
 
 export const LikePost = styled.div`
@@ -62,12 +62,15 @@ export const LikePost = styled.div`
   width: 50%;
   height: 100%;
   padding: 20px;
+  gap: 10px;
 `;
 
 export const PostBox = styled.div`
   width: 400px;
   height: 100px;
-  border: 1px solid #e5e5e5;
+  border: 3px solid gray;
+  border-radius: 10px;
+  color: gray;
 
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -76,7 +79,5 @@ export const PostBox = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  color: white;
+  justify-content: space-around;
 `;

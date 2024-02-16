@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AuthHeader from "../components/authHeader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import socialIcons from "../styles/socialIcons";
+import { useState } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -12,25 +12,23 @@ export default function Login() {
     register,
     handleSubmit,
   } = useForm({ mode: "onSubmit" });
+  const [ errorMessage, setErrorMessage ] = useState("");
 
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`http://localhost:8080/login`, data, { withCredentials: true });
-      console.log("서버 응답:", response.data);
-      console.log("상태 코드:", response.status);
-      
       if (response.status === 200) {
-        // 로그인 성공 시, 세션 정보를 확인하는 요청을 보냄
         const checkLoginStatusResponse = await axios.get("http://localhost:8080/pokemon/1", {
           withCredentials: true,
         });
-  
-        console.log("로그인 상태 확인:", checkLoginStatusResponse.data);
-  
         navigate("/pokemon/1", { state: { user: checkLoginStatusResponse.data.user } });
       }
     } catch (error) {
-      console.error("에러 발생:", error);
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data);
+      } else {
+        console.error("에러 발생:", error);
+      }
     }
   };
 
@@ -41,13 +39,16 @@ export default function Login() {
         <InputField
           placeholder="email"
           type="email"
+          autoComplete="current-email"
           {...register("email", { required: "E-mail을 작성해주세요" })}
         />
         <InputField
           placeholder="Password"
           type="password"
+          autoComplete="current-password"
           {...register("password", { required: "비밀번호를 작성해주세요." })}
         />
+        {errorMessage && <ErrorSpan>{errorMessage}</ErrorSpan>}
         <SubmitButton type="submit">로그인</SubmitButton>
         <Link to="/join">
           <CreateAccount>아직 계정이 없으신가요?</CreateAccount>
@@ -111,20 +112,9 @@ const CreateAccount = styled.div`
   text-align: center;
 `;
 
-// const SocialLoginBox = styled.div`
-//   width: 100%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   margin-top: 100px;
-// `;
-
-// const SocialImg = styled.div`
-//   cursor: pointer;
-//   img{
-//     width: 90px;
-//     height: 90px;
-//     border-radius: 20px;
-//     border: 1px solid gray;
-//   }
-// `;
+const ErrorSpan = styled.span`
+  color: red;
+  font-size: 8px;
+  margin-top: 0;
+  margin: auto;
+`;

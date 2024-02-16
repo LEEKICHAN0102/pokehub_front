@@ -1,5 +1,6 @@
 import axios from "axios";
-import { pokemon_URL,limit } from "../../constant";
+const pokemon_URL = "https://pokeapi.co/api/v2";
+const limit=21;
 
 export const getAllItem = async(page) => {
   try {

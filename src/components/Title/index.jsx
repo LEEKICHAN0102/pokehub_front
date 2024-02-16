@@ -31,7 +31,6 @@ const TitleBar = styled.div`
 
 const TitleName = styled.h1`
   font-size:36px;
-  font-weight: 600px;
 `;
 
 const TitleButton = styled.button`
@@ -48,5 +47,4 @@ const TitleButton = styled.button`
     cursor: pointer;
   }
   font-size: 16px;
-  font-weight: bold;
 `;

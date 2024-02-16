@@ -20,15 +20,13 @@ export default function PokemonCard() {
   if (isLoading) {
     return <Loader />;
   }
-
-  console.log(data); 
   
   return (
     <>
       <Title name="포켓몬 도감" />
       <Container>
         {data.id.map((_, item) => (
-          <Link key={item} to={`/detail/${data.id[item]}`}>
+          <Link key={item} to={`/pokemon/detail/${data.id[item]}`}>
             <CardContainer color={data.type[item].map(typeItem => colors[typeItem])}>
               <Info>
                 <InfoBox>
