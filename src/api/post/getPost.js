@@ -30,7 +30,7 @@ export const PostComment = async (postId) => {
 
 export const PostReply = async (commentId) => {
   try {
-    const response = await axios.post(`http://localhost:8080/board/detail/${commentId}`);
+    const response = await axios.post(`${backEndUrl}/board/detail/${commentId}`);
     return response.data;
   } catch (error) {
     console.error("답글 포스팅 중 에러 발생:", error);
@@ -39,7 +39,7 @@ export const PostReply = async (commentId) => {
 
 export const PostLike = async (postId) => {
   try {
-    const response = await axios.post(`http://localhost:8080/board/detail/like/${postId}`);
+    const response = await axios.post(`${backEndUrl}/board/detail/like/${postId}`);
     return response.data;
   } catch (error) {
     console.error("답글 포스팅 중 에러 발생:", error);

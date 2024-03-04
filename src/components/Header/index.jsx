@@ -6,6 +6,7 @@ import { Container, Content, Group, Item , LogoutButton } from "./style";
 import DropDown from "../Dropdown";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { baseUrl } from "../../constant/constant";
 
 export default function Header({ user }) {
   const dropdownRef = useRef(null);
@@ -28,7 +29,7 @@ export default function Header({ user }) {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:8080/logout", {}, { withCredentials: true });
+      await axios.post(`${baseUrl}/logout`, {}, { withCredentials: true });
       navigate("/login");
     } catch (error) {
       console.error("로그아웃 실패:", error);

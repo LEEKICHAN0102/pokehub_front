@@ -2,6 +2,7 @@ import { WriteForm, WriteTitle, WriteContentContainer, WriteContent, WriteConten
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { backEndUrl } from "../../constant/constant";
 
 export default function WriteCard() {
   const outletContext = useOutletContext();
@@ -15,7 +16,7 @@ export default function WriteCard() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`http://localhost:8080/board/write`, data, { withCredentials: true });
+      const response = await axios.post(`${backEndUrl}/board/write`, data, { withCredentials: true });
       
       if (response.status === 200) {
         navigate("/board/1");
