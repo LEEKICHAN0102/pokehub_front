@@ -5,6 +5,7 @@ import AuthHeader from "../components/authHeader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { backEndUrl } from "../constant/constant";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -16,9 +17,9 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`http://localhost:8080/login`, data, { withCredentials: true });
+      const response = await axios.post(`${backEndUrl}/login`, data, { withCredentials: true });
       if (response.status === 200) {
-        const checkLoginStatusResponse = await axios.get("http://localhost:8080/pokemon/1", {
+        const checkLoginStatusResponse = await axios.get(`pokehub-encyclopedia.vercel.app/pokemon/1`, {
           withCredentials: true,
         });
         navigate("/pokemon/1", { state: { user: checkLoginStatusResponse.data.user } });
