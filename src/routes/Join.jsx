@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthHeader from "../components/authHeader";
 import { useState } from "react";
+import { backEndUrl } from "../constant/constant";
 
 export default function Join(){
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function Join(){
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`http://localhost:8080/join`, data);
+      const response = await axios.post(`${backEndUrl}/join`, data);
       if (response.status === 200) {
         navigate("/login");
       }
