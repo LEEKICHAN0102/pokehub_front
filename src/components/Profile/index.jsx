@@ -3,6 +3,7 @@ import axios from "axios";
 import Title from "../Title";
 import { Link, useParams, Navigate, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { backEndUrl } from "../../constant/constant";
 
 export default function Profile() {
   const userId = useParams().userId;
@@ -15,7 +16,7 @@ export default function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/profile/${userId}`, { withCredentials: true });
+        const response = await axios.get(`${backEndUrl}/profile/${userId}`, { withCredentials: true });
         const userProfileData = response.data;
         setUserData(userProfileData.user);
         setPostingData(userProfileData.userPosting);
