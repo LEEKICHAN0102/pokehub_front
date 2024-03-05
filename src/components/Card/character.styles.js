@@ -1,20 +1,22 @@
 import styled from "styled-components";
 
-export const Title = styled.h1`
-  font-size:36px;
-  font-weight: 600px;
-  margin: auto;
-  width: 90%;
-  margin-top: 50px;
-`;
-
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 3fr); /* 3 columns */
   gap: 20px;
   width: 90%;
   margin: auto;
   margin-top: 100px;
+  @media screen and (min-width: ${props => props.theme.width.mobile}) {
+    grid-template-columns: repeat(1, 3fr);
+  }
+
+  @media screen and (min-width: ${props => props.theme.width.desktop}) {
+    grid-template-columns: repeat(2, 3fr);
+  }
+
+  @media screen and (min-width: ${props => props.theme.width.pc}) {
+    grid-template-columns: repeat(3, 3fr);
+  }
 `;
 
 export const CardContainer = styled.div`

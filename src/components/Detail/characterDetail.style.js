@@ -5,22 +5,20 @@ export const Navigation = styled.div`
   height: 30%;
   margin: auto;
   background-color: #2c2b2b;
-  position: absolute; /* position을 absolute로 변경 */
+  position: absolute;
   margin-top: 50px;
-  left: 0; /* 좌측에 위치하도록 설정 */
-  right: 0; /* 우측에 위치하도록 설정 */
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 0;
   border-radius: 10px;
-`;
-
-export const MainImage = styled.img`
-  width: 80px;
-  height: 80px;
-  margin: auto;
-  cursor: pointer;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    svg{
+      font-size: 24px;
+    }
+  }
 `;
 
 export const PrevNav = styled.a`
@@ -29,7 +27,6 @@ export const PrevNav = styled.a`
   display: flex;
   align-items: center;
   padding: 40px;
-  font-size: 24px;
   color: white;
   border-radius: 10px;
   &:hover{
@@ -53,7 +50,6 @@ export const NextNav = styled.a`
   justify-content: center;
   padding: 40px;
   color: white;
-  font-size: 24px;
   border-radius: 10px;
   &:hover{
     background-color: #3d3b3b;
@@ -68,7 +64,7 @@ export const Container = styled.div`
   justify-content: center;
   width: 80%;
   margin: auto;
-  height: auto 0;
+  height: auto;
   margin-top: 150px;
   border-radius: 20px;
   border: 3px solid #2c2b2b;
@@ -94,6 +90,10 @@ export const ImageQuote = styled.div`
 export const Official = styled.img`
   width: auto;
   height: auto;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    max-width: 200px;
+    max-height: 200px;
+  }
 `;
 
 export const Quote = styled.span`
@@ -111,6 +111,9 @@ export const Info = styled.div`
   align-items: center;
   justify-content: center;
   gap: 5px;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    width: auto;
+  }
 `;
 
 export const Introduction = styled.h4`
@@ -129,7 +132,7 @@ export const Information = styled.h4`
 export const MoreInfo = styled.div`
   margin: auto;
   margin-top: 50px;
-  width: 100%;
+  width: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -167,6 +170,13 @@ export const Content = styled.div`
     width: 30px;
     height: 30px;
   }
+`;
+
+export const MainImage = styled.img`
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  cursor: pointer;
 `;
 
 export const BgmContent = styled(Content)`

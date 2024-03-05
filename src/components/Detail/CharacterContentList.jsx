@@ -142,7 +142,7 @@ export default function CharacterContentList({ data, aceData }) {
                 {aceData.acePokemon && (
                   <>
                     <span>에이스 포켓몬 :</span>
-                    <Link to={`/detail/${CharacterData.ace_pokemon}`} target="_blank" rel="noopener noreferrer">
+                    <Link to={`/pokemon/detail/${CharacterData.ace_pokemon}`} target="_blank" rel="noopener noreferrer">
                       <MainImage src={`${aceData.acePokemon}`} />
                     </Link>
                   </>

@@ -11,25 +11,13 @@ export default function Footer(){
           <a href="https://corporate.pokemon.co.jp/" target="_blank" rel="noopener noreferrer">
             https://corporate.pokemon.co.jp
           </a>
+          ,
           <a href="https://pokemonkorea.co.kr/" target="_blank" rel="noopener noreferrer">
             https://pokemonkorea.co.kr
           </a> 그리고 
           <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer">
             https://pokeapi.co
           </a> 에 있음을 알립니다.
-        </span>
-        <span>
-          We inform you that this website is intended only for personal portfolio, learning, and not for commercial purposes. We also inform you that the copyright of all Pokemon information, event posts, etc. is at 
-          <a href="https://corporate.pokemon.co.jp/" target="_blank" rel="noopener noreferrer">
-            https://corporate.pokemon.co.jp
-          </a>
-          <a href="https://pokemonkorea.co.kr/" target="_blank" rel="noopener noreferrer">
-            https://pokemonkorea.co.kr
-          </a>
-          and 
-          <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer">
-            https://pokeapi.co
-          </a>.
         </span>
         <ETC>
           <span>

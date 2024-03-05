@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
-  height: 20vh;
+  width: auto;
+  height: auto;
   background-color: #BFDBFE;
   border-top: solid 2px gray;
   position: relative;
@@ -12,9 +12,9 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  margin: auto;
-  width: 90%;
-  height: 100%;
+  margin: 20px;
+  width: auto;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
