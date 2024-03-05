@@ -6,7 +6,7 @@ import styled from "styled-components";
 import useUserData from "../hooks/user/useUserData";
 
 const Container = styled.div`
-  width: 1320px;
+  width: 90%;
   min-height: 110vh;
   margin: 0 auto;
 `;

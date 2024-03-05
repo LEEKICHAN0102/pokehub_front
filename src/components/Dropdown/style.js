@@ -7,7 +7,7 @@ export const DropdownMenu = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  width: 350px;
+  width: 250px;
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index:999;
