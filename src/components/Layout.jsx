@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
-import Footer from "./Footer";
 import styled from "styled-components";
 import useUserData from "../hooks/user/useUserData";
 
@@ -22,7 +21,6 @@ export default function Layout() {
     <Container>
       <Header user={user} />
       <Outlet context={outletProps} />
-      <Footer />
     </Container>
   );
 }
