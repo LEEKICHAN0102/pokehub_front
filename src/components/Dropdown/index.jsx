@@ -78,6 +78,11 @@ export default function DropDown(){
           이벤트
         </DropdownItem>
       </Link>
+      <Link to="/about">
+        <DropDown>
+          ABOUT
+        </DropDown>
+      </Link>
     </DropdownMenu>
   );
 }
