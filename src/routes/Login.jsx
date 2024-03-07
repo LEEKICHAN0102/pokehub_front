@@ -22,7 +22,7 @@ export default function Login() {
         const checkLoginStatusResponse = await axios.get(`${baseUrl}/pokemon/1`, {
           withCredentials: true,
         });
-        navigate("/pokemon/1", { state: { user: checkLoginStatusResponse.data.user } });
+        navigate("/pokemon/1", { state: { user: checkLoginStatusResponse.data.user } }, {withCredentials: true });
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
