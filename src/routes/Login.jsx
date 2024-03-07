@@ -5,7 +5,7 @@ import AuthHeader from "../components/authHeader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { backEndUrl } from "../constant/constant";
+import { backEndUrl, baseUrl } from "../constant/constant";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,10 +19,8 @@ export default function Login() {
     try {
       const response = await axios.post(`${backEndUrl}/login`, data, { withCredentials: true });
       if (response.status === 200) {
-        const checkLoginStatusResponse = await axios.get(`${backEndUrl}/pokemon/1`, {
-          withCredentials: true,
-        });
-        navigate("/pokemon/1", { state: { user: checkLoginStatusResponse.data.user } }, {withCredentials: true });
+        const checkLoginStatusResponse = await axios.get(`${baseUrl}/pokemon/1`, { withCredentials: true });
+        navigate("/pokemon/1", { state: { user: checkLoginStatusResponse.data.user } });
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
