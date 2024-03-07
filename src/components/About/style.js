@@ -5,18 +5,9 @@ export const AboutContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: auto;
   height: 100vh;
   gap: 10px;
-  span {
-    margin-top: 3px;
-    font-size: 16px;
-    font-weight: bold;
-    color: black;
-    a{
-      color: #3568DE;
-      margin: 5px;
-    }
-  }
 `;
 
 export const AboutBack = styled.button`
@@ -42,5 +33,8 @@ export const ETC = styled.div`
     font-size: 12px;
     font-weight: bold;
     color: black;
+  }a{
+      color: #3568DE;
+      margin: 5px;
   }
 `;
