@@ -79,9 +79,9 @@ export default function DropDown(){
         </DropdownItem>
       </Link>
       <Link to="/about">
-        <DropDown>
+        <DropdownItem>
           ABOUT
-        </DropDown>
+        </DropdownItem>
       </Link>
     </DropdownMenu>
   );
