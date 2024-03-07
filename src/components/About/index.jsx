@@ -1,4 +1,5 @@
 import { AboutBack, AboutContainer, ETC } from "./style";
+import { FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export default function About() {
