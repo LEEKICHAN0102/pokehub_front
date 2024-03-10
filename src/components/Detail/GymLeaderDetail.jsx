@@ -8,6 +8,7 @@ import {
   PrevNav,
   NavDiv,
   NextNav,
+  Name,
 } from "./characterDetail.style";
 
 import CharacterContentList from "./CharacterContentList";
@@ -15,11 +16,10 @@ import CharacterContentList from "./CharacterContentList";
 
 export default function GymLeaderDetail() {
   const order = useParams().order;
-  const {data, isLoading} = useGymLeaderDetailData(order);
-  const { aceData, isPokemonLoading } = useAcePokemonData(data?.gymLeader?.ace_pokemon);
-
   const prevOrder = Number(order)-1 === 0 ? 77 : Number(order) - 1;
   const nextOrder = Number(order)+ 1 === 78 ? 1 : Number(order) + 1;
+  const {data, isLoading} = useGymLeaderDetailData({order, prevOrder, nextOrder});
+  const { aceData, isPokemonLoading } = useAcePokemonData(data?.gymLeader?.ace_pokemon);
 
   if(isLoading || isPokemonLoading){
     return <Loader />
@@ -29,11 +29,15 @@ export default function GymLeaderDetail() {
     <>
       <Navigation>
         <PrevNav href={`/gym-leader/detail/${prevOrder}`}>
-          <FaChevronCircleLeft size={60} />
+          No. {prevOrder}
+          <Name>{data.name.prevName}</Name>
+          <FaChevronCircleLeft size={36} />
         </PrevNav>
         <NavDiv />
         <NextNav href={`/gym-leader/detail/${nextOrder}`}>
-          <FaChevronCircleRight size={60} />
+          No. {nextOrder}
+          <Name>{data.name.nextName}</Name>
+          <FaChevronCircleRight size={36} />
         </NextNav>
       </Navigation>
       <CharacterContentList data={data} aceData={aceData} />

@@ -30,9 +30,13 @@ export const PrevNav = styled.a`
   gap: 5px;
   color: white;
   border-radius: 10px;
+  font-size: 1rem;
   &:hover{
     background-color: #3d3b3b;
     cursor: pointer;
+  }
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    font-size: 0.8rem;
   }
 `;
 
@@ -52,18 +56,23 @@ export const NextNav = styled.a`
   padding: 20px;
   color: white;
   border-radius: 10px;
+  font-size: 1rem;
   &:hover{
     background-color: #3d3b3b;
     cursor: pointer;
+  }
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    font-size: 0.8rem;
   }
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 100px;
   align-items: center;
-  width: 85%;
+  width: auto;
   margin: auto;
   margin-top: 150px;
   height: auto;
@@ -74,9 +83,10 @@ export const Container = styled.div`
   overflow: hidden;
   z-index: 1;
   background-color: white;
-
+  
   @media screen and (min-width: ${(props) => props.theme.width.desktop}) {
     flex-direction: row; /* 데스크탑 화면에서는 가로로 정렬됩니다. */
+    max-width: 85%;
   }
 `;
 
@@ -130,7 +140,10 @@ export const Info = styled.div`
 `;
 
 export const Name = styled.h1`
-  font-size: 20px;
+  font-size: 1.5rem;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    font-size: 1rem;
+  }
 `;
 
 export const Description = styled.h4`

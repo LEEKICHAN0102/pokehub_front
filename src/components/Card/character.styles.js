@@ -5,7 +5,7 @@ export const Container = styled.div`
   gap: 20px;
   width: 90%;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 50px;
   @media screen and (min-width: ${props => props.theme.width.mobile}) {
     grid-template-columns: repeat(1, 3fr);
   }
@@ -23,7 +23,7 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  width: 370px;
+  width: auto;
   height: 400px;
   border-radius: 10px;
   border: 1px solid #e5e5e5;
@@ -77,6 +77,7 @@ export const Type = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
+  gap: 10px;
   justify-content: space-around;
 `;
 

@@ -1,4 +1,4 @@
-import { WriteForm, WriteTitle, WriteContentContainer, WriteContent, WriteContentButton, WritePosting } from "./write.style";
+import { WriteForm, WriteTitle, WriteContentContainer, WriteContent, WriteContentButton, WritePosting, ErrorSpan } from "./write.style";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -10,13 +10,14 @@ export default function WriteCard() {
   const {
     register,
     handleSubmit,
-  } = useForm({ mode: "onSubmit" });
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
 
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${backEndUrl}/board/write`, data, { withCredentials: true });
+      const response = await axios.post(`http://localhost:8080/board/write`, data, { withCredentials: true });
       
       if (response.status === 200) {
         navigate("/board/1");
@@ -35,14 +36,28 @@ export default function WriteCard() {
       <WriteTitle
         placeholder="글 제목을 작성해주세요!"
         type="title"
-        {...register("title", { required: "글 제목을 작성해주세요!" })}
+        {...register("title", {
+          required: "글 제목을 작성해주세요!",
+          maxLength: {
+            value: 16,
+            message: "제목은 16글자 까지만 작성 가능해요!"
+          }
+        })}
       />
+      {errors.title && <ErrorSpan>{errors.title.message}</ErrorSpan>}
       <WriteContentContainer>
         <WriteContent
           placeholder="글 내용을 작성해주세요!"
           type="content"
-          {...register("content", { required: "글 내용을 작성해주세요!" })}
+          {...register("content", {
+            required: "글 내용을 작성해주세요!",
+            maxLength: {
+              value: 300,
+              message: "최대 300글자 까지만 작성 가능해요!"
+            }
+          })}
         />
+        {errors.content && <ErrorSpan>{errors.content.message}</ErrorSpan>}
         <WriteContentButton>
           <WritePosting type="submit">작성</WritePosting>
         </WriteContentButton>

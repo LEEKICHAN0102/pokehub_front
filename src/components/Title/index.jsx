@@ -30,7 +30,10 @@ const TitleBar = styled.div`
 `;
 
 const TitleName = styled.h1`
-  font-size:36px;
+  font-size:24px;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    font-size: 1rem;
+  }
 `;
 
 const TitleButton = styled.button`

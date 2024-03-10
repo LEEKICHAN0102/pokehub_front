@@ -18,3 +18,17 @@ export const getByOrder = async (order) => {
     console.error("Gym Leader 정보를 가져오는 도중 에러 발생:", error);
   }
 };
+
+export const getLeaderArray = async ({prevOrder , nextOrder}) => {
+  try{
+    const prevNameResponse = await axios.get(`${backEndUrl}/gym-leader/detail/${prevOrder}`);
+    const nextNameResponse = await axios.get(`${backEndUrl}/gym-leader/detail/${nextOrder}`);
+
+    const prevName = prevNameResponse.data.name;
+    const nextName = nextNameResponse.data.name;
+
+    return { prevName, nextName };
+  } catch (error) {
+    console.error("Gym Leader Array 정보를 가져오는 도중 에러 발생:", error);
+  }
+};

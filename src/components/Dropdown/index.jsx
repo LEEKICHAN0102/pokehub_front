@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-export default function DropDown(){
+export default function DropDown({ user }){
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isCharacterDropdownOpen, setCharacterDropdownOpen] = useState(false);
 
@@ -78,6 +78,15 @@ export default function DropDown(){
           이벤트
         </DropdownItem>
       </Link>
+      {user.userData ? (
+        <Link to={`/profile/${user.userData.user._id}`}>
+          <DropdownItem>
+            프로필
+          </DropdownItem>
+        </Link>
+      ) : (
+        null
+      )}
       <Link to="/about">
         <DropdownItem>
           ABOUT

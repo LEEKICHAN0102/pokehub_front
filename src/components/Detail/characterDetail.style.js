@@ -16,7 +16,7 @@ export const Navigation = styled.div`
   border-radius: 10px;
   @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
     svg{
-      font-size: 24px;
+      display: none;
     }
   }
 `;
@@ -25,13 +25,17 @@ export const PrevNav = styled.a`
   width: 50%;
   height: 100%;
   display: flex;
-  align-items: center;
-  padding: 40px;
+  flex-direction: column;
+  padding: 20px;
+  gap: 5px;
   color: white;
   border-radius: 10px;
   &:hover{
     background-color: #3d3b3b;
     cursor: pointer;
+  }
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    font-size: 0.8rem;
   }
 `;
 
@@ -44,16 +48,19 @@ export const NavDiv = styled.div`
 export const NextNav = styled.a`
   width: 50%;
   height: 100%;
+  gap: 5px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
-  padding: 40px;
+  padding: 20px;
   color: white;
   border-radius: 10px;
   &:hover{
     background-color: #3d3b3b;
     cursor: pointer;
+  }
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    font-size: 0.8rem;
   }
 `;
 
@@ -62,7 +69,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: auto;
   margin: auto;
   height: auto;
   margin-top: 150px;
@@ -73,6 +80,10 @@ export const Container = styled.div`
   overflow: hidden;
   z-index: 1;
   background-color: white;
+
+  @media screen and (min-width: ${(props) => props.theme.width.desktop}) {
+    width: 80%;
+  }
 `;
 
 export const ImageQuote = styled.div`
@@ -81,7 +92,7 @@ export const ImageQuote = styled.div`
   align-items: center;
   justify-content: center;
   gap: 30px;
-  width: 450px;
+  width: auto;
   span {
     color: gray;
   }
@@ -97,15 +108,18 @@ export const Official = styled.img`
 `;
 
 export const Quote = styled.span`
-  width: auto;
+  width: 90%;
   margin-top: 20px;
   border: 3px solid gray;
   border-radius: 5px;
   padding: 20px;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const Info = styled.div`
-  width: 70%;
+  width: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,36 +127,51 @@ export const Info = styled.div`
   gap: 5px;
   @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
     width: auto;
+    max-width: 350px;
+    font-size: 0.8rem;
   }
 `;
 
 export const Introduction = styled.h4`
   font-size: 20px;
   color: ${(props) => props.color};
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    font-size: 1rem;
+  }
 `;
 
 export const Name = styled.h1`
-  font-size: 24px;
+  font-size: 1.5rem;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    font-size: 1rem;
+  }
 `;
 
 export const Information = styled.h4`
   margin-top: 40px;
+  max-width: 80%;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    width: auto;
+  }
 `;
 
 export const MoreInfo = styled.div`
   margin: auto;
+  min-width: 350px;
   margin-top: 50px;
   width: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 1px solid #d0d4d2ed;
-  border-radius: 10px;
   padding: 30px;
   gap: 10px;
   span{
     font-size: 12px;
+  }
+  @media screen and (min-width: ${(props) => props.theme.width.desktop}) {
+    border: 1px solid #d0d4d2ed;
+    border-radius: 10px;
   }
 `;
 
@@ -162,8 +191,8 @@ export const Content = styled.div`
   }
 
   .typeBox{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 
   .typeImg{
@@ -181,8 +210,6 @@ export const MainImage = styled.img`
 
 export const BgmContent = styled(Content)`
   flex-direction: column;
-  border: 1px solid gray;
-  padding: 20px;
-  border-radius: 5px;
+  padding: 10px;
   align-items: flex-start;
 `;

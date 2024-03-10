@@ -7,7 +7,9 @@ export const AboutContainer = styled.div`
   justify-content: center;
   margin: auto;
   height: 100vh;
-  gap: 10px;
+  width: 90%;
+  gap: 30px;
+  padding: 50px;
 `;
 
 export const AboutBack = styled.button`
@@ -30,11 +32,16 @@ export const ETC = styled.div`
   gap: 5px;
   margin-top: 10px;
   span {
-    font-size: 12px;
+    font-size: 24px;
     font-weight: bold;
     color: black;
-  }a{
+  } a{
       color: #3568DE;
       margin: 5px;
+  }
+  @media screen and (max-width: ${props => props.theme.width.desktop}) {
+    span{
+      font-size: 0.8rem;
+    }
   }
 `;

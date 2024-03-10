@@ -1,20 +1,26 @@
 import { useEffect, useRef } from "react";
+import styled from "styled-components";
 
 export default function CustomAudioPlayer({ src }) {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    // volume 속성 default 0.1 조정 (귀 터질 뻔함;;)
     if (audioRef.current) {
-      audioRef.current.volume = 0.1;
+      audioRef.current.volume = 0.3;
     }
   }, []);
 
   return (
     <>
-      <audio ref={audioRef} controls volume="0.1">
+      <StyledAudio ref={audioRef} controls>
         <source src={src} type="audio/mp3" />
-      </audio>
+      </StyledAudio>
     </>
   );
 }
+
+const StyledAudio = styled.audio`
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    scale: 0.8;
+  }
+`;

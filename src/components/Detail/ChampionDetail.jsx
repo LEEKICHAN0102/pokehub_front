@@ -8,17 +8,17 @@ import {
   PrevNav,
   NavDiv,
   NextNav,
+  Name,
 } from "./characterDetail.style";
 import CharacterContentList from "./CharacterContentList";
 
 
 export default function ChampionDetail() {
   const order = useParams().order;
-  const {data, isLoading} = useChampionDetailData(order);
-  const { aceData, isPokemonLoading } = useAcePokemonData(data?.champion?.ace_pokemon);
-
   const prevOrder = Number(order)-1 === 0 ? 12 : Number(order) - 1;
   const nextOrder = Number(order)+ 1 === 13 ? 1 : Number(order) + 1;
+  const {data, isLoading} = useChampionDetailData({order, prevOrder, nextOrder});
+  const { aceData, isPokemonLoading } = useAcePokemonData(data?.champion?.ace_pokemon);
 
   if(isLoading || isPokemonLoading){
     return <Loader />
@@ -28,11 +28,15 @@ export default function ChampionDetail() {
     <>
       <Navigation>
         <PrevNav href={`/champion/detail/${prevOrder}`}>
-          <FaChevronCircleLeft size={60} />
+          No. {prevOrder}
+          <Name>{data.name.prevName}</Name>
+          <FaChevronCircleLeft size={36} />
         </PrevNav>
         <NavDiv />
         <NextNav href={`/champion/detail/${nextOrder}`}>
-          <FaChevronCircleRight size={60} />
+          No. {nextOrder}
+          <Name>{data.name.nextName}</Name>
+          <FaChevronCircleRight size={36} />
         </NextNav>
       </Navigation>
       <CharacterContentList data={data} aceData={aceData} />

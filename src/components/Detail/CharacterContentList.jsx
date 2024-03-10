@@ -91,8 +91,8 @@ export default function CharacterContentList({ data, aceData }) {
                 <span>성별 : {genderHandler(gender)}</span>
               </Content>
               <Content>
-                <span>사용 타입 : </span>
                 <Type>
+                  <span>사용 타입 : </span>
                   <TypeBox color={`${colors[CharacterData.type]}`} className="typeBox">
                     <TypeImg src={`${typeIcons[CharacterData.type]}`} className="typeImg" />
                   </TypeBox>
@@ -102,37 +102,37 @@ export default function CharacterContentList({ data, aceData }) {
                   <BgmContent>
                   {CharacterData.bgm["theme"] && (
                     <Content>
-                      <span>{CharacterData.name} Theme :</span>
+                      <span>{CharacterData.name} Theme</span>
                       <CustomAudioPlayer src={CharacterData.bgm["theme"]} />
                     </Content>
                   )}
                   {CharacterData.bgm["last_battle"] && (
                     <Content>
-                      <span>{CharacterData.name} 챔피언 배틀 :</span>
+                      <span>{CharacterData.name} 챔피언 배틀</span>
                       <CustomAudioPlayer src={CharacterData.bgm["last_battle"]} />
                     </Content>
                   )}
                   {CharacterData.bgm["gym_leader"] && (
                     <Content>
-                      <span>{CharacterData.name} 체육관 배틀 :</span>
+                      <span>{CharacterData.name} 체육관 배틀</span>
                       <CustomAudioPlayer src={CharacterData.bgm["gym_leader"]} />
                     </Content>
                   )}
                   {CharacterData.bgm["chance_of_victory"] && (
                     <Content>
-                      <span>{CharacterData.name} 승리는 눈 앞에! :</span>
+                      <span>{CharacterData.name} 승리는 눈 앞에!</span>
                       <CustomAudioPlayer src={CharacterData.bgm["chance_of_victory"]} />
                     </Content>
                   )}
                   {CharacterData.bgm["victory"] && (
                     <Content>
-                      <span>{CharacterData.name} 승리! :</span>
+                      <span>{CharacterData.name} 승리!</span>
                       <CustomAudioPlayer src={CharacterData.bgm["victory"]} />
                     </Content>
                   )}
                   {CharacterData.bgm["elite_four"] && (
                     <Content>
-                      <span>{CharacterData.name} 사천왕 배틀 :</span>
+                      <span>{CharacterData.name} 사천왕 배틀</span>
                       <CustomAudioPlayer src={CharacterData.bgm["elite_four"]} />
                     </Content>
                   )}

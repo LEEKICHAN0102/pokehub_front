@@ -74,3 +74,10 @@ export const WritePosting = styled.button`
   }
   cursor: pointer;
 `;
+
+export const ErrorSpan = styled.span`
+  color: red;
+  font-size: 12px;
+  margin: auto;
+  margin-top: 10px;
+`;

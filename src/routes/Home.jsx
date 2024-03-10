@@ -36,7 +36,7 @@ const MrOh = styled.img`
 const Bubble = styled.div`
   margin-top: 50px;
   gap: 10px;
-  width: 70%;
+  width: auto;
   height: auto;
   padding: 30px;
   border: 3px solid gray;
