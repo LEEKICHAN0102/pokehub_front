@@ -5,7 +5,7 @@ import AuthHeader from "../components/authHeader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { backEndUrl, baseUrl } from "../constant/constant";
+import { backEndUrl } from "../constant/constant";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function Login() {
     try {
       const response = await axios.post(`${backEndUrl}/login`, data, { withCredentials: true });
       if (response.status === 200) {
-        const checkLoginStatusResponse = await axios.get(`${baseUrl}/pokemon/1`, { withCredentials: true });
+        const checkLoginStatusResponse = await axios.get(`${backEndUrl}/pokemon/1`, { withCredentials: true });
         navigate("/pokemon/1", { state: { user: checkLoginStatusResponse.data.user } });
       }
     } catch (error) {
@@ -58,7 +58,8 @@ export default function Login() {
 }
 
 const Container = styled.div`
-  width: 438px;
+  width: 100%;
+  max-width: 400px;
   margin: 0 auto;
   padding-bottom: 150px;
   span {
@@ -79,7 +80,7 @@ const InputField = styled.input`
   padding: 12px;
   border: 1px solid ${(props) => (props.iserror ? "red" : "gray")};
   border-radius: 10px;
-  width: 430px;
+  width: auto;
   height: 50px;
   font-size: 24px;
   outline: none;
@@ -89,7 +90,7 @@ const SubmitButton = styled.button`
   padding: 10px;
   background-color: #109ceb;
   color: white;
-  width: 430px;
+  width: auto;
   height: 50px;
   font-size: 24px;
   border: none;

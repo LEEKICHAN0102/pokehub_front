@@ -10,6 +10,9 @@ export const PostDetailContainer = styled.div`
   border-radius: 20px;
   border: 3px solid #2c2b2b;
   padding: 10px;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    width: auto;
+  }
 `;
 
 export const PostDetailTitle = styled.div`
@@ -20,14 +23,19 @@ export const PostDetailTitle = styled.div`
   height: 30px;
   padding: 20px;
   border-bottom: 2px solid gray;
-
   p{
     font-size: 20px;
   }
-
   span{
     font-size: 16px;
     color: gray;
+  }
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    p{
+      font-size: 1rem;
+    } span{
+      font-size: 0.8rem;
+    }
   }
 `;
 
@@ -96,7 +104,7 @@ export const CommentTime = styled.span`
 
 
 export const PostDetailReply = styled(PostDetailComment)`
-  width: 70%;
+  width: 90%;
 `;
 export const ReplyWrapper = styled(CommentWrapper)``;
 export const ReplyAuthor = styled(CommentAuthor)``;
@@ -119,16 +127,19 @@ export const ReplyInputContainer = styled.form`
   align-items: center;
   gap: 5px;
   margin-top: 30px;
-  width: 70%;
+  width: auto;
 `;
 
 export const ReplyInput = styled.textarea`
   padding: 10px;
-  height: 40px;
-  width: 70%;
+  height: auto;
+  width: 300px;
   border: 1px solid black;
   border-radius: 5px;
   resize: none;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    width: auto;
+  }
 `;
 
 export const ReplyInputSubmit = styled.button`

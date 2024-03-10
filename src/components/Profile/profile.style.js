@@ -11,14 +11,6 @@ export const ProfileContainer = styled.div`
   border-radius: 20px;
 `;
 
-export const ProfileImage = styled.img`
-  width: 200px;
-  height: 200px;
-  border-radius: 100px;
-  border: 2px solid black;
-  margin-top: 50px;
-`;
-
 export const ProfileInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,15 +26,24 @@ export const ProfileInfo = styled.div`
       transition: ease-in-out 0.3s all;
     }
   }
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    span{
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const UserPost = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  width: 70%;
-  height: 50%;
+  width: auto;
+  height: auto;
   margin-top: 30px;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const MyPost = styled.div`

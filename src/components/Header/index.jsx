@@ -49,23 +49,12 @@ export default function Header({ user }) {
           <Item onClick={toggleDropdown}>
             <GiHamburgerMenu size={24} />
           </Item>
-          {isDropdownOpen && <DropDown />}
+          {isDropdownOpen && <DropDown user={user} />}
         </Group>
         <Link to="/">
           <Logo />
         </Link>
         <Group>
-          {user.userData ? (
-            <Item>
-              <Link to={`/profile/${user.userData.user._id}`}>
-                <span>
-                  {`환영합니다 ${user.userData.user.username}님`}
-                </span>
-              </Link>
-            </Item>
-          ) : (
-            null
-          )}
           <Item>
             {user.userData ? (
               <LogoutButton 

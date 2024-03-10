@@ -2,11 +2,20 @@ import styled from "styled-components";
 
 export const EventContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 3 columns */
   gap: 30px;
   width: 90%;
   margin: auto;
   margin-top: 10vh;
+  @media screen and (min-width: ${props => props.theme.width.mobile}) {
+    grid-template-columns: repeat(1, 4fr);
+  }
+
+  @media screen and (min-width: ${props => props.theme.width.desktop}) {
+    grid-template-columns: repeat(2, 4fr);
+  }
+  @media screen and (min-width: ${props => props.theme.width.pc}) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 
 export const EventCardContainer = styled.div`
@@ -56,7 +65,7 @@ export const InfoText = styled.a`
   span {
     font-size: 16px;
   }
-  width: 500px;
+  width: auto;
   height: 70px;
   background-color: #6c757d;
   color: white;

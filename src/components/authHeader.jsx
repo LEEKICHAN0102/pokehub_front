@@ -21,8 +21,7 @@ export default function AuthHeader({ title }) {
 }
 
 const Container = styled.div`
-  width: 100%;
-
+  width: auto;
   h1 {
     text-align: center;
     margin-top: 27px;
@@ -31,6 +30,7 @@ const Container = styled.div`
 
 const Icons = styled.div`
   width: 100%;
+  max-width: 400px;
   height: 70px;
   display: flex;
   justify-content: space-between;

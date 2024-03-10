@@ -114,7 +114,8 @@ export default function Join(){
 }
 
 const Container = styled.div`
-  width: 438px;
+  width: 100%;
+  max-width: 400px;
   margin: 0 auto;
   padding-bottom: 150px;
   span {
@@ -135,7 +136,7 @@ const InputField = styled.input`
   padding: 12px;
   border: 1px solid ${({ iserror }) => (iserror ? "red" : "gray")};
   border-radius: 10px;
-  width: 430px;
+  width: auto;
   height: 50px;
   font-size: 24px;
   outline: none;
@@ -145,7 +146,7 @@ const SubmitButton = styled.button`
   padding: 10px;
   background-color: #109ceb;
   color: white;
-  width: 430px;
+  width: auto;
   height: 50px;
   font-size: 24px;
   border: none;

@@ -1,5 +1,5 @@
 import Title from "../Title";
-import { PostContainer, PostCardContainer, PostThumb, PostTitle, PostInfo  } from "./postcard.style";
+import { PostContainer, PostCardContainer, PostThumb, PostTitle, PostInfo } from "./postcard.style";
 import Pagination from "react-js-pagination";
 import "../../styles/Paging.css";
 import ThumbLogo from "../../assets/Loading/pokehubLogo.png";
@@ -26,18 +26,24 @@ export default function PostCard() {
     <>
       <Title name="게시글" hasButton="글 작성" />
       <PostContainer>
-        {data.posting.map((posting) => (
-          <Link to={`/board/detail/${posting._id}`} key={posting._id} >
-            <PostCardContainer>
-              <PostThumb src={`${ThumbLogo}`} />
-              <PostTitle>{posting.title}</PostTitle>
-              <PostInfo>
-                <span>작성자: {posting.username}</span>
-                <span>게시: {posting.postingTime}</span>
-              </PostInfo>
-            </PostCardContainer>
-          </Link>
-        ))}
+        {data.posting.length === 0 ? (
+          <PostCardContainer>
+            <PostThumb src={`${ThumbLogo}`} />
+            <PostTitle>아직 게시글이 없어요.. 첫 게시글을 작성 해주세요!</PostTitle>
+          </PostCardContainer>
+        ) : (
+          (data.posting.map((posting) => (
+            <Link to={`/board/detail/${posting._id}`} key={posting._id} >
+              <PostCardContainer>
+                <PostThumb src={`${ThumbLogo}`} />
+                <PostTitle>{posting.title}</PostTitle>
+                <PostInfo>
+                  <span>작성자: {posting.username}</span>
+                  <span>게시: {posting.postingTime}</span>
+                </PostInfo>
+              </PostCardContainer>
+            </Link>
+          ))))}
       </PostContainer>
       <Pagination
         activePage={parseInt(page)}

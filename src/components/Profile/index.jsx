@@ -44,25 +44,35 @@ export default function Profile() {
         <UserPost>
           <MyPost>
             <span>내가 작성한 게시글</span>
-            {postingData.map((myPost) => (
-              <Link key={myPost._id} to={`/board/detail/${myPost._id}`}>
-                <PostBox>
-                  <span>{myPost.title}</span>
-                  <span>{myPost.postingTime}</span>
-                </PostBox>
-              </Link>
-            ))}
+            {postingData.length === 0 ? (
+              <PostBox>
+                <span>아직 작성 게시글이 없어요!</span>
+              </PostBox>
+              ) : (
+              postingData.map((myPost) => (
+                <Link key={myPost._id} to={`/board/detail/${myPost._id}`}>
+                  <PostBox>
+                    <span>{myPost.title}</span>
+                    <span>{myPost.postingTime}</span>
+                  </PostBox>
+                </Link>
+              )))}
           </MyPost>
           <LikePost>
             <span>내가 좋아하는 게시글</span>
-            {likedData.map((likePost) => (
-              <Link key={likePost._id} to={`/board/detail/${likePost._id}`}>
-                <PostBox>
-                  <span>{likePost.title}</span>
-                  <span>{likePost.postingTime}</span>
-                </PostBox>
-              </Link>
-            ))}
+            {likedData.length === 0 ? (
+              <PostBox>
+                <span>아직 좋아하는 게시글이 없어요!</span>
+              </PostBox>
+              ) : (
+              likedData.map((likePost) => (
+                <Link key={likePost._id} to={`/board/detail/${likePost._id}`}>
+                  <PostBox>
+                    <span>{likePost.title}</span>
+                    <span>{likePost.postingTime}</span>
+                  </PostBox>
+                </Link>
+              )))}
           </LikePost>
         </UserPost>
       </ProfileContainer>

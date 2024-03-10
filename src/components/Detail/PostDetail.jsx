@@ -37,7 +37,7 @@ import { backEndUrl } from "../../constant/constant";
 
 export default function PostDetail() {
   const postId = useParams().postId;
-  const [replyStates, setReplyStates] = useState({});
+  const [openReplyId, setOpenReplyId] = useState(null);
   const queryClient = useQueryClient();
   const { data, isLoading } = useDetailPostData(postId);
   const outletContext = useOutletContext();
@@ -74,6 +74,7 @@ export default function PostDetail() {
       await axios.post(`${backEndUrl}/board/detail/${postId}`, postData, { withCredentials: true });
       queryClient.invalidateQueries(["detail", postId]);
       postSetValue("content", "");
+      setOpenReplyId(null);
     } catch (error) {
       console.error("에러 발생:", error);
     }
@@ -84,6 +85,7 @@ export default function PostDetail() {
       await axios.post(`${backEndUrl}/board/detail/${postId}/${commentId}`, replyData, { withCredentials: true });
       queryClient.invalidateQueries(["detail", postId]);
       replySetValue("replyContent", "");
+      setOpenReplyId(null);
     } catch (error) {
       console.error("에러 발생:", error);
     }
@@ -99,10 +101,7 @@ export default function PostDetail() {
   };
 
   const handleReply = (commentId) => {
-    setReplyStates((prevStates) => ({
-      ...prevStates,
-      [commentId]: !prevStates[commentId],
-    }));
+    setOpenReplyId((prevState) => (prevState === commentId ? null : commentId));
   };
 
   return(
@@ -151,7 +150,7 @@ export default function PostDetail() {
               }
             })}
           </CommentWrapper>
-          {replyStates[comment._id] ? (
+          {openReplyId === comment._id ? (
             <ReplyInputContainer key={comment._id} onSubmit={replyHandleSubmit((data) => onReplySubmit(data, comment._id))}>
               <ReplyInput
                 placeholder="답글을 작성해보세요!"
