@@ -7,9 +7,8 @@ export const AboutContainer = styled.div`
   justify-content: center;
   margin: auto;
   height: 100vh;
-  width: 90%;
+  width: 50%;
   gap: 30px;
-  padding: 50px;
 `;
 
 export const AboutBack = styled.button`
@@ -41,7 +40,7 @@ export const ETC = styled.div`
   }
   @media screen and (max-width: ${props => props.theme.width.desktop}) {
     span{
-      font-size: 0.8rem;
+      font-size: 0.65rem;
     }
   }
 `;
