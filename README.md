@@ -33,7 +33,7 @@
    
 
 -  [PokéAPI](https://pokeapi.co/) 에서 제공되는 인게임 도구 | 아이템의 정보를 확인 할 수 있습니다.
--  
+
 <br/>
 
 ### 3. 인물 | 체육관 관장 , 사천왕 , 챔피언
@@ -48,7 +48,7 @@
   ![image](https://github.com/LEEKICHAN0102/pokehub_front/assets/112845155/3f7905a1-2b7f-4eca-8677-c68c632a5106)  
   
 
-- [PokéHub - BE](https://github.com/LEEKICHAN0102/pokehub_back) PokéAPI 에서 인물 관련 정보는 제공하지 않기에 인물 관련 정보를 작성 하였습니다.  
+- [PokéHub - BE](https://github.com/LEEKICHAN0102/pokehub_back) PokéHub_BE 에서 인물 관련 정보를 확인 할 수 있습니다.  
   
 <br/>
 
@@ -67,3 +67,24 @@
 <br/>
 
 - 게시글 작성, 댓글과 답글, 좋아요 등을 통한 소통이 가능 합니다.
+
+<br/>
+
+## 개발 환경
+
+<br/>  
+
+### Environment
+<img src="https://img.shields.io/badge/Visual Studio code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">  
+
+### Package Manager
+<img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
+
+### Development
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"> <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"> <img src="https://img.shields.io/badge/reacthookform-EC5990?style=for-the-badge&logo=react-hook-form&logoColor=white">
+
+### Style
+<img src="https://img.shields.io/badge/stylecomponents-DB7093?style=for-the-badge&logo=stylecomponents&logoColor=white">
+
+### Bundler
+<img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
