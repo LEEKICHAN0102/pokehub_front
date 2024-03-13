@@ -36,6 +36,11 @@ export const Item = styled.li`
     color: #FF658F;
     transition: all 0.3s;
   }
+  @media screen and (max-width: ${props => props.theme.width.desktop}) {
+    a{
+      font-size: 0.9rem;
+    }
+  }
 `;
 
 export const LogoutButton = styled.input`
@@ -49,4 +54,9 @@ export const LogoutButton = styled.input`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  @media screen and (max-width: ${props => props.theme.width.desktop}) {
+    width: auto;
+    height: auto;
+    padding: 8px;
+  }
 `;
