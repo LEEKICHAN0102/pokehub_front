@@ -20,6 +20,12 @@ const PokeHub = styled.div`
   gap: 10px;
   font-weight: 500px;
   font-size: 24px;
+  @media screen and (max-width: ${props => props.theme.width.desktop}) {
+    width: auto;
+    height: auto;
+    padding: 10px;
+    font-size: 1rem;
+  }
 `;
 
 const Poke = styled.h4`
