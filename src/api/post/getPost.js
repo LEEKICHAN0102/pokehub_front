@@ -18,30 +18,3 @@ export const getPostingById = async (postId) => {
     console.error("포스팅 Detail 정보 가져오는 중 에러 발생:", error);
   }
 }
-
-export const PostComment = async (postId) => {
-  try {
-    const response = await axios.post(`${backEndUrl}/board/detail/${postId}`);
-    return response.data;
-  } catch (error) {
-    console.error("댓글 포스팅 중 에러 발생:", error);
-  }
-}
-
-export const PostReply = async (commentId) => {
-  try {
-    const response = await axios.post(`${backEndUrl}/board/detail/${commentId}`);
-    return response.data;
-  } catch (error) {
-    console.error("답글 포스팅 중 에러 발생:", error);
-  }
-}
-
-export const PostLike = async (postId) => {
-  try {
-    const response = await axios.post(`${backEndUrl}/board/detail/like/${postId}`);
-    return response.data;
-  } catch (error) {
-    console.error("답글 포스팅 중 에러 발생:", error);
-  }
-}

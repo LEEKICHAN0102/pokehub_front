@@ -97,7 +97,8 @@ export const DetailInfo = styled.div`
 
 export const MainImage = styled.img`
   width: 80px;
-  height: 80px;
+  height: auto;
+  max-height: 130px;
   margin: auto;
 `;
 
