@@ -1,59 +1,41 @@
-import { Navigate, useParams, useOutletContext } from "react-router-dom";
+import { useParams, useOutletContext, useNavigate } from "react-router-dom";
 import { 
   PostDetailContainer,
   PostDetailTitle,
   PostDetailContent,
+  PostEdit,
   PostDetailDivider, 
-  PostDetailForm,
-  InputWrapper,
-  InputContent,
-  InputButton,
-  PostDetailComment,
-  CommentAuthor,
-  CommentContent,
-  CommentWrapper,
-  CommentTime,
-  CommentReply,
-  ReplyInputContainer,
-  ReplyInput,
-  ReplyInputSubmit,
-  PostDetailReply,
-  ReplyWrapper,
-  ReplyAuthor,
-  ReplyContent,
-  ReplyTime,
   LikeButtonWrapper,
   LikeButton,
   LikeCount,
 } from "./postDetail.style"
 import { useForm } from "react-hook-form"
 import useDetailPostData from "../../hooks/post/usePostDetailData";
+import PostComment from "./PostComment";
 import axios from "axios";
 import Loader from "../Loader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa6";
 import { useQueryClient } from "react-query";
 import { backEndUrl } from "../../constant/constant";
 
 export default function PostDetail() {
   const postId = useParams().postId;
-  const [openReplyId, setOpenReplyId] = useState(null);
+  const [isLoggedInUser, setLoggedInUser] = useState(false);
   const queryClient = useQueryClient();
   const { data, isLoading } = useDetailPostData(postId);
   const outletContext = useOutletContext();
   const { user } = outletContext;
+  const navigate = useNavigate();
 
-  const {
-    register: postRegister,
-    handleSubmit: postHandleSubmit,
-    setValue: postSetValue,
-  } = useForm({ mode: "onSubmit" });
+  const loggedInUserId = user.userData?.user._id ?? null;
+  const postedUserId = data.detail?.findByPostId?.userId ?? null;
 
-  const {
-    register: replyRegister,
-    handleSubmit: replyHandleSubmit,
-    setValue: replySetValue,
-  } = useForm({ mode: "onSubmit" });
+  useEffect(() => {
+    if (loggedInUserId === postedUserId) {
+      setLoggedInUser(true);
+    }
+  } , [loggedInUserId, postedUserId]);
 
   const {
     register: LikeRegister,
@@ -65,44 +47,30 @@ export default function PostDetail() {
     return <Loader />
   }
 
-  if(!user.userData) {
-    return <Navigate to="/login" replace />;
-  }
-
-  const onCommentSubmit = async (postData) => {
-    try {
-      await axios.post(`${backEndUrl}/board/detail/${postId}`, postData, { withCredentials: true });
-      queryClient.invalidateQueries(["detail", postId]);
-      postSetValue("content", "");
-      setOpenReplyId(null);
-    } catch (error) {
-      console.error("에러 발생:", error);
-    }
-  };
-
-  const onReplySubmit = async (replyData, commentId) => {
-    try {
-      await axios.post(`${backEndUrl}/board/detail/${postId}/${commentId}`, replyData, { withCredentials: true });
-      queryClient.invalidateQueries(["detail", postId]);
-      replySetValue("replyContent", "");
-      setOpenReplyId(null);
-    } catch (error) {
-      console.error("에러 발생:", error);
-    }
-  };
-
   const onHandleLike = async (likeData) => {
     try {
       await axios.post(`${backEndUrl}/board/detail/like/${postId}`, likeData, { withCredentials: true });
       queryClient.invalidateQueries(["detail", postId]);
     } catch (error) {
-      console.error("에러 발생:", error, error.message);
+      console.error("좋아요 에러 발생:", error);
     }
   };
 
-  const handleReply = (commentId) => {
-    setOpenReplyId((prevState) => (prevState === commentId ? null : commentId));
-  };
+  const onDeletePosting = async () => {
+    try {
+      const response = await axios.delete(`${backEndUrl}/board/detail/${postId}/delete`, { withCredentials: true });
+      queryClient.invalidateQueries(["detail", postId]);
+      if (response.status === 200) {
+        navigate("/board/1");
+      }
+    } catch (error) {
+      console.error("포스팅 삭제 중 에러 발생:", error);
+    }
+  }
+
+  const onEditPosting = async () => {
+    navigate(`/board/edit/${postId}`);
+  }
 
   return(
     <>
@@ -126,52 +94,19 @@ export default function PostDetail() {
           <LikeCount>{data.detail.findByPostId.likeCount}</LikeCount>
         </LikeButtonWrapper>
       </PostDetailContainer>
+      {isLoggedInUser ? (
+        <PostEdit>
+          <div onClick={onEditPosting}>수정</div>
+          <div onClick={onDeletePosting}>삭제</div>
+        </PostEdit>
+      ) : null}
       <PostDetailDivider />
-      {data.detail.findCommentByPostId.map((comment) => (
-        <PostDetailComment key={comment._id}>
-          <CommentWrapper>
-            <CommentAuthor>{comment.username}</CommentAuthor>
-            <CommentContent>{comment.content}</CommentContent>
-            <CommentTime>
-              {comment.postingTime}
-              <CommentReply onClick={() => handleReply(comment._id)}>답글 달기</CommentReply>
-            </CommentTime>
-            {data.detail.findReplyByCommentId.map((reply) => {
-              if (reply.commentId === comment._id) {
-                return (
-                  <PostDetailReply key={reply._id}>
-                    <ReplyWrapper>
-                      <ReplyAuthor>{reply.username}</ReplyAuthor>
-                      <ReplyContent>{reply.replyContent}</ReplyContent>
-                      <ReplyTime>{reply.postingTime}</ReplyTime>
-                    </ReplyWrapper>
-                  </PostDetailReply>
-                );
-              }
-            })}
-          </CommentWrapper>
-          {openReplyId === comment._id ? (
-            <ReplyInputContainer key={comment._id} onSubmit={replyHandleSubmit((data) => onReplySubmit(data, comment._id))}>
-              <ReplyInput
-                placeholder="답글을 작성해보세요!"
-                type="replyContent"
-                {...replyRegister("replyContent", { required: "댓글 내용을 작성해주세요!" })}
-              />
-              <ReplyInputSubmit>답글</ReplyInputSubmit>
-            </ReplyInputContainer> 
-          ) : null}
-        </PostDetailComment>
-      ))}
-      <PostDetailForm onSubmit={postHandleSubmit(onCommentSubmit)}>
-        <InputWrapper>
-          <InputContent
-            placeholder="댓글을 작성해보세요!"
-            type="content"
-            {...postRegister("content", { required: "댓글 내용을 작성해주세요!" })}
-          />
-          <InputButton>작성</InputButton>
-        </InputWrapper>
-      </PostDetailForm>
+      <PostComment
+        data={data}
+        queryClient={queryClient}
+        postId={postId}
+        loggedInUserId={loggedInUserId}
+      />
     </>
   )
 }

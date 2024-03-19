@@ -12,6 +12,10 @@ export const WriteForm = styled.form`
   background-color: #e5e5e5;
   border-radius: 20px;
   border: 1px solid gray;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    width: auto;
+    height: 100vh;
+  }
 `;
 
 export const WriteTitle = styled.input`
@@ -22,6 +26,11 @@ export const WriteTitle = styled.input`
   margin-top: 20px;
   font-size: 20px;
   padding-left: 20px;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    font-size: 16px;
+    height: 30px;
+    padding: 20px;
+  }
 `;
 
 export const WriteContentContainer = styled.div`

@@ -58,10 +58,33 @@ export const PostDetailContent = styled.div`
   }
 `;
 
+export const PostEdit = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  width: auto;
+  div{
+    outline: none;
+    font-size: 16px;
+    color: #127CE6;
+  
+    &:hover{
+      color: red;
+      transition: ease-in-out 0.3s all;
+      cursor: pointer;
+    }
+    @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+      font-size: 12px;
+    }
+  }
+`;
+
 export const PostDetailDivider = styled.div`
   width: 100%;
   border: 3px solid black;
-  margin-top: 50px;
+  margin-top: 30px;
 `;
 
 export const PostDetailComment = styled.div`
@@ -111,7 +134,7 @@ export const ReplyAuthor = styled(CommentAuthor)``;
 export const ReplyContent = styled(CommentContent)``;
 export const ReplyTime = styled(CommentTime)``;
 
-export const CommentReply = styled.div`
+export const CommentOption = styled.div`
   font-size: 12px;
   color: #127CE6;
   
@@ -128,7 +151,12 @@ export const ReplyInputContainer = styled.form`
   gap: 5px;
   margin-top: 30px;
   width: auto;
+  @media screen and (max-width: ${(props) => props.theme.width.desktop}) {
+    flex-direction: row;
+  }
 `;
+
+export const EditInputContainer = styled(ReplyInputContainer)``;
 
 export const ReplyInput = styled.textarea`
   padding: 10px;
@@ -141,6 +169,8 @@ export const ReplyInput = styled.textarea`
     width: auto;
   }
 `;
+
+export const EditInput = styled(ReplyInput)``;
 
 export const ReplyInputSubmit = styled.button`
   border-radius: 20px;
@@ -158,6 +188,8 @@ export const ReplyInputSubmit = styled.button`
   }
   cursor: pointer;
 `;
+
+export const EditInputSubmit = styled(ReplyInputSubmit)``;
 
 export const PostDetailForm = styled.form`
   display: flex;
