@@ -2,6 +2,7 @@ import axios from "axios";
 const pokemon_URL = "https://pokeapi.co/api/v2";
 const limit=21;
 
+/**pokeapi에서 포켓몬스터의 정보를 가져오는 함수*/
 export const getAllPokemon = async(page) => {
   try {
     const pageOffset = (page - 1) * limit;
@@ -18,6 +19,7 @@ export const getAllPokemon = async(page) => {
   }
 }
 
+/**포켓몬스터의 고유 ID 정보를 가져오는 함수*/
 export const getPokemonID = async (page) => {
   try {
     const urls = await getAllPokemon(page);
@@ -38,7 +40,7 @@ export const getPokemonID = async (page) => {
   }
 };
 
-
+/**포켓몬스터의 이미지 정보를 가져오는 함수*/
 export const getPokemonImage = async (page) => {
   const pokemonId = await getPokemonID(page);
   try{
@@ -71,6 +73,7 @@ export const getPokemonImage = async (page) => {
   }
 }
 
+/**포켓몬스터의 한국어 이름 정보를 가져오는 함수*/
 export const getPokemonName = async (page) => {
   const pokemonId = await getPokemonID(page);
 
@@ -94,6 +97,7 @@ export const getPokemonName = async (page) => {
   }
 };
 
+/**포켓몬스터의 한국어 설명에 대한 정보를 가져오는 함수*/
 export const getPokemonDescription = async (id) => {
   try{
     try{
@@ -109,6 +113,7 @@ export const getPokemonDescription = async (id) => {
   }
 }
 
+/**포켓몬스터의 타입에 대한 정보를 가져오는 함수*/
 export const  getPokemonType = async(page) => {
   const pokemonId = await getPokemonID(page);
   try {
@@ -130,6 +135,7 @@ export const  getPokemonType = async(page) => {
   }
 }
 
+/**포켓몬스터의 한국어 타입에 대한 정보를 가져오는 함수*/
 export const getKorPokemonType = async (page) => {
   const pokemonId = await getPokemonID(page);
   try {
@@ -158,6 +164,7 @@ export const getKorPokemonType = async (page) => {
   }
 }
 
+/**포켓몬스터의 지역에 대한 정보를 가져오는 함수*/
 export const getKorPokemonRegion = async (page) => {
   try {
     const pokemonId = await getPokemonID(page);
@@ -192,7 +199,7 @@ export const getKorPokemonRegion = async (page) => {
   }
 };
 
-
+/**포켓몬스터의 공식 삽화에 대한 정보를 가져오는 함수*/
 export const getOfficialArtwork = async (id) => {
   try {
     const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
@@ -212,6 +219,7 @@ export const getOfficialArtwork = async (id) => {
   }
 };
 
+/**포켓몬스터의 색이 다른 공식 삽화에 대한 정보를 가져오는 함수*/
 export const getShinyOfficialArtwork = async(id) => {
   try{
     const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
@@ -229,6 +237,7 @@ export const getShinyOfficialArtwork = async(id) => {
   }
 }
 
+/**포켓몬스터의 신장에 대한 정보를 가져오는 함수*/
 export const getPokemonHeight = async(id) => {
   try{
     const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
@@ -240,6 +249,7 @@ export const getPokemonHeight = async(id) => {
   }
 }
 
+/**포켓몬스터의 무게에 대한 정보를 가져오는 함수*/
 export const getPokemonWeight = async(id) => {
   try{
     const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
@@ -251,6 +261,7 @@ export const getPokemonWeight = async(id) => {
   }
 }
 
+/**포켓몬스터의 분류에 대한 정보를 가져오는 함수*/
 export const getPokemonGenus = async (id) => {
   try {
     const response = await axios.get(`${pokemon_URL}/pokemon-species/${id}`);
@@ -269,6 +280,7 @@ export const getPokemonGenus = async (id) => {
   }
 };
 
+/**포켓몬스터의 성별에 대한 정보를 가져오는 함수*/
 export const getPokemonGender = async (id) => {
   try {
     const speciesResponse = await axios.get(`${pokemon_URL}/pokemon-species/${id}`);
@@ -288,6 +300,7 @@ export const getPokemonGender = async (id) => {
   }
 };
 
+/**포켓몬스터의 특성에 대한 정보를 가져오는 함수*/
 export const getPokemonAbility = async (id) => {
   try {
     const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
@@ -313,6 +326,7 @@ export const getPokemonAbility = async (id) => {
   }
 };
 
+/**포켓몬스터의 특성에 대한 설명 정보를 가져오는 함수*/
 export const getAbilityDescription = async (id) => {
   try {
     const response = await axios.get(`${pokemon_URL}/pokemon/${id}`);
@@ -337,6 +351,7 @@ export const getAbilityDescription = async (id) => {
   }
 };
 
+/**포켓몬스터 내비게이션 최대 길이를 제한하는 함수*/
 export const getDetailNameArray = async (id) => {
   try {
     const getPokemonName = async (pokemonId, language) => {
@@ -372,7 +387,7 @@ export const getDetailNameArray = async (id) => {
   }
 };
 
-
+/**포켓몬스터의 등급에 대한 정보를 가져오는 함수*/
 export const getPokemonClass = async(id) => {
   try{
     const response = await axios.get(`${pokemon_URL}/pokemon-species/${id}`);
@@ -391,6 +406,7 @@ export const getPokemonClass = async(id) => {
   }
 }
 
+/**포켓몬스터의 ID로 이미지 정보를 가져오기 위한 함수 Using By Champion Detail*/
 export const getPokemonImageByNumber = async (ace) => {
   try{
       const response = await axios.get(`${pokemon_URL}/pokemon/${ace}`);

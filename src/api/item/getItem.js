@@ -2,6 +2,7 @@ import axios from "axios";
 const pokemon_URL = "https://pokeapi.co/api/v2";
 const limit=21;
 
+/**pokeapi에서 인게임 아이템 정보를 가져오는 함수*/
 export const getAllItem = async(page) => {
   try {
     const pageOffset = (page - 1) * limit;
@@ -16,6 +17,7 @@ export const getAllItem = async(page) => {
   }
 }
 
+/**아이템의 고유 ID 정보를 가져오는 함수*/
 export const getItemId = async(page) => {
   try {
     // getAllPokemon result
@@ -34,6 +36,7 @@ export const getItemId = async(page) => {
   }
 }
 
+/**아이템의 한국어 이름 정보를 가져오는 함수*/
 export const getKoreanName = async(page) =>{
 const itemId = await getItemId(page);
   try {
@@ -55,6 +58,7 @@ const itemId = await getItemId(page);
   }
 }
 
+/**아이템의 한국어 설명에 대한 정보를 가져오는 함수*/
 export const getKorItemDescription = async(page) => {
   const itemId = await getItemId(page);
   try {
@@ -89,6 +93,7 @@ export const getKorItemDescription = async(page) => {
   }
 }
 
+/**아이템의 이미지 정보를 가져오는 함수*/
 export const getItemImage = async(page) => {
   const itemId = await getItemId(page);
   try{
