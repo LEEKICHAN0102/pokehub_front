@@ -1,6 +1,7 @@
 import axios from "axios";
 import { backEndUrl } from "../../constant/constant";
 
+/**모든 게시글 정보를 가져오기 위한 함수 */
 export const getAllPosting = async (page) => {
   try {
     const response = await axios.get(`${backEndUrl}/board/${page}`);
@@ -10,6 +11,7 @@ export const getAllPosting = async (page) => {
   }
 };
 
+/**게시글의 디테일 정보를 가져오기 위한 함수 */
 export const getPostingById = async (postId) => {
   try {
     const response = await axios.get(`${backEndUrl}/board/detail/${postId}`);
