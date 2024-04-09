@@ -94,3 +94,4 @@
 <br/> 
 
 ## 개발 후기
+- ### [포켓몬 도감을 만들어보자v2 FE](https://velog.io/@rlcks01537/%ED%8F%AC%EC%BC%93%EB%AA%AC-%EB%8F%84%EA%B0%90%EC%9D%84-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EC%9E%90v2-FE)
