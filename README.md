@@ -1,17 +1,46 @@
-# PokéHub | 포켓몬 도감   
+# PokéHub | 포켓몬 도감 
 
-### [PokéHub](https://pokehub-encyclopedia.vercel.app/)
+<br>
 
 ## 목차
   - [개요](#개요)
+  - [프로젝트 설치](#프로젝트-설치)
   - [프로젝트 설명](#프로젝트-설명)
   - [개발 환경](#개발-환경)
   - [개발 후기](#개발-후기)
+
+<br>
 
 ## 개요
 - 프로젝트 명: PokéHub
 - 개발 기간 : 24.01 ~ 24.03
 - 개발 멤버 : 이기찬
+
+<br>
+
+## 프로젝트 설치
+
+- AWS 프리티어 기간의 종료로 요금 부담이 커지면서 부득이 하게 배포환경을 중단하게 되었습니다. 로컬에서 작동하기 위한 프로젝트 설치는 다음과 같습니다.
+
+1. Clone the Repository
+
+> git clone https://github.com/LEEKICHAN0102/pokehub_front.git
+
+2. Install Dependencies
+
+> npm install
+
+3. Start the development Server
+
+> npm start
+
+4. Open the Project in your browser
+
+> https://localhost:8080
+
+- 더 많은 컨텐츠 이용을 위해 [PokéHub | BE](https://github.com/LEEKICHAN0102/pokehub_back) 설치
+
+<br>
 
 ## 프로젝트 설명
 
