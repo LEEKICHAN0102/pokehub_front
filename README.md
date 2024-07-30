@@ -32,11 +32,11 @@
 
 3. Start the development Server
 
-> npm start
+> npm run dev
 
 4. Open the Project in your browser
 
-> https://localhost:8080
+> http://localhost:3000/
 
 - 더 많은 컨텐츠 이용을 위해 [PokéHub | BE](https://github.com/LEEKICHAN0102/pokehub_back) 설치
 
