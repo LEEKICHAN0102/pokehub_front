@@ -18,30 +18,6 @@
 
 <br>
 
-## 프로젝트 설치
-
-- AWS 프리티어 기간의 종료로 요금 부담이 커지면서 부득이 하게 배포환경을 중단하게 되었습니다. 로컬에서 작동하기 위한 프로젝트 설치는 다음과 같습니다.
-
-1. Clone the Repository
-
-> git clone https://github.com/LEEKICHAN0102/pokehub_front.git
-
-2. Install Dependencies
-
-> npm install
-
-3. Start the development Server
-
-> npm run dev
-
-4. Open the Project in your browser
-
-> http://localhost:3000/
-
-- 더 많은 컨텐츠 이용을 위해 [PokéHub | BE](https://github.com/LEEKICHAN0102/pokehub_back) 설치
-
-<br>
-
 ## 프로젝트 설명
 
 ### PokéHub 는 포켓몬과 관련 된 인게임 데이터 정보를 도감 형식으로 제작한 웹사이트 입니다. 한국어 기반 정보를 중점적으로 제공합니다.  
