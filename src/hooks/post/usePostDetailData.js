@@ -8,9 +8,7 @@ export default function useDetailPostData(postId) {
     {
       queryKey: ["detail", postId],
       queryFn: () => getPostingById(postId),
-      onSuccess: () => {
-        queryClient.invalidateQueries(["detail", postId]);
-      },
+      staleTime: 60000, // staleTime || refetchInterval 
     },
   ]);
 
